@@ -22,7 +22,7 @@ class Sach {
         string viTriKe ; 
         string moTa ; 
 // ctrl D  : xoa dong bo 
-// ctrl Click : them click
+// alt Click : them click
 // string s : khi duoc goi thi cap phat rat nang khong giong int a , double b 
         
     public : 
@@ -79,17 +79,23 @@ class Sach {
         void xuatDong() const;
         void xuatChiTiet() const;
         static void inTieuDeBang();
+        
+
+        // Nap chong Toan Tu
+        bool operator == ( const Sach& s ) const ; 
+        bool operator < ( const Sach& s ) const ; 
+        Sach& operator += ( int a ) ; 
+        friend ostream& operator << ( ostream& os , const Sach& s ) ; 
+
+// ostream la kieu du lieu giong int , double , char 
+// friend vi khong co thuoc tinh cout 
+
+        double tiLeGiamGia() const { return 0.0; }
+        double giaSauGiam()  const;
+
+
 
 };
-
-
-
-
-
-
-
-
-
 
 
 

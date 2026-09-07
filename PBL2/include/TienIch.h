@@ -10,7 +10,7 @@ using namespace std ;
 // XU LI CHUOI
 
 vector<string> TachChuoi (const string& s , char NganCach) ; 
-string toLower ( string s ) ; // GK01 = gk01 = Gk01
+string ToLower ( string s ) ; // GK01 = gk01 = Gk01
 string ChuanHoa ( const string s ) ; 
 string CatBot ( const string& s , string::size_type n ) ; 
 bool CheckTuNhap (const string& Ten , const string& TuNhap) ;

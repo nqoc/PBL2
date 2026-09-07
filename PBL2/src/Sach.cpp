@@ -39,6 +39,7 @@ Sach::Sach(const string& maSach_, const string& tenSach_,
 
 Sach::~Sach() {}  
 
+// dinh nghia ham set
 
 bool Sach::setMaSach( const string& s) {
     string tmp = ChuanHoa(s) ; 
@@ -113,6 +114,7 @@ bool Sach::setMoTa(const string& s) {
     return true;
 }
 
+// ham tinh nang
 
 bool  Sach::nhapThemKho(int sl) {
     if ( sl < 0 ) return false ; 
@@ -133,10 +135,6 @@ double  Sach::giaTriTonKho() const {
 
 double Sach::loiNhuanMotCuon() const {
     return giaBan-giaNhap ;
-}
-
-void Sach::nhap() {
-
 }
 
 void Sach::nhap() {
@@ -206,3 +204,33 @@ void Sach::xuatChiTiet() const {
          << "  Mo ta        : " << moTa       << "\n"
          << "  Gia tri ton  : " << ChuyenSo(giaTriTonKho()) << " VND\n";
 }
+
+// nap chong toan tu 
+
+
+bool Sach::operator == ( const Sach& s ) const {
+    if( ToLower(maSach) != ToLower(s.maSach) ) return false ; 
+    return true ;
+} 
+
+bool Sach::operator < ( const Sach& s ) const {
+    return giaSauGiam() < s.giaSauGiam();
+} 
+
+Sach& Sach::operator += ( int a ) {
+    nhapThemKho(a) ; 
+    return *this ; 
+}
+
+ ostream& operator << ( ostream& os , const Sach& s )  {
+    os << s.maSach << " - " << s.tenSach ; 
+    return os ; 
+}
+
+double Sach::giaSauGiam() const {
+    return giaBan * (1.0 - tiLeGiamGia());
+}
+
+
+
+
