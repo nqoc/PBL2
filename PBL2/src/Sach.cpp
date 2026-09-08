@@ -211,7 +211,9 @@ void Sach::xuatChiTiet() const {
 bool Sach::operator == ( const Sach& s ) const {
     if( ToLower(maSach) != ToLower(s.maSach) ) return false ; 
     return true ;
-} 
+}
+// p1 == p2  :  p1.operator==(p2) 
+// nen con tro this se tro vao p1 va p2 la tham so
 
 bool Sach::operator < ( const Sach& s ) const {
     return giaSauGiam() < s.giaSauGiam();
@@ -226,6 +228,9 @@ Sach& Sach::operator += ( int a ) {
     os << s.maSach << " - " << s.tenSach ; 
     return os ; 
 }
+// ham main : cout << s1 
+// tbd : operator<<( cout , s1 ) 
+// in ra : s1.maSach + s1.tenSach 
 
 double Sach::giaSauGiam() const {
     return giaBan * (1.0 - tiLeGiamGia());

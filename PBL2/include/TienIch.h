@@ -17,6 +17,15 @@ bool CheckTuNhap (const string& Ten , const string& TuNhap) ;
 string ChuyenSo ( double x ) ; 
 
 
+// DOI CHUOI SANG SO  (thay cho atoi/atof/atol cua <cstdlib>)
+// Tra ve false neu chuoi khong phai so -> phan biet duoc "abc" voi "0".
+// Ket qua di ra qua tham so 'kq'.
+
+bool ChuoiSangInt    ( const string& s , int& kq ) ;
+bool ChuoiSangLong   ( const string& s , long& kq ) ;
+bool ChuoiSangDouble ( const string& s , double& kq ) ;
+
+
 // XU LI NHAP XUAT 
 
 namespace Nhap {

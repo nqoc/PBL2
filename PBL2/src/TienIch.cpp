@@ -154,19 +154,31 @@ namespace Nhap {
 
 }
 
+// ================== DOI CHUOI SANG SO ==================
 
+bool ChuoiSangInt ( const string& s , int& kq ) {
+    istringstream is(ChuanHoa(s)) ;
+    int v ; char thua ;
+    if ( !(is >> v) ) return false ;      // khong doc duoc so nao
+    if ( is >> thua ) return false ;      // con ky tu thua phia sau
+    kq = v ;
+    return true ;
+}
 
+bool ChuoiSangLong ( const string& s , long& kq ) {
+    istringstream is(ChuanHoa(s)) ;
+    long v ; char thua ;
+    if ( !(is >> v) ) return false ;
+    if ( is >> thua ) return false ;
+    kq = v ;
+    return true ;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+bool ChuoiSangDouble ( const string& s , double& kq ) {
+    istringstream is(ChuanHoa(s)) ;
+    double v ; char thua ;
+    if ( !(is >> v) ) return false ;
+    if ( is >> thua ) return false ;
+    kq = v ;
+    return true ;
+}
