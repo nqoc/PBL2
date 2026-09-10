@@ -8,7 +8,7 @@ if errorlevel 1 (
     echo === LOI BIEN DICH ===
     echo.
     pause 
-    exit b/ 1
+    exit /b 1 
 )
 
 echo === OK ===

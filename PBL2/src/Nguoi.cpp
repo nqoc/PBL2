@@ -72,7 +72,7 @@ bool Nguoi::setEmail ( const string& s ) {
 // check sdt : 0932abc4242
 
 bool Nguoi::checkSoDienThoai ( const string& s ) {
-    if ( s.size() < 9 && s.size() > 11 ) return false ; 
+    if ( s.size() < 9 || s.size() > 11 ) return false ;  // sua && thanh ||, nho lon dau r jimmi 
     for ( size_t i = 0 ; i < s.size() ; i ++ ) {
         if ( s[i] < 48 || s[i] > 57 ) return false ;
     }

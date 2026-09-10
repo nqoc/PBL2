@@ -1,4 +1,4 @@
-1|Cho tôi xin một vé đi tuổi thơ|1|1|1|2008|45000|75000|20|A1-01|Truyện dài của Nguyễn Nhật Ánh|2026-01-01
-2|Nhà giả kim|2|2|2|1988|60000|95000|15|A1-02|Tiểu thuyết nổi tiếng của Paulo Coelho|2026-01-02
-3|Harry Potter và Hòn đá phù thủy|3|3|3|1997|80000|120000|10|A1-03|Phần đầu của series Harry Potter|2026-01-03
-4|Sapiens: Lược sử loài người|4|4|4|2011|120000|180000|8|B2-01|Lược sử về nhân loại của Yuval Harari|2026-01-04
+1|Cho tôi xin một vé đi tuổi thơ|1|1|1|2008|45000|75000|20|A1-01|Truyện dài của Nguyễn Nhật Ánh|01/01/2026
+2|Nhà giả kim|2|2|2|1988|60000|95000|15|A1-02|Tiểu thuyết nổi tiếng của Paulo Coelho|02/01/2026
+3|Harry Potter và Hòn đá phù thủy|3|3|3|1997|80000|120000|10|A1-03|Phần đầu của series Harry Potter|03/01/2026
+4|Sapiens: Lược sử loài người|4|4|4|2011|120000|180000|8|B2-01|Lược sử về nhân loại của Yuval Harari|04/01/2026
