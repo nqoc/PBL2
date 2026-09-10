@@ -1,4 +1,30 @@
-1|Văn học thiếu nhi|Sách dành cho thiếu nhi và thanh thiếu niên
+1|Văn học thiếu nhi|Sách dành cho thiếu nhi
 2|Tiểu thuyết|Tác phẩm văn học hư cấu
 3|Khoa học viễn tưởng|Sách về khoa học tương lai
-4|Khoa học xã hội|Sách về lịch sử, xã hội học
+4|Khoa học xã hội|Sách về lịch sử và xã hội
+5|Kỹ năng sống|Sách rèn luyện kỹ năng cá nhân
+6|Kinh tế|Sách về kinh doanh và tài chính
+7|Tâm lý học|Sách nghiên cứu tâm lý con người
+8|Lịch sử|Sách về các giai đoạn lịch sử
+9|Địa lý|Sách về địa lý và vùng miền
+10|Giáo dục|Sách phục vụ học tập và giảng dạy
+11|Công nghệ thông tin|Sách về máy tính và công nghệ
+12|Lập trình|Sách học các ngôn ngữ lập trình
+13|Ngoại ngữ|Sách học ngôn ngữ nước ngoài
+14|Y học|Sách về sức khỏe và y khoa
+15|Nấu ăn|Sách công thức và nghệ thuật nấu ăn
+16|Du lịch|Sách hướng dẫn khám phá địa danh
+17|Thể thao|Sách về luyện tập và thi đấu
+18|Nghệ thuật|Sách về hội họa và âm nhạc
+19|Triết học|Sách về tư tưởng và nhận thức
+20|Khoa học tự nhiên|Sách về tự nhiên và vũ trụ
+21|Trinh thám|Tiểu thuyết điều tra phá án
+22|Tôn giáo|Sách về tín ngưỡng và tôn giáo
+23|Thiếu nhi|Truyện và kiến thức cho trẻ em
+24|Manga|Truyện tranh Nhật Bản
+25|Truyện ngắn|Tập hợp các truyện ngắn
+26|Thơ|Các tuyển tập thơ
+27|Kinh điển|Tác phẩm có giá trị lâu dài
+28|Quản trị|Sách về quản lý tổ chức
+29|Marketing|Sách về tiếp thị và thương hiệu
+30|Phát triển bản thân|Sách nâng cao năng lực cá nhân
