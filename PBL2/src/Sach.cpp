@@ -3,9 +3,34 @@
 #include"Sach.h"
 #include<string>
 #include<iomanip>
+#include<ctime>
+#include<cstdio>
 
 
 using namespace std ;
+
+namespace {
+bool laNgayHopLe(const string& ngay) {
+    int ngayTrongThang, thang, nam;
+    char dau1, dau2;
+
+    if (sscanf(ngay.c_str(), "%d%c%d%c%d", &ngayTrongThang, &dau1,
+               &thang, &dau2, &nam) != 5 || dau1 != '/' || dau2 != '/') {
+        return false;
+    }
+
+    tm ngayLich = {};
+    ngayLich.tm_mday = ngayTrongThang;
+    ngayLich.tm_mon = thang - 1;
+    ngayLich.tm_year = nam - 1900;
+    ngayLich.tm_isdst = -1;
+    mktime(&ngayLich);
+
+    return ngayTrongThang >= 1 && thang >= 1 && thang <= 12 && nam >= 1 &&
+           ngayLich.tm_mday == ngayTrongThang &&
+           ngayLich.tm_mon == thang - 1 && ngayLich.tm_year == nam - 1900;
+}
+}
 
 // gia tri cho toan bo
 const int Sach::NAM_MIN = 1900;
@@ -33,7 +58,7 @@ Sach::Sach(const string& maSach_, const string& tenSach_,
     setMaNXB(maNXB_);        setNamXuatBan(namXuatBan_);
     setGiaNhap(giaNhap_);    setGiaBan(giaBan_);
     setSoLuongTon(soLuongTon_); setViTriKe(viTriKe_);
-    setMoTa(moTa_);
+    setMoTa(moTa_); setNgayTao(ngayTao_);
 }
 
 
@@ -113,7 +138,12 @@ bool Sach::setMoTa(const string& s) {
     moTa = ChuanHoa(s);            // duoc phep rong
     return true;
 }
-
+bool Sach::setNgayTao(const string& s) {
+    string t = ChuanHoa(s);
+    if (!laNgayHopLe(t)) return false;
+    ngayTao = t;
+    return true;
+}
 // ham tinh nang
 
 bool  Sach::nhapThemKho(int sl) {
@@ -150,6 +180,8 @@ void Sach::nhap() {
         cout << "  !! Ma the loai khong duoc rong.\n";
     while (!setMaNXB(Nhap::Chuoi("  Ma NXB        : ")))
         cout << "  !! Ma NXB khong duoc rong.\n";
+    while (!setNgayTao(Nhap::Chuoi("  Ngay tao      : ")))
+        cout << "  !! Ngay tao khong hop le.\n";
     
     // neu dung , goi ham set , set-> truyen gia tri vao thuoc tinh
 
@@ -186,7 +218,7 @@ void Sach::xuatDong() const {
          << right << setw(6)  << namXuatBan
          << right << setw(13) << ChuyenSo(giaBan)
          << right << setw(7)  << soLuongTon << "\n";
-}
+}       
 
 void Sach::xuatChiTiet() const {
 
@@ -202,7 +234,8 @@ void Sach::xuatChiTiet() const {
          << "  So luong ton : " << soLuongTon << "\n"
          << "  Vi tri ke    : " << viTriKe    << "\n"
          << "  Mo ta        : " << moTa       << "\n"
-         << "  Gia tri ton  : " << ChuyenSo(giaTriTonKho()) << " VND\n";
+         << "  Gia tri ton  : " << ChuyenSo(giaTriTonKho()) << " VND\n"
+         << "  Ngay tao    : " << ngayTao    << "\n";
 }
 
 // nap chong toan tu 

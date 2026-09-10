@@ -57,6 +57,7 @@ class Sach {
         int getSoLuongTon() const  {return soLuongTon  ; } 
         string getViTriKe() const  {return viTriKe ;  } 
         string getMoTa()  const {return moTa ; } 
+        string getNgayTao() const { return ngayTao ; }
         
         // Setter 
         bool setMaSach( const string& s) ; 
@@ -70,6 +71,7 @@ class Sach {
         bool setSoLuongTon ( int a ) ; 
         bool setViTriKe( const string& s) ; 
         bool setMoTa( const string& s) ;
+        bool setNgayTao( const string& s) ;
 
         bool   nhapThemKho(int sl);        
         bool   banBotKho(int sl);        
