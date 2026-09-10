@@ -14,17 +14,17 @@ const int Sach::NAM_MAX = 2100;
 
 Sach::Sach() : maSach(""), tenSach(""), maTacGia(""), maTheLoai(""), maNXB(""),
       namXuatBan(2024), giaNhap(0), giaBan(0), soLuongTon(0),
-      viTriKe(""), moTa("") {}
+      viTriKe(""), moTa(""), ngayTao("") {}
 
       
 Sach::Sach(const string& maSach_, const string& tenSach_,
            const string& maTacGia_, const string& maTheLoai_,
            const string& maNXB_, int namXuatBan_,
            double giaNhap_, double giaBan_, int soLuongTon_,
-           const string& viTriKe_, const string& moTa_)
+           const string& viTriKe_, const string& moTa_, const string& ngayTao_)
     : maSach(""), tenSach(""), maTacGia(""), maTheLoai(""), maNXB(""),
       namXuatBan(2024), giaNhap(0), giaBan(0), soLuongTon(0),
-      viTriKe(""), moTa("")
+      viTriKe(""), moTa(""), ngayTao("") 
 
       // gan truoc roi moi check ham trong , neu true thi gan , false thi out 
 {
