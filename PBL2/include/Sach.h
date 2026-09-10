@@ -75,10 +75,12 @@ class Sach {
         double loiNhuanMotCuon() const;
         
 
-        void nhap();
-        void xuatDong() const;
-        void xuatChiTiet() const;
-        static void inTieuDeBang();
+        // virtual : de lop con ( SachGiamGia , SachNhapKhau ... ) ghi de duoc.
+        // Goi qua con tro Sach* se chay dung ban cua lop con.
+        virtual void nhap();
+        virtual void xuatDong() const;
+        virtual void xuatChiTiet() const;
+        static void inTieuDeBang();     // static thi KHONG virtual duoc
         
 
         // Nap chong Toan Tu
@@ -90,8 +92,11 @@ class Sach {
 // ostream la kieu du lieu giong int , double , char 
 // friend vi khong co thuoc tinh cout 
 
-        double tiLeGiamGia() const { return 0.0; }
-        double giaSauGiam()  const;
+        // PHAI la virtual : giaSauGiam() goi tiLeGiamGia() , va operator<
+        // lai goi giaSauGiam(). Neu khong virtual thi khi upcast ve Sach*
+        // ban cua LOP CHA (0.0) van duoc goi -> lop con giam gia bi bo qua.
+        virtual double tiLeGiamGia() const { return 0.0; }
+        double giaSauGiam()  const;     // khong can virtual : no goi ham virtual o tren
 
 
 

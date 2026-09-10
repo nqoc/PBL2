@@ -43,6 +43,7 @@ Sach::~Sach() {}
 
 bool Sach::setMaSach( const string& s) {
     string tmp = ChuanHoa(s) ; 
+    if( CoKyTuNganCach(tmp) ) return false ;    // '|' '#' se lam vo record khi ghi file
     if( !tmp.empty() ) {
         this->maSach = tmp ; 
         return true ; 
@@ -52,6 +53,7 @@ bool Sach::setMaSach( const string& s) {
 
 bool Sach::setTenSach( const string& s) {
     string tmp = ChuanHoa(s) ; 
+    if( CoKyTuNganCach(tmp) ) return false ; 
     if( !tmp.empty() ) {
         this->tenSach = tmp ; 
         return true ; 
@@ -62,6 +64,7 @@ bool Sach::setTenSach( const string& s) {
 bool Sach::setMaTacGia(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;    
+    if (CoKyTuNganCach(t)) return false;
     maTacGia = t;                   
     return true;
 }
@@ -69,6 +72,7 @@ bool Sach::setMaTacGia(const string& s) {
 bool Sach::setMaTheLoai(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;
+    if (CoKyTuNganCach(t)) return false;
     maTheLoai = t;
     return true;
 }
@@ -76,6 +80,7 @@ bool Sach::setMaTheLoai(const string& s) {
 bool Sach::setMaNXB(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;
+    if (CoKyTuNganCach(t)) return false;
     maNXB = t;
     return true;
 }
@@ -105,12 +110,16 @@ bool Sach::setSoLuongTon(int a) {
 }
 
 bool Sach::setViTriKe(const string& s) {
-    viTriKe = ChuanHoa(s);          //  duoc phep rong
+    string t = ChuanHoa(s);         //  duoc phep rong
+    if (CoKyTuNganCach(t)) return false;
+    viTriKe = t;
     return true;
 }
 
 bool Sach::setMoTa(const string& s) {
-    moTa = ChuanHoa(s);            // duoc phep rong
+    string t = ChuanHoa(s);        // duoc phep rong
+    if (CoKyTuNganCach(t)) return false;
+    moTa = t;
     return true;
 }
 
@@ -140,16 +149,29 @@ double Sach::loiNhuanMotCuon() const {
 void Sach::nhap() {
     
     // neu sai : 
-    while (!setMaSach(Nhap::Chuoi("  Ma sach       : ")))
-        cout << "  !! Ma khong duoc rong.\n";
-    while (!setTenSach(Nhap::Chuoi("  Ten sach      : ")))
-        cout << "  !! Ten khong duoc rong.\n";
-    while (!setMaTacGia(Nhap::Chuoi("  Ma tac gia    : ")))
+    // Moi vong lap deu phai co loi thoat khi cin dong ( Ctrl+Z , hoac chay
+    // main.exe < test.txt ) , neu khong Nhap::Chuoi() tra "" mai mai -> treo vo han.
+
+    while (!setMaSach(Nhap::Chuoi("  Ma sach       : "))) {
+        if (Nhap::HetInput()) return;
+        cout << "  !! Ma khong duoc rong / khong chua '|' '#'.\n";
+    }
+    while (!setTenSach(Nhap::Chuoi("  Ten sach      : "))) {
+        if (Nhap::HetInput()) return;
+        cout << "  !! Ten khong duoc rong / khong chua '|' '#'.\n";
+    }
+    while (!setMaTacGia(Nhap::Chuoi("  Ma tac gia    : "))) {
+        if (Nhap::HetInput()) return;
         cout << "  !! Ma tac gia khong duoc rong.\n";
-    while (!setMaTheLoai(Nhap::Chuoi("  Ma the loai   : ")))
+    }
+    while (!setMaTheLoai(Nhap::Chuoi("  Ma the loai   : "))) {
+        if (Nhap::HetInput()) return;
         cout << "  !! Ma the loai khong duoc rong.\n";
-    while (!setMaNXB(Nhap::Chuoi("  Ma NXB        : ")))
+    }
+    while (!setMaNXB(Nhap::Chuoi("  Ma NXB        : "))) {
+        if (Nhap::HetInput()) return;
         cout << "  !! Ma NXB khong duoc rong.\n";
+    }
     
     // neu dung , goi ham set , set-> truyen gia tri vao thuoc tinh
 
@@ -157,8 +179,14 @@ void Sach::nhap() {
     setGiaNhap    (Nhap::SoThuc  ("  Gia nhap      : ", 0, 1e9));
     setGiaBan     (Nhap::SoThuc  ("  Gia ban       : ", 0, 1e9));
     setSoLuongTon    (Nhap::SoNguyen("  So luong ton  : ", 0, 1000000));
-    setViTriKe(Nhap::Chuoi("  Vi tri ke     : ", true));
-    setMoTa   (Nhap::Chuoi("  Mo ta         : ", true));
+    while (!setViTriKe(Nhap::Chuoi("  Vi tri ke     : ", true))) {
+        if (Nhap::HetInput()) return;
+        cout << "  !! Vi tri ke khong duoc chua '|' hoac '#'.\n";
+    }
+    while (!setMoTa(Nhap::Chuoi("  Mo ta         : ", true))) {
+        if (Nhap::HetInput()) return;
+        cout << "  !! Mo ta khong duoc chua '|' hoac '#'.\n";
+    }
 
 }
 
@@ -173,16 +201,17 @@ void Sach::inTieuDeBang() {
          << right << setw(6)  << "NAM"
          << right << setw(13) << "GIA BAN"
          << right << setw(7)  << "TON" << "\n";  // trong 7 o thi TON xep o mep phai
-    cout << " " << string(80, '-') << "\n";
+    cout << " " << string(81, '-') << "\n";    // 9+30+8+8+6+13+7 = 81
 }
 
 void Sach::xuatDong() const {
 
     // xuat tren 1 dong
-    cout << " " << left  << setw(9)  << CatBot(maSach, 8)
-         << left  << setw(30) << CatBot(tenSach, 29)
-         << left  << setw(8)  << CatBot(maTacGia, 7)
-         << left  << setw(8)  << CatBot(maTheLoai, 7)
+    // Cot CHU dung CanTrai (dem ky tu) , cot SO van dung setw duoc vi chi co ASCII
+    cout << " " << CanTrai(CatBot(maSach,    8),  9)
+         << CanTrai(CatBot(tenSach,  29), 30)
+         << CanTrai(CatBot(maTacGia,  7),  8)
+         << CanTrai(CatBot(maTheLoai, 7),  8)
          << right << setw(6)  << namXuatBan
          << right << setw(13) << ChuyenSo(giaBan)
          << right << setw(7)  << soLuongTon << "\n";

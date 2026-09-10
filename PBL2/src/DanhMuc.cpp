@@ -23,6 +23,7 @@ TheLoai::TheLoai(const string& ma1 , const string& ten1 ,const string& moTa1 ) {
 bool TheLoai::setMa(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;             
+    if (CoKyTuNganCach(t)) return false;    // '|' '#' se lam vo record khi ghi file
     this->ma = t;
     return true;
 }
@@ -30,21 +31,32 @@ bool TheLoai::setMa(const string& s) {
 bool TheLoai::setTen(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;
+    if (CoKyTuNganCach(t)) return false;
     this->ten = t;
     return true;
 }
 
 bool TheLoai::setMoTa(const string& s) {
-    this->moTa = ChuanHoa(s);                       
+    string t = ChuanHoa(s);                       
+    if (CoKyTuNganCach(t)) return false;
+    this->moTa = t;                     // moTa duoc phep RONG , nhung khong duoc co '|' '#'
     return true;
 }
 
 void TheLoai::nhap() {
-    while (!setMa(Nhap::Chuoi("  Ma the loai   : ")))
-        cout << "  !! Ma khong duoc rong.\n";
-    while (!setTen(Nhap::Chuoi("  Ten the loai  : ")))
-        cout << "  !! Ten khong duoc rong.\n";
-    setMoTa(Nhap::Chuoi("  Mo ta         : ", true));  // true = cho phep rong
+    // Nhap::HetInput() : loi thoat khi cin dong , neu khong thi lap VO HAN
+    while (!setMa(Nhap::Chuoi("  Ma the loai   : "))) {
+        if (Nhap::HetInput()) return;
+        cout << "  !! Ma khong duoc rong / khong chua '|' '#'.\n";
+    }
+    while (!setTen(Nhap::Chuoi("  Ten the loai  : "))) {
+        if (Nhap::HetInput()) return;
+        cout << "  !! Ten khong duoc rong / khong chua '|' '#'.\n";
+    }
+    while (!setMoTa(Nhap::Chuoi("  Mo ta         : ", true))) {  // true = cho phep rong
+        if (Nhap::HetInput()) return;
+        cout << "  !! Mo ta khong duoc chua '|' hoac '#'.\n";
+    }
 }
 
 void TheLoai::inBang() {
@@ -55,9 +67,10 @@ void TheLoai::inBang() {
 }
 
 void TheLoai::xuatDong() const {
-    cout << " " << left << setw(10) << CatBot(ma,   9) // rong 10 ,toi da 9 dong
-         << left << setw(28) << CatBot(ten,  27)
-         << left << setw(40) << CatBot(moTa, 39) << "\n";
+    // CanTrai thay cho setw : setw dem BYTE nen tieng Viet lam lech cot
+    cout << " " << CanTrai(CatBot(ma,   9), 10)   // rong 10 ,toi da 9 dong
+         << CanTrai(CatBot(ten,  27), 28)
+         << CanTrai(CatBot(moTa, 39), 40) << "\n";
 }
 
 

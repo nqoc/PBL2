@@ -26,6 +26,7 @@ DongChiTiet::DongChiTiet(const string& maSach_, const string& tenSach_,
 bool DongChiTiet::setMaSach(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;
+    if (CoKyTuNganCach(t)) return false;    // '|' hay '#' se lam vo record khi ghi file
     maSach = t;
     return true;
 }
@@ -33,6 +34,7 @@ bool DongChiTiet::setMaSach(const string& s) {
 bool DongChiTiet::setTenSach(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;
+    if (CoKyTuNganCach(t)) return false;
     tenSach = t;
     return true;
 }
@@ -61,29 +63,42 @@ double DongChiTiet::thanhTien() const {
 // "VH002#Nha Gia Kim#2#75050"
 // dong goi ghi xuong data 
 
+// QUAN TRONG : phai dung '#' , KHONG dung '|'.
+// Vi ChungTu::chuoiChiTiet() noi cac dong lai bang '|' , va file txt cung
+// ngan cot bang '|'. Neu o day cung dung '|' thi khi doc len TachChuoi(...,'|')
+// se be vun tung dong ra 4 manh -> fromChuoi() that bai -> MAT SACH chi tiet.
+
 string DongChiTiet::toChuoi() const {
     ostringstream os;
     os << fixed << setprecision(0);     // khong lay phan thap phan
+                                        // fixed de chan TH in ra dang 1.23457e+06
 
-     // chi ghi 6 so co nghia , them vao de chan TH : 1.23457e+06
-
-    os << maSach << '|' << tenSach << '|' << soLuong << '|' << donGia;   // fix lai cac cot giua cac data bang | thay vi # de tranh nham lan khi doc tu file txt
+    os << maSach << '#' << tenSach << '#' << soLuong << '#' << donGia;
     return os.str();
 }
 
 // lay tu data ra de ghi vao thuoc tinh 
 
 bool DongChiTiet::fromChuoi(const string& dong) {
-    vector<string> p = TachChuoi(dong, '|'); // fix lai cac cot giua cac data bang | thay vi # de tranh nham lan khi doc tu file txt
+    vector<string> p = TachChuoi(dong, '#');    // '#' , khop voi toChuoi()
     if (p.size() != 4) return false;
-    if (!setMaSach(p[0]))  return false;        
-    
-    // chay hamsetMaSach xong moi tra ve gia tri bool
 
-    if (!setTenSach(p[1])) return false;
-    if (!ChuoiSangInt(p[2], soLuong))   return false;
-    if (!ChuoiSangDouble(p[3], donGia)) return false;
-    return soLuong > 0 && donGia >= 0;
+    int    sl = 0 ;
+    double dg = 0 ;
+    if (!ChuoiSangInt(p[2], sl))    return false;
+    if (!ChuoiSangDouble(p[3], dg)) return false;
+
+    // Ghi vao BAN NHAP truoc. Neu bat ky field nao hong thi *this van con
+    // nguyen ven , khong bi sua nua chung roi tra ve false.
+
+    DongChiTiet tam ;
+    if (!tam.setMaSach(p[0]))  return false;
+    if (!tam.setTenSach(p[1])) return false;
+    if (!tam.setSoLuong(sl))   return false;    // setter da chan sl <= 0
+    if (!tam.setDonGia(dg))    return false;    // va dg < 0
+
+    *this = tam ;
+    return true;
 }
 
 void DongChiTiet::inTieuDeBang() {
@@ -96,8 +111,8 @@ void DongChiTiet::inTieuDeBang() {
 }
 
 void DongChiTiet::xuatDong() const {
-    cout << "  " << left  << setw(9)  << CatBot(maSach, 8)
-         << left  << setw(28) << CatBot(tenSach, 27)
+    cout << "  " << CanTrai(CatBot(maSach,  8),  9)     // CanTrai thay cho setw :
+         << CanTrai(CatBot(tenSach, 27), 28)            // setw dem byte -> lech cot
          << right << setw(5)  << soLuong
          << right << setw(13) << ChuyenSo(donGia)
          << right << setw(15) << ChuyenSo(thanhTien()) << "\n";
@@ -122,6 +137,7 @@ ChungTu::~ChungTu() {}
 bool ChungTu::setMa(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;
+    if (CoKyTuNganCach(t)) return false;
     ma = t;
     return true;
 }
@@ -136,6 +152,7 @@ bool ChungTu::setNgay(const string& s) {
 bool ChungTu::setNguoiLap(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;
+    if (CoKyTuNganCach(t)) return false;
     nguoiLap = t;
     return true;
 }
@@ -209,7 +226,7 @@ bool ChungTu::laNgayHopLe(const string& s) {
 
     if (nam < 1900 || nam > 2100) return false;
     if (thang < 1 || thang > 12)  return false;
-    if (ngay < 1 || ngay > soNgayTrongThang(thang, nam)) return false;  // cho nay dung dinh dang dd/mm/yyyy, nen sua lai ben invoices thanh dd/mm/yyyy
+    if (ngay < 1 || ngay > soNgayTrongThang(thang, nam)) return false;  // cho nay dung dinh dang dd/mm/yyyy, nen sua lai ben hoadon.txt thanh dd/mm/yyyy
     return true;
 }
 

@@ -25,6 +25,7 @@ Nguoi::~Nguoi() {}
 bool Nguoi::setMa(const string& s )   {
     string t = ChuanHoa(s) ; 
     if( t.empty() ) return false ; 
+    if( CoKyTuNganCach(t) ) return false ;   // '|' '#' se lam vo record khi ghi file
     this->ma = t ; 
     return true ; 
 }
@@ -32,12 +33,15 @@ bool Nguoi::setMa(const string& s )   {
 bool Nguoi::setHoTen ( const string& s ) {
     string t = ChuanHoa(s) ;
     if(t.empty()) return false ; 
+    if( CoKyTuNganCach(t) ) return false ; 
     this->hoTen = t ; 
     return true ; 
 }
 
 bool Nguoi::setDiaChi ( const string& s ) {
-    diaChi = ChuanHoa(s) ;      // dia chi co the rong 
+    string t = ChuanHoa(s) ;    // dia chi co the rong 
+    if( CoKyTuNganCach(t) ) return false ; 
+    diaChi = t ; 
     return true ; 
 }
 
@@ -62,6 +66,7 @@ bool Nguoi::checkEmail ( const string& s ) {
 
 bool Nguoi::setEmail ( const string& s ) {
     string t = ChuanHoa(ToLower(s)) ; 
+    if( CoKyTuNganCach(t) ) return false ; 
     if(checkEmail(t)) {
         this->email = t ; 
         return true ; 

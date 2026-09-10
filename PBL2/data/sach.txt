@@ -23,7 +23,7 @@
 23|Kiêu hãnh và định kiến|25|27|23|1813|60000|100000|9|E2-02|Tiểu thuyết tình cảm kinh điển|23/01/2026
 24|Hamlet|26|27|24|1603|55000|90000|8|E2-03|Bi kịch nổi tiếng của Shakespeare|24/01/2026
 25|Nghệ thuật sống|27|5|25|1990|65000|105000|15|F1-01|Sách suy ngẫm và phát triển bản thân|25/01/2026
-26|Mắt biếc|28|1|26|1990|50000|85000|18|F1-02|Câu chuyện tình tuổi học trò|26/01/2026
+26|Mắt biếc|1|1|26|1990|50000|85000|18|F1-02|Câu chuyện tình tuổi học trò|26/01/2026
 27|Cánh đồng bất tận|29|25|27|2005|60000|100000|12|F1-03|Tập truyện ngắn Việt Nam|27/01/2026
 28|Chiếc thuyền ngoài xa|30|4|28|1987|45000|75000|10|F2-01|Tác phẩm văn học thời kỳ đổi mới|28/01/2026
 29|Tôi thấy hoa vàng trên cỏ xanh|1|1|29|2010|55000|95000|16|F2-02|Truyện tuổi thơ trong sáng|29/01/2026

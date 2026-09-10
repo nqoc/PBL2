@@ -37,7 +37,7 @@ string ToLower ( string s ) {
     return s ; 
 }
 
-string ChuanHoa ( string s ) {
+string ChuanHoa ( const string& s ) {
     string::size_type dau = 0 ; 
     string::size_type cuoi = s.size() ; 
     while(dau < cuoi && LaKhoangTrang(s[dau])) ++dau ; 
@@ -45,10 +45,55 @@ string ChuanHoa ( string s ) {
     return s.substr(dau , cuoi-dau) ; // tao string moi , bat dau tu dau lay cuoi-dau phan tu
 }
 
+// Byte dau cua 1 ky tu UTF-8 la 0xxxxxxx (ASCII) hoac 11xxxxxx.
+// Byte NOI TIEP luon la 10xxxxxx -> khong dem.
+
+static bool LaByteNoiTiep ( char c ) {
+    return ( (unsigned char)c & 0xC0 ) == 0x80 ; 
+}
+
+size_t DoDaiHienThi ( const string& s ) {
+    size_t n = 0 ; 
+    for ( string::size_type i = 0 ; i < s.size() ; i++ ) 
+        if ( !LaByteNoiTiep(s[i]) ) n++ ; 
+    return n ; 
+}
+
+// Vi tri BYTE cua ky tu thu n  ( n tinh tu 0 )
+static string::size_type ViTriByte ( const string& s , size_t n ) {
+    size_t dem = 0 ; 
+    for ( string::size_type i = 0 ; i < s.size() ; i++ ) {
+        if ( !LaByteNoiTiep(s[i]) ) {
+            if ( dem == n ) return i ; 
+            dem++ ; 
+        }
+    }
+    return s.size() ; 
+}
+
+// Cat theo KY TU chu khong phai byte -> khong lam vo ky tu tieng Viet
 string CatBot( const string& s , string::size_type n ) {
-    if(s.size() <= n ) return s ; 
-    if(n<=3) return s.substr(0,n) ; 
-    return s.substr(0,n-3) +"..." ; 
+    if( DoDaiHienThi(s) <= n ) return s ; 
+    if( n <= 3 ) return s.substr( 0 , ViTriByte(s,n) ) ; 
+    return s.substr( 0 , ViTriByte(s,n-3) ) + "..." ; 
+}
+
+// setw() dem byte nen bang bi lech khi co tieng Viet -> tu chen space
+string CanTrai ( const string& s , size_t n ) {
+    size_t d = DoDaiHienThi(s) ; 
+    if ( d >= n ) return s ; 
+    return s + string( n - d , ' ' ) ; 
+}
+
+string CanPhai ( const string& s , size_t n ) {
+    size_t d = DoDaiHienThi(s) ; 
+    if ( d >= n ) return s ; 
+    return string( n - d , ' ' ) + s ; 
+}
+
+// '|' ngan cach cot trong file , '#' ngan cach field trong 1 dong chi tiet
+bool CoKyTuNganCach ( const string& s ) {
+    return s.find('|') != string::npos || s.find('#') != string::npos ; 
 }
  
 bool CheckTuNhap (const string& Ten , const string& TuNhap) {
@@ -93,7 +138,7 @@ namespace Nhap {
         if(!getline(cin,s)) return "" ; 
         s = ChuanHoa(s) ; 
         if( !s.empty() || ChoPhepRong ) return s ; 
-        cout << "KHONG HOP LE , VUI LONG NHAP LAI" ; 
+        cout << "KHONG HOP LE , VUI LONG NHAP LAI\n" ; 
         }
     }
 
@@ -140,14 +185,21 @@ namespace Nhap {
     }
 
 
+    // Vong lap  while(!setMa(Nhap::Chuoi(...)))  se quay VO TAN khi cin dong
+    // ( bam Ctrl+Z , hoac chay  main.exe < test.txt ). Goi ham nay de thoat.
+    bool HetInput () {
+        return !cin ; 
+    }
+
     bool XacNhan ( const string& ThongBao ) {
         while (true) {
-        cout << ThongBao << "y/n" ; 
+        cout << ThongBao << " (y/n) : " ; 
             string c ; 
-            getline(cin,c ) ; 
+            if ( !getline(cin,c) ) return false ;    // het input -> coi nhu 'n'
+            c = ToLower(ChuanHoa(c)) ;               // nhan ca 'Y' , ' n ' ...
             if ( c == "y" ) return true ;  // dung cin se de lai enter 
             if ( c == "n") return false ; 
-            cout << "Vui long nhap lai " << "y : yes , n : no " ; 
+            cout << "Vui long nhap lai " << "y : yes , n : no\n" ; 
         }
     }
 
