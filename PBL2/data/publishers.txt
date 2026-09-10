@@ -2,3 +2,29 @@
 2|NXB Văn học|51 Trần Hưng Đạo, Hoàn Kiếm, HN|02438246229|nxbvanhoc@vanhoc.vn
 3|NXB Kim Đồng|55 Quang Trung, Hai Bà Trưng, HN|02439425217|kimdong@kimdong.com.vn
 4|NXB Thế giới|46 Trần Hưng Đạo, Hoàn Kiếm, HN|02438254838|tg@thegioi.com.vn
+5|NXB Giáo dục|81 Trần Hưng Đạo, HN|02438220801|giaoduc@giaoduc.vn
+6|NXB Phụ nữ|39 Hàng Chuối, Hai Bà Trưng, HN|02439710717|phunu@phunu.vn
+7|NXB Lao động|175 Giảng Võ, Đống Đa, HN|02438515380|laodong@laodong.vn
+8|NXB Tổng hợp|62 Nguyễn Thị Minh Khai, Q3|02839303233|tonghop@tphcm.gov.vn
+9|NXB Thanh niên|64 Bà Triệu, Hoàn Kiếm, HN|02439434240|thanhnien@thanhnien.vn
+10|NXB Bách khoa|52 Lê Đại Hành, Hai Bà Trưng|02438683444|bachkhoa@hust.edu.vn
+11|NXB Đại học Quốc gia|16 Hàng Chuối, HN|02439714896|vnuhanoi@vnu.edu.vn
+12|NXB Khoa học|18 Hoàng Quốc Việt, Cầu Giấy|02437564315|khkt@khkt.vn
+13|NXB Công thương|655 Phạm Văn Đồng, HN|02439345122|congthuong@moit.gov.vn
+14|NXB Giao thông|80B Trần Hưng Đạo, HN|02439421654|giaothong@giaothong.vn
+15|NXB Mỹ thuật|44B Ngô Quyền, Hoàn Kiếm|02438263952|mythuat@mythuat.vn
+16|NXB Âm nhạc|61 Nguyễn Thái Học, Ba Đình|02438455411|amnhac@amnhac.vn
+17|NXB Hồng Đức|65 Tràng Thi, Hoàn Kiếm|02439260061|hongduc@hongduc.vn
+18|NXB Dân trí|9 Phạm Hùng, Nam Từ Liêm|02437852345|dantri@dantri.vn
+19|NXB Hà Nội|47 Hàng Bồ, Hoàn Kiếm|02439260026|nxbhanoi@hanoi.gov.vn
+20|NXB Đà Nẵng|19 Trần Phú, Hải Châu|02363822011|nxbdanang@danang.vn
+21|NXB Nghệ An|37 Nguyễn Thị Minh Khai, Vinh|02383592211|nxbna@nghean.vn
+22|NXB Đồng Nai|12 Nguyễn Ái Quốc, Biên Hòa|02513824567|nxbdongnai@dongnai.vn
+23|NXB Cần Thơ|3A Trần Hưng Đạo, Ninh Kiều|02923821122|nxbct@cantho.vn
+24|NXB Phương Đông|20 Nguyễn Đình Chiểu, Q3|02839303222|phuongdong@phuongdong.vn
+25|NXB Tri thức|53 Nguyễn Du, Hai Bà Trưng|02439434241|trithuc@trithuc.vn
+26|NXB Dự báo|79 Nguyễn Chí Thanh, Đống Đa|02437732989|dubaoxuatban@dubaobac.vn
+27|NXB Anpha|55 Nguyễn Thị Minh Khai, Q1|02838221145|anpha@anpha.vn
+28|NXB Alpha Books|176 Thái Hà, Đống Đa|02439728080|alpha@alphabooks.vn
+29|NXB Nhã Nam|59 Đỗ Quang, Cầu Giấy|02435146876|nhanam@nhanam.vn
+30|NXB Đông A|35 Đông Tác, Đống Đa|02435739999|donga@donga.vn

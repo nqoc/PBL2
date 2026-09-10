@@ -67,15 +67,15 @@ string DongChiTiet::toChuoi() const {
 
      // chi ghi 6 so co nghia , them vao de chan TH : 1.23457e+06
 
-    os << maSach << '#' << tenSach << '#' << soLuong << '#' << donGia;
+    os << maSach << '|' << tenSach << '|' << soLuong << '|' << donGia;   // fix lai cac cot giua cac data bang | thay vi # de tranh nham lan khi doc tu file txt
     return os.str();
 }
 
 // lay tu data ra de ghi vao thuoc tinh 
 
 bool DongChiTiet::fromChuoi(const string& dong) {
-    vector<string> p = TachChuoi(dong, '#');
-    if (p.size() < 4) return false;
+    vector<string> p = TachChuoi(dong, '|'); // fix lai cac cot giua cac data bang | thay vi # de tranh nham lan khi doc tu file txt
+    if (p.size() != 4) return false;
     if (!setMaSach(p[0]))  return false;        
     
     // chay hamsetMaSach xong moi tra ve gia tri bool
@@ -209,7 +209,7 @@ bool ChungTu::laNgayHopLe(const string& s) {
 
     if (nam < 1900 || nam > 2100) return false;
     if (thang < 1 || thang > 12)  return false;
-    if (ngay < 1 || ngay > soNgayTrongThang(thang, nam)) return false;
+    if (ngay < 1 || ngay > soNgayTrongThang(thang, nam)) return false;  // cho nay dung dinh dang dd/mm/yyyy, nen sua lai ben invoices thanh dd/mm/yyyy
     return true;
 }
 
@@ -243,12 +243,17 @@ void ChungTu::docChiTiet(const vector<string>& p, size_t batDau) {
     chiTiet.clear();
     if (batDau >= p.size()) return;
     int n;
-    if (!ChuoiSangInt(p[batDau], n)) return;         
+    if (!ChuoiSangInt(p[batDau], n) || n < 0) return;
+    if (p.size() - batDau - 1 < static_cast<size_t>(n)) return;
     for (int i = 0; i < n; ++i) {
         size_t vt = batDau + 1 + (size_t)i;
         if (vt >= p.size()) break;
         DongChiTiet d;
-        if (d.fromChuoi(p[vt])) chiTiet.push_back(d);
+        if (!d.fromChuoi(p[vt])) {
+            chiTiet.clear();
+            return;
+        }
+        chiTiet.push_back(d);
     }
 }
 
