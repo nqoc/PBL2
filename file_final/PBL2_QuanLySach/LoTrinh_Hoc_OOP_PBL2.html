@@ -1,0 +1,2704 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Lộ trình học OOP C++ để làm PBL2 Quản lý sách</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", "Calibri", Arial, sans-serif;
+    font-size: 10.5pt; line-height: 1.5; color: #1a1a1a; margin: 0;
+  }
+  h1 { font-size: 21pt; color: #0b3d6b; margin: 0 0 6pt; line-height: 1.25; }
+  h2 {
+    font-size: 14.5pt; color: #fff; background: #0b3d6b;
+    padding: 5pt 9pt; margin: 0 0 10pt; border-radius: 3px;
+  }
+  h3 { font-size: 12pt; color: #0b3d6b; margin: 14pt 0 5pt;
+       border-bottom: 1.5px solid #cfd9e3; padding-bottom: 2pt; }
+  h4 { font-size: 10.8pt; color: #14507f; margin: 10pt 0 3pt; }
+  p, li { margin: 3pt 0; text-align: justify; }
+  ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+  li { margin: 2pt 0; }
+  code {
+    font-family: Consolas, "Courier New", monospace; font-size: 9.3pt;
+    background: #eef2f7; padding: 0.5pt 3pt; border-radius: 2px; color: #0b3d6b;
+  }
+  pre {
+    font-family: Consolas, "Courier New", monospace; font-size: 8.7pt;
+    background: #f6f8fa; border: 1px solid #d7dee6; border-left: 3px solid #0b3d6b;
+    padding: 6pt 8pt; margin: 5pt 0 8pt; line-height: 1.38;
+    white-space: pre-wrap; word-wrap: break-word; page-break-inside: avoid;
+  }
+  pre code { background: none; padding: 0; color: #1a1a1a; font-size: 8.7pt; }
+  .cmt { color: #6a7b8c; font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 5pt 0 9pt; font-size: 9.4pt; }
+  th { background: #0b3d6b; color: #fff; text-align: left; padding: 4pt 6pt;
+       border: 1px solid #0b3d6b; font-weight: 600; }
+  td { border: 1px solid #c9d4df; padding: 3.5pt 6pt; vertical-align: top; }
+  tbody tr:nth-child(even) td { background: #f4f7fa; }
+  .chang { page-break-before: always; }
+  .box {
+    border: 1px solid #b9cde0; background: #f0f6fc; border-radius: 3px;
+    padding: 7pt 10pt; margin: 7pt 0; page-break-inside: avoid;
+  }
+  .box.warn { border-color: #e0c48a; background: #fdf7ea; }
+  .box.pbl  { border-color: #9fc9a8; background: #eff9f1; }
+  .box.check{ border-color: #c3c3cf; background: #f6f6f9; }
+  .box h4 { margin-top: 0; }
+  .meta { color: #4a5b6b; font-size: 9.6pt; }
+  .lead { font-size: 11pt; }
+  .cover {
+    text-align: center; padding-top: 42mm; page-break-after: always;
+  }
+  .cover .sub { font-size: 12.5pt; color: #14507f; margin-top: 4pt; }
+  .cover .rule { height: 3px; background: #0b3d6b; width: 55%; margin: 12pt auto; }
+  .cover table { width: 78%; margin: 22mm auto 0; font-size: 10.5pt; }
+  .cover td { border: none; padding: 3pt 6pt; }
+  .tag {
+    display: inline-block; background: #0b3d6b; color: #fff; font-size: 8.2pt;
+    padding: 1pt 5pt; border-radius: 8px; margin-right: 4pt; vertical-align: 1pt;
+  }
+  .tag.w { background: #8a6d1f; }
+  .tag.g { background: #2e6b3d; }
+  .nowrap { white-space: nowrap; }
+  .small { font-size: 9.2pt; }
+  .toc td { border: none; padding: 2.2pt 4pt; }
+  .toc .n { color: #0b3d6b; font-weight: 600; width: 58pt; }
+  .toc .w { color: #6a7b8c; width: 72pt; text-align: right; }
+</style>
+</head>
+<body>
+
+<!-- ============================ BÌA ============================ -->
+<div class="cover">
+  <div class="meta">TRƯỜNG ĐẠI HỌC BÁCH KHOA – ĐẠI HỌC ĐÀ NẴNG<br>KHOA CÔNG NGHỆ THÔNG TIN</div>
+  <div class="rule"></div>
+  <h1>LỘ TRÌNH HỌC LẬP TRÌNH<br>HƯỚNG ĐỐI TƯỢNG (C++)</h1>
+  <div class="sub">Từ con số 0 đến hoàn thành chương trình PBL2<br>
+  <b>“Quản lý sách trong cửa hàng chuyên về sách”</b></div>
+  <div class="rule"></div>
+  <table>
+    <tr><td style="width:38%"><b>Dành cho</b></td><td>Sinh viên chưa từng học OOP</td></tr>
+    <tr><td><b>Ngôn ngữ</b></td><td>C++ (chuẩn C++17), biên dịch bằng g++ / MinGW</td></tr>
+    <tr><td><b>Sản phẩm đích</b></td><td>Chương trình console: 23 tệp <code>.h</code> + 23 tệp <code>.cpp</code>, ~5.900 dòng</td></tr>
+    <tr><td><b>Thời lượng</b></td><td>15 tuần, khớp với kế hoạch PBL2</td></tr>
+    <tr><td><b>Cấu trúc</b></td><td>14 chặng: lý thuyết → bài tập luyện → mốc dự án</td></tr>
+  </table>
+</div>
+
+<!-- ============================ MỞ ĐẦU ============================ -->
+<h2>Cách dùng tài liệu này</h2>
+
+<p class="lead">Tài liệu này không phải một quyển sách lý thuyết. Nó là <b>lộ trình</b>: mỗi
+chặng dạy đúng lượng kiến thức cần thiết, cho bạn bài tập nhỏ để tay quen, rồi ngay lập tức
+bắt bạn viết một phần thật của chương trình PBL2. Học xong 14 chặng, bạn không chỉ “hiểu OOP”
+mà đã có sản phẩm chạy được nộp thầy.</p>
+
+<h3>Mỗi chặng gồm 4 phần</h3>
+<table>
+  <thead><tr><th style="width:26%">Phần</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td><b>Mục tiêu</b></td><td>Sau chặng này bạn <i>làm được</i> gì (không phải “biết” gì).</td></tr>
+    <tr><td><b>Lý thuyết cốt lõi</b></td><td>Chỉ những khái niệm chương trình PBL2 thực sự dùng, kèm ví dụ ngắn.</td></tr>
+    <tr><td><b>Bài tập luyện tay</b></td><td>3–6 bài nhỏ, viết trong 1 tệp <code>.cpp</code>, chạy được ngay. Làm hết mới đi tiếp.</td></tr>
+    <tr><td><b>Mốc PBL</b> <span class="tag g">quan trọng</span></td>
+        <td>Việc thật trong dự án: tạo tệp nào, viết lớp nào. Đây là phần được tính điểm.</td></tr>
+  </tbody>
+</table>
+
+<div class="box warn">
+  <h4>Ba nguyên tắc bắt buộc</h4>
+  <ol style="margin-bottom:0">
+    <li><b>Không copy code mà chưa chạy được.</b> Gõ lại bằng tay, sai ở đâu sửa ở đó — đó là lúc bạn học.</li>
+    <li><b>Không nhảy chặng.</b> Chặng 6 (đa hình) sẽ vô nghĩa nếu chưa nắm chặng 5 (kế thừa).</li>
+    <li><b>Mỗi lần chạy được thì commit Git ngay.</b> Một mốc PBL = một commit có ghi chú rõ ràng.</li>
+  </ol>
+</div>
+
+<h3>Mục lục 14 chặng</h3>
+<table class="toc">
+  <tr><td class="n">Chặng 0</td><td>Chuẩn bị môi trường &amp; biên dịch nhiều tệp</td><td class="w">Tuần 1</td></tr>
+  <tr><td class="n">Chặng 1</td><td>Từ C sang C++: những thứ phải quên và phải học</td><td class="w">Tuần 1</td></tr>
+  <tr><td class="n">Chặng 2</td><td>Lớp và đối tượng — tính đóng gói</td><td class="w">Tuần 2</td></tr>
+  <tr><td class="n">Chặng 3</td><td>Nạp chồng toán tử</td><td class="w">Tuần 2–3</td></tr>
+  <tr><td class="n">Chặng 4</td><td>Quan hệ giữa các lớp: has-a, chứa, liên kết</td><td class="w">Tuần 3</td></tr>
+  <tr><td class="n">Chặng 5</td><td>Kế thừa (is-a)</td><td class="w">Tuần 4</td></tr>
+  <tr><td class="n">Chặng 6</td><td>Đa hình, hàm ảo, lớp trừu tượng</td><td class="w">Tuần 4–5</td></tr>
+  <tr><td class="n">Chặng 7</td><td>Template — lập trình tổng quát</td><td class="w">Tuần 5–6</td></tr>
+  <tr><td class="n">Chặng 8</td><td>Ngoại lệ (exception) và dữ liệu hợp lệ</td><td class="w">Tuần 6</td></tr>
+  <tr><td class="n">Chặng 9</td><td>Đọc/ghi tệp văn bản, lưu trữ bền vững</td><td class="w">Tuần 6–7</td></tr>
+  <tr><td class="n">Chặng 10</td><td>Tự cài cấu trúc dữ liệu: mảng động, liên kết, bảng băm</td><td class="w">Tuần 7</td></tr>
+  <tr><td class="n">Chặng 11</td><td>Thuật toán tìm kiếm &amp; sắp xếp, độ phức tạp</td><td class="w">Tuần 8</td></tr>
+  <tr><td class="n">Chặng 12</td><td>Kiến trúc 3 tầng &amp; nghiệp vụ nhập – bán</td><td class="w">Tuần 9–10</td></tr>
+  <tr><td class="n">Chặng 13</td><td>Thống kê, báo cáo, đăng nhập &amp; phân quyền</td><td class="w">Tuần 11–12</td></tr>
+  <tr><td class="n">Chặng 14</td><td>Kiểm thử, tối ưu, chuẩn bị chuyển sang Qt</td><td class="w">Tuần 13–15</td></tr>
+</table>
+
+<h3>Bản đồ: chương trình cuối cùng dùng kiến thức nào ở đâu</h3>
+<p class="small">Bảng này là “kim chỉ nam”. Khi học một chặng, hãy mở đúng tệp tương ứng
+trong thư mục <code>PBL2/</code> để thấy kiến thức đó được dùng thật như thế nào.</p>
+<table>
+  <thead><tr><th style="width:22%">Chặng</th><th style="width:40%">Tệp trong dự án</th><th>Khái niệm OOP thể hiện</th></tr></thead>
+  <tbody>
+    <tr><td>2 – Lớp &amp; đối tượng</td><td><code>DanhMuc.h/.cpp</code>, <code>Nguoi.h/.cpp</code></td><td>đóng gói, getter/setter, hàm tạo, hàm hủy</td></tr>
+    <tr><td>3 – Nạp chồng toán tử</td><td><code>Sach.h</code> (<code>==</code>, <code>&lt;</code>, <code>+=</code>, <code>&lt;&lt;</code>)</td><td>toán tử thành viên &amp; toán tử bạn</td></tr>
+    <tr><td>4 – Quan hệ lớp</td><td><code>ChungTu.h</code>, <code>CuaHang.h</code></td><td>composition, aggregation, tham chiếu bằng mã</td></tr>
+    <tr><td>5 – Kế thừa</td><td><code>KhachHang</code>, <code>NhaCungCap</code>, <code>TaiKhoan</code></td><td>4 cây kế thừa, <code>protected</code>, gọi hàm tạo lớp cha</td></tr>
+    <tr><td>6 – Đa hình</td><td><code>Sach</code> → 3 lớp con, <code>QuanLySach.cpp</code></td><td>hàm ảo, hàm thuần ảo, hàm xưởng, <code>nhanBan()</code></td></tr>
+    <tr><td>7 – Template</td><td><code>Vector.h</code>, <code>KhoDuLieu.h</code>, <code>ThuatToan.h</code></td><td>class template, function template</td></tr>
+    <tr><td>8 – Ngoại lệ</td><td><code>NgoaiLe.h</code> + <code>try/catch</code> ở mọi menu</td><td>cây lớp ngoại lệ kế thừa <code>runtime_error</code></td></tr>
+    <tr><td>9 – Tệp</td><td><code>toCSV()</code>/<code>fromCSV()</code> mọi lớp</td><td><code>ifstream</code>/<code>ofstream</code>, tuần tự hoá</td></tr>
+    <tr><td>10 – Cấu trúc dữ liệu</td><td><code>Vector.h</code>, <code>DanhSachLienKet.h</code>, <code>BangBam.h</code></td><td>bộ nhớ động, quy tắc ba, băm nối kết</td></tr>
+    <tr><td>11 – Thuật toán</td><td><code>ThuatToan.h</code>, <code>QuanLySach::sapXepTheo</code></td><td>nhị phân, Quick Sort, Merge Sort</td></tr>
+    <tr><td>12–13 – Kiến trúc</td><td><code>CuaHang.cpp</code>, <code>ThongKe.cpp</code>, <code>UngDung*.cpp</code></td><td>tách 3 tầng, giao dịch nguyên tử, phân quyền</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================ CHẶNG 0 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 0 — Chuẩn bị môi trường &amp; biên dịch nhiều tệp <span class="tag">Tuần 1</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Biên dịch được một chương trình C++ gồm <b>nhiều tệp</b> <code>.h</code> và <code>.cpp</code>.</li>
+  <li>Hiểu tại sao phải tách <code>.h</code> (khai báo) và <code>.cpp</code> (định nghĩa).</li>
+  <li>Dùng Git để lưu từng bước tiến của dự án.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Cài đặt công cụ</h4>
+<p>Theo đúng tài liệu <i>Hướng dẫn sử dụng Visual Studio Code</i> của môn học:
+cài VS Code → cài MinGW-w64 qua MSYS2 → thêm <code>C:\msys64\mingw64\bin</code> vào
+biến môi trường <code>PATH</code> → cài extension <b>C/C++</b> của Microsoft.
+Kiểm tra bằng cách mở terminal và gõ:</p>
+<pre><code>g++ --version</code></pre>
+<p>Nếu ra số phiên bản là xong. Nếu báo “not found” thì <code>PATH</code> chưa đúng, làm lại bước thêm PATH.</p>
+
+<h4>2. Vì sao phải chia tệp?</h4>
+<p>Chương trình PBL2 cuối cùng có gần 6.000 dòng. Nếu nhét vào một tệp
+<code>main.cpp</code> thì: sửa một dòng phải dịch lại toàn bộ, hai người không thể
+làm song song, và không ai đọc nổi. Quy ước chuẩn:</p>
+<ul>
+  <li><b>Tệp <code>.h</code> (header)</b> — <i>khai báo</i>: “lớp này có gì”. Người dùng lớp chỉ cần đọc tệp này.</li>
+  <li><b>Tệp <code>.cpp</code></b> — <i>định nghĩa</i>: “làm như thế nào”. Chi tiết bị che đi.</li>
+</ul>
+
+<h4>3. Include guard — chống khai báo lặp</h4>
+<p>Nếu hai tệp cùng <code>#include "Sach.h"</code>, trình biên dịch sẽ thấy lớp
+<code>Sach</code> hai lần và báo lỗi. Mọi tệp <code>.h</code> phải được bọc như sau:</p>
+<pre><code>#ifndef SACH_H        <span class="cmt">// nếu chưa định nghĩa nhãn SACH_H</span>
+#define SACH_H        <span class="cmt">// thì định nghĩa nó</span>
+
+class Sach { ... };   <span class="cmt">// và đưa nội dung vào</span>
+
+#endif <span class="cmt">// SACH_H   -&gt; lần include thứ hai sẽ bị bỏ qua</span></code></pre>
+
+<h4>4. Quá trình biên dịch 2 bước</h4>
+<pre><code><span class="cmt">// Bước 1: mỗi .cpp -&gt; một tệp đối tượng .o (biên dịch riêng lẻ)</span>
+g++ -std=c++17 -Wall -Wextra -Iinclude -c src/Sach.cpp -o build/Sach.o
+
+<span class="cmt">// Bước 2: nối tất cả .o thành tệp chạy (liên kết)</span>
+g++ -std=c++17 build/*.o -o QuanLySach.exe
+
+<span class="cmt">// Trong thực tế, khi dự án còn nhỏ có thể gộp một dòng:</span>
+g++ -std=c++17 -Wall -Wextra -Iinclude src/*.cpp -o QuanLySach.exe</code></pre>
+<p>Ý nghĩa các tuỳ chọn: <code>-std=c++17</code> chọn chuẩn ngôn ngữ;
+<code>-Iinclude</code> nói với g++ “tìm tệp .h trong thư mục include”;
+<code>-Wall -Wextra</code> bật mọi cảnh báo. <b>Hãy luôn bật cảnh báo và sửa cho hết</b> —
+đa số lỗi khó tìm đều được cảnh báo báo trước.</p>
+
+<h4>5. Tệp <code>build.bat</code> để không phải gõ lại</h4>
+<pre><code>@echo off
+g++ -std=c++17 -Wall -Wextra -Iinclude src\*.cpp -o QuanLySach.exe
+if errorlevel 1 ( echo === LOI BIEN DICH === &amp; pause &amp; exit /b 1 )
+echo === OK === &amp; QuanLySach.exe</code></pre>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT0.1</b> — Viết <code>helloworld.cpp</code> in ra tên và mã sinh viên của bạn. Biên dịch và chạy bằng dòng lệnh (không dùng nút Run của IDE) để hiểu quy trình.</li>
+  <li><b>BT0.2</b> — Tạo 3 tệp: <code>ToanHoc.h</code> (khai báo <code>int binhPhuong(int)</code>), <code>ToanHoc.cpp</code> (định nghĩa), <code>main.cpp</code> (gọi hàm). Biên dịch cả hai <code>.cpp</code> cùng lúc.</li>
+  <li><b>BT0.3</b> — Cố tình xoá include guard trong <code>ToanHoc.h</code>, rồi <code>#include</code> nó hai lần trong <code>main.cpp</code>. Đọc thông báo lỗi. Thêm guard lại. Bạn vừa học cách <i>đọc lỗi</i>, kỹ năng quan trọng nhất.</li>
+  <li><b>BT0.4</b> — Viết <code>build.bat</code> cho bài BT0.2 và chạy nó.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 1</h4>
+  <ul style="margin-bottom:0">
+    <li>Tạo thư mục dự án đúng cấu trúc: <code>PBL2/include/</code>, <code>PBL2/src/</code>, <code>PBL2/data/</code>.</li>
+    <li><code>git init</code>, tạo <code>.gitignore</code> (bỏ qua <code>*.o</code>, <code>*.exe</code>, <code>build/</code>), đẩy lên GitHub, thêm thành viên nhóm.</li>
+    <li>Viết <code>build.bat</code> và <code>Makefile</code>.</li>
+    <li>Nộp bản <i>phát biểu bài toán</i>: Input – Output – Ràng buộc (lấy từ mục 1 của bản kế hoạch PBL2).</li>
+    <li>Phân công: ai làm lớp dữ liệu, ai làm cấu trúc dữ liệu, ai làm giao diện.</li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra trước khi qua Chặng 1</h4>
+  <p style="margin-bottom:0">☐ Gõ <code>g++ --version</code> ra kết quả &nbsp;·&nbsp;
+  ☐ Biên dịch được dự án 2 tệp <code>.cpp</code> &nbsp;·&nbsp;
+  ☐ Giải thích được include guard dùng làm gì &nbsp;·&nbsp;
+  ☐ Đã có repo Git với ít nhất 1 commit</p>
+</div>
+
+<!-- ============================ CHẶNG 1 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 1 — Từ C sang C++ <span class="tag">Tuần 1</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Dùng <code>std::string</code> thay cho <code>char*</code>, <code>cin/cout</code> thay cho <code>scanf/printf</code>.</li>
+  <li>Hiểu <b>tham chiếu</b> (<code>&amp;</code>) — thứ xuất hiện gần như mọi dòng trong PBL2.</li>
+  <li>Biết nạp chồng hàm, tham số mặc định, <code>new</code>/<code>delete</code>.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Nhập xuất và chuỗi</h4>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    string ten;                       <span class="cmt">// tự quản lý bộ nhớ, không lo tràn mảng</span>
+    cout &lt;&lt; "Ten sach: ";
+    getline(cin, ten);                <span class="cmt">// đọc CẢ DÒNG, kể cả khoảng trắng</span>
+
+    cout &lt;&lt; "Do dai = " &lt;&lt; ten.size() &lt;&lt; "\n";
+    cout &lt;&lt; "Ghep   = " &lt;&lt; ten + " (moi)" &lt;&lt; "\n";
+    if (ten.find("Toan") != string::npos) cout &lt;&lt; "Co chua chu Toan\n";
+    return 0;
+}</code></pre>
+<div class="box warn">
+  <h4>Cái bẫy kinh điển: trộn <code>cin &gt;&gt;</code> với <code>getline</code></h4>
+  <p><code>cin &gt;&gt; n;</code> đọc số nhưng <b>để lại ký tự Enter</b> trong bộ đệm, làm
+  <code>getline</code> ngay sau đó đọc được chuỗi rỗng. Trong PBL2 chúng ta giải quyết bằng cách
+  <b>luôn dùng <code>getline</code></b> rồi tự chuyển chuỗi sang số — đó chính là lý do tồn tại
+  của <code>Nhap::soNguyen()</code> trong <code>TienIch.cpp</code>:</p>
+<pre style="margin-bottom:0"><code>string s;  getline(cin, s);
+istringstream is(s);
+int v;   char thua;
+if (!(is &gt;&gt; v) || (is &gt;&gt; thua)) cout &lt;&lt; "Khong phai so nguyen!\n";</code></pre>
+</div>
+
+<h4>2. Tham chiếu — khái niệm quan trọng nhất của chặng này</h4>
+<p>Tham chiếu là <b>tên gọi khác</b> của một biến đã có. Không phải bản sao, không phải con trỏ.</p>
+<pre><code>void tang(int  x) { x = x + 1; }   <span class="cmt">// truyền GIÁ TRỊ: sửa bản sao -&gt; vô tác dụng</span>
+void tang(int&amp; x) { x = x + 1; }   <span class="cmt">// truyền THAM CHIẾU: sửa chính biến gốc</span>
+
+int a = 5;
+tang(a);        <span class="cmt">// a = 6</span></code></pre>
+<p>Có ba cách truyền tham số, và PBL2 dùng cả ba một cách có chủ ý:</p>
+<table>
+  <thead><tr><th style="width:26%">Cách viết</th><th style="width:32%">Ý nghĩa</th><th>Dùng khi nào</th></tr></thead>
+  <tbody>
+    <tr><td><code>void f(int x)</code></td><td>bản sao</td><td>kiểu nhỏ (<code>int</code>, <code>double</code>, <code>bool</code>)</td></tr>
+    <tr><td><code>void f(string&amp; s)</code></td><td>tham chiếu, được sửa</td><td>muốn hàm thay đổi đối tượng gốc</td></tr>
+    <tr><td><code>void f(const string&amp; s)</code></td><td>tham chiếu, <b>không</b> được sửa</td><td><b>mặc định nên dùng</b> cho mọi đối tượng lớn — nhanh (không sao chép) và an toàn</td></tr>
+  </tbody>
+</table>
+<p>Vì vậy trong PBL2 bạn thấy khắp nơi: <code>void setTen(const std::string&amp; s)</code>,
+<code>void them(const T&amp; x)</code>, <code>bool operator==(const Sach&amp; k) const</code>.</p>
+
+<h4>3. Nạp chồng hàm và tham số mặc định</h4>
+<pre><code><span class="cmt">// Cùng tên, khác danh sách tham số -&gt; đây là "đa hình hàm" (tĩnh)</span>
+string doiSangChuoi(int v);
+string doiSangChuoi(double v, int soLeThapPhan = 0);   <span class="cmt">// có tham số mặc định</span>
+
+doiSangChuoi(5);            <span class="cmt">// gọi bản int</span>
+doiSangChuoi(3.14159, 2);   <span class="cmt">// gọi bản double -&gt; "3.14"</span>
+doiSangChuoi(3.14159);      <span class="cmt">// gọi bản double, soLeThapPhan = 0 -&gt; "3"</span></code></pre>
+<p>Hai hàm này có thật trong <code>TienIch.h</code> của dự án.</p>
+
+<h4>4. Bộ nhớ động: <code>new</code> / <code>delete</code></h4>
+<pre><code>int*  p  = new int(10);       delete   p;      <span class="cmt">// một biến</span>
+int*  a  = new int[100];      delete[] a;      <span class="cmt">// một mảng -&gt; PHẢI có []</span></code></pre>
+<div class="box warn">
+  <h4>Ba luật sinh tử về bộ nhớ động</h4>
+  <ol style="margin-bottom:0">
+    <li><code>new</code> đi với <code>delete</code>, <code>new[]</code> đi với <code>delete[]</code>. Nhầm là hỏng.</li>
+    <li>Mỗi <code>new</code> phải có <b>đúng một</b> <code>delete</code>. Thiếu → rò rỉ bộ nhớ. Thừa → chương trình đổ.</li>
+    <li>Sau <code>delete p</code>, con trỏ <code>p</code> trở thành rác. Đừng dùng lại nó.</li>
+  </ol>
+</div>
+<p>Trong PBL2, chỉ có <b>một</b> nơi được phép <code>new Sach</code> và <b>một</b> nơi
+<code>delete</code> nó: lớp <code>QuanLySach</code>. Tập trung trách nhiệm bộ nhớ vào một chỗ
+là cách duy nhất để không rò rỉ trong dự án lớn.</p>
+
+<h4>5. Namespace</h4>
+<pre><code>namespace Nhap {
+    int soNguyen(const std::string&amp; tb, int min, int max);
+}
+<span class="cmt">// gọi: Nhap::soNguyen("Nhap tuoi: ", 0, 120);</span></code></pre>
+<p>Namespace nhóm các hàm cùng chủ đề và tránh trùng tên. Dự án dùng hai namespace:
+<code>Nhap</code> (nhập liệu) và <code>Man</code> (trình bày màn hình).</p>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT1.1</b> — Viết hàm <code>void doiCho(int&amp; a, int&amp; b)</code> hoán vị hai số. Thử bỏ dấu <code>&amp;</code> và giải thích tại sao chương trình sai.</li>
+  <li><b>BT1.2</b> — Viết <code>string veThuong(string s)</code> chuyển chuỗi thành chữ thường, và <code>bool chuaChuoiCon(const string&amp; nguon, const string&amp; tuKhoa)</code> tìm không phân biệt hoa/thường. <i>(Đây là 2 hàm thật trong <code>TienIch.cpp</code>.)</i></li>
+  <li><b>BT1.3</b> — Viết <code>vector&lt;string&gt; tachChuoi(const string&amp; s, char nganCach)</code>: tách <code>"GK001|Toan 12|35000"</code> theo dấu <code>|</code> thành 3 phần. Gợi ý: dùng <code>istringstream</code> + <code>getline(is, tam, nganCach)</code>. <i>Hàm này là nền tảng của toàn bộ phần đọc tệp về sau.</i></li>
+  <li><b>BT1.4</b> — Viết <code>string dinhDangTien(double v)</code> đổi <code>1234567</code> thành <code>"1.234.567"</code>.</li>
+  <li><b>BT1.5</b> — Nạp chồng hàm <code>dienTich</code> cho hình vuông (1 tham số), hình chữ nhật (2 tham số), hình tròn (1 tham số kiểu <code>double</code>).</li>
+  <li><b>BT1.6</b> — Cấp phát mảng động <code>n</code> số nguyên bằng <code>new[]</code>, nhập, tính trung bình, rồi <code>delete[]</code>. Kiểm tra bằng cách chạy trong vòng lặp 1 triệu lần xem RAM có tăng không (nếu tăng là bạn quên <code>delete[]</code>).</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 1 (phần cuối)</h4>
+  <ul style="margin-bottom:0">
+    <li>Tạo <code>include/TienIch.h</code> và <code>src/TienIch.cpp</code>.</li>
+    <li>Cài đặt: <code>tachChuoi</code>, <code>veThuong</code>, <code>chuanHoa</code>, <code>catBot</code>,
+        <code>chuaChuoiCon</code>, <code>dinhDangTien</code>.</li>
+    <li>Cài đặt namespace <code>Nhap</code>: <code>chuoi</code>, <code>soNguyen</code>,
+        <code>soThuc</code>, <code>xacNhan</code> — nhập sai thì hỏi lại, không bao giờ để chương trình treo.</li>
+    <li>Viết <code>main.cpp</code> tạm để thử từng hàm tiện ích. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Phân biệt được <code>int x</code>, <code>int&amp; x</code>, <code>const int&amp; x</code> &nbsp;·&nbsp;
+  ☐ Giải thích được vì sao không nên trộn <code>cin&gt;&gt;</code> và <code>getline</code> &nbsp;·&nbsp;
+  ☐ <code>tachChuoi</code> chạy đúng với chuỗi có phần rỗng (<code>"a||b"</code>) &nbsp;·&nbsp;
+  ☐ Nhớ <code>new[]</code> ↔ <code>delete[]</code></p>
+</div>
+<!-- ============================ CHẶNG 2 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 2 — Lớp và đối tượng: tính đóng gói <span class="tag">Tuần 2</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Viết được một lớp hoàn chỉnh: thuộc tính <code>private</code>, phương thức <code>public</code>, hàm tạo, hàm hủy.</li>
+  <li>Hiểu <b>vì sao</b> phải che dữ liệu chứ không chỉ biết cú pháp.</li>
+  <li>Nắm <code>this</code>, hàm hằng <code>const</code>, thành viên <code>static</code>, hàm bạn <code>friend</code>.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Từ <code>struct</code> của C đến <code>class</code> của C++</h4>
+<p>Trong C, bài toán quản lý ngày tháng viết thế này:</p>
+<pre><code>struct Date { int ngay, thang, nam; };
+Date d;
+d.ngay  = 32;      <span class="cmt">// SAI nhưng trình biên dịch vẫn cho qua!</span>
+d.thang = 2;  d.ngay = 30;   <span class="cmt">// SAI, ai kiểm tra?</span></code></pre>
+<p>Vấn đề: dữ liệu “trần trụi”, bất kỳ dòng code nào cũng gán được giá trị vô nghĩa.
+Khi phần mềm lớn lên, đây là nguồn lỗi số một. Giải pháp của OOP là
+<b>đóng gói</b>: gói dữ liệu lại, chỉ cho ra ngoài qua các cửa có kiểm soát.</p>
+
+<pre><code>class Ngay {
+private:                                <span class="cmt">// KHÔNG ai bên ngoài chạm được</span>
+    int ngay, thang, nam;
+
+public:                                 <span class="cmt">// giao diện dùng của lớp</span>
+    Ngay() : ngay(1), thang(1), nam(2024) {}          <span class="cmt">// hàm tạo mặc định</span>
+
+    void setNgay(int n) {
+        if (n &lt; 1 || n &gt; 31) return;    <span class="cmt">// CHỐT KIỂM TRA nằm ngay tại đây</span>
+        ngay = n;
+    }
+    int getNgay() const { return ngay; }              <span class="cmt">// const: chỉ đọc</span>
+};</code></pre>
+
+<h4>2. Ba mức truy cập</h4>
+<table>
+  <thead><tr><th style="width:18%">Từ khoá</th><th style="width:34%">Ai truy cập được</th><th>Dùng cho</th></tr></thead>
+  <tbody>
+    <tr><td><code>private</code></td><td>chỉ hàm thành viên của chính lớp đó (và hàm bạn)</td><td><b>mặc định cho mọi thuộc tính</b></td></tr>
+    <tr><td><code>protected</code></td><td>lớp đó <b>và các lớp con</b></td><td>thuộc tính mà lớp con cần dùng lại (Chặng 5)</td></tr>
+    <tr><td><code>public</code></td><td>mọi nơi</td><td>các phương thức tạo nên “giao diện”</td></tr>
+  </tbody>
+</table>
+<p>Trong PBL2, lớp <code>Sach</code> khai báo thuộc tính là <code>protected</code>
+(vì <code>SachGiaoKhoa</code>, <code>SachVanHoc</code>, <code>SachThieuNhi</code> cần dùng),
+còn <code>SachGiaoKhoa</code> khai báo <code>monHoc</code>, <code>khoiLop</code> là
+<code>private</code> (không ai cần nữa).</p>
+
+<h4>3. Hàm tạo và danh sách khởi tạo</h4>
+<pre><code>class Sach {
+protected:
+    std::string maSach, tenSach;
+    int    namXuatBan;
+    double giaBan;
+public:
+    Sach();                                                <span class="cmt">// hàm tạo mặc định</span>
+    Sach(const std::string&amp; ma, const std::string&amp; ten,
+         int nam, double gia);                             <span class="cmt">// hàm tạo có tham số</span>
+    virtual ~Sach();                                       <span class="cmt">// hàm hủy (Chặng 6 sẽ giải thích virtual)</span>
+};
+
+<span class="cmt">// --- trong Sach.cpp ---</span>
+Sach::Sach() : namXuatBan(2024), giaBan(0) {}              <span class="cmt">// danh sách khởi tạo</span>
+
+Sach::Sach(const std::string&amp; ma, const std::string&amp; ten, int nam, double gia)
+    : maSach(ma), tenSach(ten), namXuatBan(nam), giaBan(gia) {}</code></pre>
+<p><b>Danh sách khởi tạo</b> là phần sau dấu <code>:</code>. Nó khởi tạo thành viên
+<i>trước khi</i> thân hàm chạy — nhanh hơn và là cách <b>duy nhất</b> để khởi tạo
+hằng thành viên, tham chiếu thành viên, và (Chặng 5) phần dữ liệu của lớp cha.</p>
+
+<h4>4. Con trỏ <code>this</code></h4>
+<p><code>this</code> là con trỏ trỏ tới chính đối tượng đang gọi phương thức. Nó giúp
+phân biệt khi tham số trùng tên thuộc tính:</p>
+<pre><code>void Sach::setGiaBan(double giaBan) {
+    this-&gt;giaBan = giaBan;      <span class="cmt">// this-&gt;giaBan là thuộc tính, giaBan là tham số</span>
+}</code></pre>
+
+<h4>5. Hàm hằng — <code>const</code> ở cuối</h4>
+<pre><code>std::string getTen() const { return tenSach; }      <span class="cmt">// cam kết KHÔNG sửa đối tượng</span></code></pre>
+<p>Quy tắc nghề: <b>mọi hàm chỉ đọc phải có <code>const</code></b>. Lợi ích thấy ngay khi
+bạn có một <code>const Sach&amp;</code> — chỉ những hàm <code>const</code> mới gọi được.
+Trong PBL2, tất cả <code>getMa()</code>, <code>giaSauGiam()</code>, <code>toCSV()</code>
+đều là hàm hằng.</p>
+
+<h4>6. Thành viên <code>static</code> — của lớp, không của đối tượng</h4>
+<pre><code>class TaiKhoan {
+public:
+    static const std::string QUYEN_ADMIN;      <span class="cmt">// khai báo trong .h</span>
+};
+<span class="cmt">// định nghĩa BẮT BUỘC nằm trong .cpp:</span>
+const std::string TaiKhoan::QUYEN_ADMIN = "ADMIN";</code></pre>
+<p>Một biến <code>static</code> tồn tại duy nhất một bản cho cả lớp. Dự án dùng nó làm
+hằng số quyền, và dùng <b>hàm static</b> <code>Sach::inTieuDeBang()</code> để in tiêu đề bảng
+(việc này không thuộc riêng cuốn sách nào).</p>
+
+<h4>7. Hàm bạn <code>friend</code></h4>
+<pre><code>class Sach {
+    ...
+    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Sach&amp; s);
+};</code></pre>
+<p>Hàm bạn không phải thành viên nhưng được phép đọc <code>private</code>. Dùng có mức độ —
+chủ yếu cho toán tử xuất <code>&lt;&lt;</code> (Chặng 3).</p>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT2.1</b> — Viết lớp <code>Ngay</code> đầy đủ: kiểm tra tháng 1–12, kiểm tra số ngày theo tháng, xử lý năm nhuận, phương thức <code>chuoiNgay()</code> trả về <code>"dd/mm/yyyy"</code> và <code>soHoa()</code> trả về <code>yyyymmdd</code> để so sánh hai ngày.</li>
+  <li><b>BT2.2</b> — Viết lớp <code>DiemHoc</code> gồm <code>diemThi</code>, <code>diemQuaTrinh</code>; setter chỉ nhận 0–10; phương thức <code>diemTongKet()</code> = 60% thi + 40% quá trình; <code>xepLoai()</code> trả về chuỗi A/B/C/D/F.</li>
+  <li><b>BT2.3</b> — Viết lớp <code>TheLoai</code> với <code>ma</code>, <code>ten</code>, <code>moTa</code>; hàm tạo mặc định + hàm tạo 3 tham số; các getter/setter; <code>nhap()</code>; <code>xuatDong()</code> in một dòng thẳng cột bằng <code>setw</code>. <i>Đây là lớp thật của dự án.</i></li>
+  <li><b>BT2.4</b> — Thêm vào <code>TheLoai</code> một biến <code>static int demSoDoiTuong</code>, tăng trong hàm tạo, giảm trong hàm hủy; in ra sau mỗi thao tác để quan sát vòng đời đối tượng.</li>
+  <li><b>BT2.5</b> — Thử gán trực tiếp <code>tl.ma = "X"</code> từ <code>main</code>. Đọc lỗi trình biên dịch. Đó là tính đóng gói đang bảo vệ bạn.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 2</h4>
+  <ul style="margin-bottom:0">
+    <li><b>Trước khi viết code</b>: vẽ <b>sơ đồ lớp</b> cho 9 thực thể: Sách, Thể loại, Tác giả, NXB,
+        Khách hàng, Nhà cung cấp, Tài khoản, Hoá đơn, Phiếu nhập. Ghi rõ thuộc tính từng lớp.</li>
+    <li>Viết <code>include/DanhMuc.h</code> + <code>src/DanhMuc.cpp</code> nhưng
+        <b>tạm thời chỉ làm lớp <code>TheLoai</code></b> đứng độc lập (chưa kế thừa).</li>
+    <li>Viết <code>include/Sach.h</code> + <code>src/Sach.cpp</code> với 11 thuộc tính:
+        <code>maSach, tenSach, maTacGia, maTheLoai, maNXB, namXuatBan, giaNhap, giaBan,
+        soLuongTon, viTriKe, moTa</code>; đầy đủ getter/setter có kiểm tra;
+        các phương thức <code>nhapThemKho()</code>, <code>banBotKho()</code>,
+        <code>giaTriTonKho()</code>.</li>
+    <li>Viết <code>main.cpp</code> tạo 3 đối tượng <code>Sach</code>, in ra, thử gán giá âm để
+        chứng minh setter chặn được. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Giải thích được lợi ích của <code>private</code> bằng ví dụ ngày 32/1 &nbsp;·&nbsp;
+  ☐ Viết được danh sách khởi tạo &nbsp;·&nbsp;
+  ☐ Biết khi nào đặt <code>const</code> ở cuối hàm &nbsp;·&nbsp;
+  ☐ Định nghĩa được biến <code>static</code> đúng chỗ (trong <code>.cpp</code>)</p>
+</div>
+
+<!-- ============================ CHẶNG 3 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 3 — Nạp chồng toán tử <span class="tag">Tuần 2–3</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Cho phép viết <code>if (s1 == s2)</code>, <code>cout &lt;&lt; sach</code>, <code>sach += 10</code> với đối tượng do mình định nghĩa.</li>
+  <li>Phân biệt toán tử là <b>thành viên</b> và toán tử là <b>hàm bạn</b>.</li>
+  <li>Biết quy tắc ba (hàm hủy – hàm tạo sao chép – toán tử gán) và khi nào <i>buộc</i> phải viết.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Toán tử chỉ là hàm có tên đặc biệt</h4>
+<pre><code>class Sach {
+public:
+    bool  operator==(const Sach&amp; k) const;   <span class="cmt">// s1 == s2  -&gt;  s1.operator==(s2)</span>
+    bool  operator&lt;(const Sach&amp; k)  const;   <span class="cmt">// s1 &lt;  s2</span>
+    Sach&amp; operator+=(int sl);                <span class="cmt">// s += 10   (nhập thêm 10 cuốn)</span>
+    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Sach&amp; s);
+};</code></pre>
+<pre><code><span class="cmt">// --- Sach.cpp ---</span>
+bool Sach::operator==(const Sach&amp; k) const {
+    return veThuong(maSach) == veThuong(k.maSach);   <span class="cmt">// "bằng nhau" = cùng mã sách</span>
+}
+
+bool Sach::operator&lt;(const Sach&amp; k) const {
+    return giaSauGiam() &lt; k.giaSauGiam();            <span class="cmt">// "nhỏ hơn" = rẻ hơn</span>
+}
+
+Sach&amp; Sach::operator+=(int sl) {
+    nhapThemKho(sl);
+    return *this;                                    <span class="cmt">// trả về chính mình -&gt; cho phép a += 5 += 3</span>
+}
+
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Sach&amp; s) {
+    os &lt;&lt; s.maSach &lt;&lt; " - " &lt;&lt; s.tenSach &lt;&lt; " (" &lt;&lt; s.loaiSach() &lt;&lt; ")";
+    return os;                                       <span class="cmt">// trả về os -&gt; cho phép cout &lt;&lt; a &lt;&lt; b</span>
+}</code></pre>
+
+<h4>2. Vì sao <code>&lt;&lt;</code> phải là hàm bạn, không phải thành viên?</h4>
+<p>Vì toán hạng bên trái là <code>cout</code> (kiểu <code>ostream</code>), không phải
+<code>Sach</code>. Nếu viết thành thành viên, bạn sẽ phải gọi
+<code>sach &lt;&lt; cout</code> — ngược tự nhiên. Quy tắc: <b>nếu toán hạng trái không phải
+lớp của bạn, hãy làm hàm bạn (hoặc hàm tự do)</b>.</p>
+
+<h4>3. Quy tắc ba (Rule of Three)</h4>
+<p>Nếu lớp của bạn <b>tự quản lý bộ nhớ động</b> (có con trỏ <code>new</code> bên trong),
+trình biên dịch sinh sẵn hàm tạo sao chép và toán tử gán, nhưng nó chỉ sao chép
+<i>giá trị con trỏ</i> — hai đối tượng sẽ trỏ vào <b>cùng một</b> vùng nhớ, và khi cả hai
+bị hủy thì vùng nhớ đó bị <code>delete</code> hai lần → chương trình đổ.</p>
+<pre><code>template &lt;class T&gt;
+class Vector {
+    T* duLieu;  std::size_t soPhanTu, dungLuong;
+public:
+    ~Vector()                       { delete[] duLieu; }          <span class="cmt">// (1) hàm hủy</span>
+    Vector(const Vector&lt;T&gt;&amp; khac);                                <span class="cmt">// (2) hàm tạo sao chép</span>
+    Vector&lt;T&gt;&amp; operator=(const Vector&lt;T&gt;&amp; khac);                  <span class="cmt">// (3) toán tử gán</span>
+};
+
+template &lt;class T&gt;
+Vector&lt;T&gt;&amp; Vector&lt;T&gt;::operator=(const Vector&lt;T&gt;&amp; khac) {
+    if (this == &amp;khac) return *this;         <span class="cmt">// BẮT BUỘC: chặn tự gán cho chính mình</span>
+    delete[] duLieu;                         <span class="cmt">// giải phóng vùng cũ</span>
+    duLieu = 0; soPhanTu = 0; dungLuong = 0;
+    baoDamChua(khac.soPhanTu);               <span class="cmt">// cấp vùng mới</span>
+    for (std::size_t i = 0; i &lt; khac.soPhanTu; ++i) duLieu[i] = khac.duLieu[i];
+    soPhanTu = khac.soPhanTu;                <span class="cmt">// SAO CHÉP SÂU</span>
+    return *this;
+}</code></pre>
+<p>Đoạn code trên là <code>Vector.h</code> thật của dự án. Chặng 10 sẽ viết trọn vẹn nó.</p>
+
+<div class="box warn">
+  <h4>Ngược lại: khi nào phải <i>cấm</i> sao chép?</h4>
+  <p style="margin-bottom:0">Lớp <code>QuanLySach</code> sở hữu một mảng <code>Sach*</code> mà nó
+  sẽ <code>delete</code>. Sao chép nó là vô nghĩa và nguy hiểm, nên ta khai báo hàm tạo sao
+  chép và toán tử gán ở vùng <code>private</code> và <b>không định nghĩa</b> — mọi nỗ lực
+  sao chép sẽ bị chặn ngay lúc biên dịch:</p>
+<pre style="margin-bottom:0"><code>class QuanLySach {
+private:
+    QuanLySach(const QuanLySach&amp;);              <span class="cmt">// khai báo mà không định nghĩa</span>
+    QuanLySach&amp; operator=(const QuanLySach&amp;);
+public: ...
+};</code></pre>
+</div>
+
+<h4>4. Các toán tử PBL2 nạp chồng</h4>
+<table>
+  <thead><tr><th style="width:20%">Toán tử</th><th style="width:26%">Lớp</th><th>Ý nghĩa nghiệp vụ</th></tr></thead>
+  <tbody>
+    <tr><td><code>==</code></td><td><code>Sach</code></td><td>hai cuốn là một nếu cùng mã sách</td></tr>
+    <tr><td><code>&lt;</code></td><td><code>Sach</code></td><td>so sánh theo giá sau giảm → dùng cho <code>sachDatNhat()</code></td></tr>
+    <tr><td><code>+=</code></td><td><code>Sach</code></td><td><code>sach += 20</code> = nhập thêm 20 cuốn vào kho</td></tr>
+    <tr><td><code>&lt;&lt;</code></td><td><code>Sach</code></td><td>in gọn <code>"GK001 - Toan 12 (Giao khoa)"</code></td></tr>
+    <tr><td><code>[]</code></td><td><code>Vector&lt;T&gt;</code></td><td>truy cập phần tử như mảng thường</td></tr>
+    <tr><td><code>+=</code></td><td><code>Vector&lt;T&gt;</code></td><td><code>ds += x</code> = thêm phần tử vào cuối</td></tr>
+    <tr><td><code>=</code></td><td><code>Vector</code>, <code>BangBam</code>, <code>DanhSachLienKet</code></td><td>sao chép sâu (quy tắc ba)</td></tr>
+    <tr><td><code>*</code>, <code>++</code>, <code>!=</code></td><td><code>DanhSachLienKet::BoDuyet</code></td><td>để dùng được vòng <code>for</code> phạm vi</td></tr>
+  </tbody>
+</table>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT3.1</b> — Lớp <code>PhanSo</code>: nạp chồng <code>+ - * /</code>, <code>==</code>, <code>&lt;</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>; tự rút gọn bằng thuật toán Euclid trong hàm tạo.</li>
+  <li><b>BT3.2</b> — Lớp <code>SoTien</code> (VND) nạp chồng <code>+=</code>, <code>-=</code>, <code>&lt;&lt;</code> (in có dấu phân cách nghìn).</li>
+  <li><b>BT3.3</b> — Thêm vào lớp <code>Sach</code> của bạn 4 toán tử <code>==</code>, <code>&lt;</code>, <code>+=</code>, <code>&lt;&lt;</code> đúng như bảng trên. Viết <code>main</code> thử cả 4.</li>
+  <li><b>BT3.4</b> — Viết lớp <code>MangSo</code> tự quản lý <code>int* duLieu</code>: đủ quy tắc ba + <code>operator[]</code>. Sau đó <b>cố tình xoá</b> hàm tạo sao chép, truyền đối tượng vào hàm theo giá trị và quan sát chương trình đổ. Đây là bài học nhớ đời về sao chép nông.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 2–3</h4>
+  <ul style="margin-bottom:0">
+    <li>Hoàn thiện 4 toán tử của <code>Sach</code>.</li>
+    <li>Viết <code>include/Nguoi.h</code> + <code>src/Nguoi.cpp</code>: 5 thuộc tính
+        <code>ma, hoTen, soDienThoai, diaChi, email</code>; setter kiểm tra
+        số điện thoại 9–11 chữ số và email phải có <code>@</code> + dấu chấm.</li>
+    <li>Viết bộ dữ liệu mẫu bằng tay trong <code>main</code> để kiểm thử. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Biết vì sao <code>operator&lt;&lt;</code> phải trả về <code>ostream&amp;</code> &nbsp;·&nbsp;
+  ☐ Nói được 3 thành phần của quy tắc ba &nbsp;·&nbsp;
+  ☐ Nhớ dòng <code>if (this == &amp;khac) return *this;</code> &nbsp;·&nbsp;
+  ☐ Biết cách cấm sao chép một lớp</p>
+</div>
+
+<!-- ============================ CHẶNG 4 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 4 — Quan hệ giữa các lớp <span class="tag">Tuần 3</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Phân biệt 4 quan hệ: <b>composition</b>, <b>aggregation</b>, <b>association</b>, <b>dependency</b>.</li>
+  <li>Chọn đúng quan hệ khi thiết kế — sai quan hệ dẫn tới rò rỉ bộ nhớ hoặc xoá nhầm dữ liệu.</li>
+  <li>Biết cách liên kết dữ liệu <b>gián tiếp qua mã</b> — cách PBL2 dùng.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Composition — “là bộ phận của”, chết theo chủ</h4>
+<p>Đối tượng con là <b>thành viên giá trị</b>, sinh và chết cùng đối tượng chứa.</p>
+<pre><code>class HoaDon {
+private:
+    Vector&lt;DongChiTiet&gt; chiTiet;      <span class="cmt">// các dòng hàng SỐNG CHẾT cùng hoá đơn</span>
+};</code></pre>
+<p>Xoá hoá đơn thì các dòng chi tiết cũng mất — hoàn toàn hợp lý, vì một dòng
+“3 cuốn Toán 12” chẳng có nghĩa gì nếu đứng ngoài hoá đơn. Đây là quan hệ
+<b>composition</b>, thể hiện bằng cách khai báo thành viên trực tiếp.</p>
+
+<h4>2. Aggregation — “có”, nhưng con sống độc lập</h4>
+<p>Đối tượng chứa giữ <b>con trỏ / mã tham chiếu</b>, không sở hữu:</p>
+<pre><code>class Department {
+    Vector&lt;Teacher*&gt; giaoVien;    <span class="cmt">// giữ con trỏ; hủy Department KHÔNG delete Teacher</span>
+};</code></pre>
+<p>Giải thể một bộ môn thì giáo viên vẫn còn (chuyển bộ môn khác). Nếu bạn
+<code>delete</code> trong hàm hủy của <code>Department</code>, bạn vừa xoá mất giáo viên
+của cả trường — đó chính là lỗi trong ví dụ <code>Department</code> ở slide môn học.</p>
+
+<h4>3. Association — hai bên biết nhau</h4>
+<pre><code>class Doctor  { Vector&lt;Patient*&gt; benhNhan; };   <span class="cmt">// bác sĩ biết bệnh nhân</span>
+class Patient { Vector&lt;Doctor*&gt;  bacSi;     };   <span class="cmt">// và ngược lại</span></code></pre>
+
+<h4>4. Cách PBL2 chọn: liên kết gián tiếp bằng MÃ</h4>
+<p>Thay vì cho <code>Sach</code> giữ <code>TacGia*</code>, dự án cho nó giữ
+<code>std::string maTacGia</code>. Lý do rất thực tế:</p>
+<table>
+  <thead><tr><th style="width:32%">Ưu điểm</th><th>Giải thích</th></tr></thead>
+  <tbody>
+    <tr><td>Ghi tệp văn bản dễ</td><td>chỉ cần ghi chuỗi <code>"TG001"</code>; nếu giữ con trỏ thì địa chỉ bộ nhớ vô nghĩa khi đọc lại</td></tr>
+    <tr><td>Không con trỏ treo</td><td>xoá một tác giả không làm con trỏ trong <code>Sach</code> thành rác</td></tr>
+    <tr><td>Giống cơ sở dữ liệu thật</td><td>đây chính là khoá ngoại (foreign key) — kiến thức dùng lại ở môn CSDL</td></tr>
+    <tr><td>Kiểm tra toàn vẹn tập trung</td><td><code>CuaHang</code> là nơi duy nhất kiểm tra “mã này có tồn tại không”</td></tr>
+  </tbody>
+</table>
+<p>Cái giá phải trả là mỗi lần hiển thị phải tra ngược mã → tên, nên
+<code>CuaHang</code> có các hàm:</p>
+<pre><code>std::string CuaHang::tenTacGia(const std::string&amp; ma) const {
+    const TacGia* p = khoTacGia.timTheoMa(ma);
+    return p ? p-&gt;getTen() : std::string("(khong ro)");
+}</code></pre>
+
+<h4>5. Ràng buộc toàn vẹn — trái tim của phần nghiệp vụ</h4>
+<p>Bản kế hoạch PBL2 yêu cầu: <i>“Không cho phép xoá một thể loại, tác giả hoặc nhà xuất bản
+đang được tham chiếu bởi ít nhất một đầu sách”</i>. Cài đặt:</p>
+<pre><code>void CuaHang::xoaTheLoaiAnToan(const std::string&amp; ma) {
+    std::size_t n = khoSach.demThamChieuTheLoai(ma);   <span class="cmt">// đếm sách đang dùng</span>
+    if (n &gt; 0) {
+        std::ostringstream os;
+        os &lt;&lt; "The loai " &lt;&lt; ma &lt;&lt; " dang duoc " &lt;&lt; n
+           &lt;&lt; " dau sach su dung, khong the xoa.";
+        throw LoiRangBuoc(os.str());                   <span class="cmt">// Chặng 8 sẽ nói về throw</span>
+    }
+    if (!khoTheLoai.xoa(ma)) throw LoiKhongTimThay("The loai " + ma);
+}</code></pre>
+
+<h4>6. Lớp chứa (container class)</h4>
+<p>Slide môn học phân biệt: <i>value container</i> (chứa giá trị → composition) và
+<i>reference container</i> (chứa con trỏ → aggregation). PBL2 dùng cả hai:</p>
+<pre><code>KhoDuLieu&lt;KhachHang&gt;  khoKhachHang;   <span class="cmt">// value container: Vector&lt;KhachHang&gt;  -&gt; composition</span>
+QuanLySach            khoSach;        <span class="cmt">// chứa Vector&lt;Sach*&gt; và TỰ delete -&gt; sở hữu</span></code></pre>
+<p><code>QuanLySach</code> buộc phải dùng con trỏ vì chứa <b>đa hình</b> (Chặng 6):
+một mảng phải chứa được cả 3 loại sách khác nhau.</p>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT4.1</b> — Composition: lớp <code>Point2D</code> và lớp <code>Creature</code> có thành viên <code>Point2D viTri</code>. Viết <code>moveTo(x, y)</code>. Đặt lệnh in trong hàm tạo/hủy của cả hai lớp để thấy thứ tự sinh–hủy.</li>
+  <li><b>BT4.2</b> — Aggregation: lớp <code>GiaoVien</code> và <code>BoMon</code> chứa <code>Vector&lt;GiaoVien*&gt;</code>. Chứng minh: hủy <code>BoMon</code> mà <code>GiaoVien</code> vẫn dùng được.</li>
+  <li><b>BT4.3</b> — Viết lớp <code>DongChiTiet</code> (<code>maSach, tenSach, soLuong, donGia</code>) với <code>thanhTien()</code>, và lớp <code>HoaDonDonGian</code> chứa <code>Vector&lt;DongChiTiet&gt;</code>, có <code>themDong()</code> (gộp nếu trùng mã sách) và <code>tongTien()</code>.</li>
+  <li><b>BT4.4</b> — Viết hàm <code>demThamChieu(const Vector&lt;Sach&gt;&amp; ds, const string&amp; maTL)</code> đếm số sách thuộc một thể loại; dùng nó chặn việc xoá thể loại.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 3</h4>
+  <ul style="margin-bottom:0">
+    <li>Chốt <b>sơ đồ lớp</b> có ghi rõ loại quan hệ trên từng đường nối (nộp trong báo cáo).</li>
+    <li>Chốt <b>định dạng tệp</b> cho cả 9 tệp dữ liệu (các trường cách nhau bởi <code>|</code>,
+        dòng chi tiết chứng từ dùng thêm <code>#</code>) — xem mục 5 của <code>README.md</code> dự án.</li>
+    <li>Viết <code>include/ChungTu.h</code> + <code>src/ChungTu.cpp</code>: lớp <code>DongChiTiet</code>
+        và lớp <code>ChungTu</code> chứa <code>Vector&lt;DongChiTiet&gt;</code> (dùng
+        <code>std::vector</code> tạm, Chặng 10 sẽ thay bằng <code>Vector</code> tự viết).</li>
+    <li>Chuẩn bị bộ dữ liệu mẫu để thử nghiệm suốt các tuần sau. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Nói được khác biệt composition / aggregation bằng ví dụ <i>hoá đơn – dòng hàng</i> và <i>bộ môn – giáo viên</i> &nbsp;·&nbsp;
+  ☐ Giải thích được vì sao PBL2 liên kết bằng mã chứ không bằng con trỏ &nbsp;·&nbsp;
+  ☐ Viết được hàm đếm tham chiếu để chặn xoá</p>
+</div>
+<!-- ============================ CHẶNG 5 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 5 — Kế thừa (quan hệ is-a) <span class="tag">Tuần 4</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Xây được cây kế thừa 3 tầng, gọi đúng hàm tạo lớp cha.</li>
+  <li>Hiểu <code>protected</code>, ba kiểu kế thừa, thứ tự gọi hàm tạo/hàm hủy.</li>
+  <li>Phân biệt <b>upcast</b>, <b>slicing</b>, <b>downcast</b> và biết cái nào an toàn.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Vấn đề: sao chép code</h4>
+<p>Khách hàng, nhà cung cấp, tài khoản — cả ba đều có họ tên, điện thoại, địa chỉ, email.
+Nếu viết 3 lớp riêng, bạn sẽ chép cùng một đoạn code 3 lần. Khi khách hàng yêu cầu
+đổi cách kiểm tra số điện thoại, bạn phải sửa 3 chỗ và chắc chắn sẽ quên một chỗ.</p>
+
+<h4>2. Giải pháp: dồn phần chung lên lớp cha</h4>
+<pre><code><span class="cmt">// ---------- Nguoi.h : phần CHUNG ----------</span>
+class Nguoi {
+protected:                        <span class="cmt">// protected: lớp con dùng được, người ngoài thì không</span>
+    std::string ma, hoTen, soDienThoai, diaChi, email;
+public:
+    Nguoi();
+    Nguoi(const std::string&amp; ma, const std::string&amp; hoTen,
+          const std::string&amp; sdt, const std::string&amp; diaChi,
+          const std::string&amp; email);
+    virtual ~Nguoi();                                <span class="cmt">// hàm hủy ẢO - xem Chặng 6</span>
+
+    std::string getMa()  const { return ma; }
+    void setSDT(const std::string&amp; s);               <span class="cmt">// kiểm tra 9-11 chữ số</span>
+    void setEmail(const std::string&amp; s);             <span class="cmt">// kiểm tra @ và dấu chấm</span>
+
+    virtual std::string vaiTro() const = 0;          <span class="cmt">// hàm THUẦN ẢO - Chặng 6</span>
+    virtual void        nhap();
+    virtual std::string toCSV() const;
+};</code></pre>
+
+<pre><code><span class="cmt">// ---------- KhachHang.h : phần RIÊNG ----------</span>
+class KhachHang : public Nguoi {                      <span class="cmt">// "public Nguoi" = kế thừa công khai</span>
+private:
+    int diemTichLuy;                                  <span class="cmt">// chỉ khách hàng mới có</span>
+public:
+    KhachHang();
+    KhachHang(const std::string&amp; ma, const std::string&amp; hoTen,
+              const std::string&amp; sdt, const std::string&amp; diaChi,
+              const std::string&amp; email, int diem = 0);
+
+    void        congDiemTheoHoaDon(double soTienMua); <span class="cmt">// 1 điểm / 10.000đ</span>
+    double      tiLeGiamThanhVien() const;            <span class="cmt">// 0 / 2 / 5 / 8 %</span>
+    std::string capThanhVien()      const;            <span class="cmt">// Thường/Bạc/Vàng/Kim cương</span>
+
+    std::string vaiTro() const;                       <span class="cmt">// bắt buộc định nghĩa</span>
+    void        nhap();                               <span class="cmt">// ghi đè</span>
+    std::string toCSV() const;
+};</code></pre>
+
+<h4>3. Gọi hàm tạo của lớp cha — qua danh sách khởi tạo</h4>
+<pre><code>KhachHang::KhachHang(const string&amp; ma_, const string&amp; hoTen_, const string&amp; sdt_,
+                     const string&amp; diaChi_, const string&amp; email_, int diem)
+    : Nguoi(ma_, hoTen_, sdt_, diaChi_, email_),   <span class="cmt">// (1) dựng phần lớp cha TRƯỚC</span>
+      diemTichLuy(diem)                            <span class="cmt">// (2) rồi dựng phần riêng</span>
+{}</code></pre>
+<div class="box warn">
+  <p style="margin-bottom:0"><b>Sai phổ biến:</b> gán trực tiếp thuộc tính lớp cha trong thân hàm tạo
+  (<code>this-&gt;hoTen = hoTen_;</code>). Nó chạy được nếu thuộc tính là <code>protected</code>,
+  nhưng bạn đã <i>bỏ qua</i> mọi kiểm tra hợp lệ mà lớp cha viết sẵn, và không dùng lại được
+  code khởi tạo của cha. Luôn gọi hàm tạo lớp cha qua danh sách khởi tạo.</p>
+</div>
+
+<h4>4. Thứ tự sinh và hủy</h4>
+<pre><code>KhachHang kh(...);
+<span class="cmt">// Khi SINH : Nguoi::Nguoi()   -&gt;  KhachHang::KhachHang()      (từ cha xuống con)</span>
+<span class="cmt">// Khi HỦY  : KhachHang::~KhachHang() -&gt; Nguoi::~Nguoi()        (từ con lên cha, ngược lại)</span></code></pre>
+
+<h4>5. Dùng lại code của cha bằng toán tử phạm vi <code>::</code></h4>
+<pre><code>void KhachHang::nhap() {
+    Nguoi::nhap();       <span class="cmt">// gọi lại phần nhập của lớp cha -&gt; KHÔNG viết lại 4 câu hỏi</span>
+    diemTichLuy = 0;     <span class="cmt">// rồi làm thêm phần riêng</span>
+}
+
+std::string KhachHang::toCSV() const {
+    return Nguoi::toCSV() + "|" + doiSangChuoi(diemTichLuy);
+}</code></pre>
+<p>Đây là <b>kỹ thuật quan trọng nhất</b> của chặng này, dùng ở gần như mọi lớp con trong PBL2.</p>
+
+<h4>6. Ba kiểu kế thừa</h4>
+<table>
+  <thead><tr><th style="width:20%">Trong lớp cha</th><th style="width:26%">kế thừa <code>public</code></th><th style="width:26%">kế thừa <code>protected</code></th><th>kế thừa <code>private</code></th></tr></thead>
+  <tbody>
+    <tr><td><code>public</code></td><td><code>public</code></td><td><code>protected</code></td><td><code>private</code></td></tr>
+    <tr><td><code>protected</code></td><td><code>protected</code></td><td><code>protected</code></td><td><code>private</code></td></tr>
+    <tr><td><code>private</code></td><td>không truy cập được</td><td>không truy cập được</td><td>không truy cập được</td></tr>
+  </tbody>
+</table>
+<p>Thực tế 99% dùng <code>public</code>, và <b>chỉ dùng khi thật sự có quan hệ “là một”</b>:
+<i>Khách hàng LÀ một Người</i> ✔ &nbsp; <i>Hoá đơn LÀ một Danh sách</i> ✘ (đó là quan hệ “có”).</p>
+
+<h4>7. Upcast — an toàn, dùng liên tục</h4>
+<pre><code>KhachHang kh(...);
+Nguoi* p  = &amp;kh;                <span class="cmt">// con trỏ lớp cha trỏ tới đối tượng lớp con: OK, tự động</span>
+Nguoi&amp; r  = kh;                 <span class="cmt">// tham chiếu lớp cha: cũng OK</span>
+p-&gt;getMa();                     <span class="cmt">// gọi được các thành viên của Nguoi</span>
+<span class="cmt">// p-&gt;getDiem();                 // LỖI: trình biên dịch chỉ thấy "đây là Nguoi"</span></code></pre>
+<p>Nhờ upcast, ta viết được một hàm dùng cho mọi loại người:</p>
+<pre><code>void inThongTin(const Nguoi&amp; ai) { ai.xuatChiTiet(); }
+<span class="cmt">// gọi được với KhachHang, NhaCungCap, TaiKhoan</span></code></pre>
+
+<h4>8. Slicing — cắt mất phần con, thường là lỗi</h4>
+<pre><code>KhachHang kh("KH001", "Mai", "0912345678", "Da Nang", "", 620);
+<span class="cmt">// Nguoi n = kh;      // nếu Nguoi không trừu tượng: SAO CHÉP rồi CẮT BỎ diemTichLuy</span></code></pre>
+<p>Trong PBL2 lỗi này không thể xảy ra vì <code>Nguoi</code>, <code>Sach</code>,
+<code>DanhMuc</code>, <code>ChungTu</code> đều là lớp trừu tượng — không tạo được đối tượng.
+Đó là một lợi ích “ngầm” rất lớn của thiết kế trừu tượng.</p>
+
+<h4>9. Downcast — nguy hiểm, hạn chế dùng</h4>
+<pre><code>Nguoi* p = &amp;kh;
+KhachHang* pk = static_cast&lt;KhachHang*&gt;(p);   <span class="cmt">// biên dịch OK nhưng KHÔNG kiểm tra</span>
+<span class="cmt">// Nếu p thực ra trỏ tới NhaCungCap -&gt; chương trình đổ khi dùng pk-&gt;getDiem()</span></code></pre>
+<p>Cách tránh: thiết kế sao cho không cần downcast — đặt hành vi cần thiết thành
+<b>hàm ảo</b> ở lớp cha (Chặng 6). PBL2 không có một dòng downcast nào.</p>
+
+<h4>10. Bốn cây kế thừa của PBL2</h4>
+<pre><code>        Nguoi (trừu tượng)                    DanhMuc (trừu tượng)
+       /       |        \                     /       |         \
+KhachHang  NhaCungCap  TaiKhoan        TheLoai    TacGia    NhaXuatBan
+
+         Sach (trừu tượng)                     ChungTu (trừu tượng)
+        /       |        \                      /              \
+SachGiaoKhoa SachVanHoc SachThieuNhi        HoaDon           PhieuNhap
+  (-10%)      (-5%)       (-15%)         (có chiết khấu)   (không chiết khấu)</code></pre>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT5.1</b> — Cây <code>Nguoi → SinhVien / GiangVien</code>: <code>SinhVien</code> thêm <code>maSV</code>, <code>lop</code>; <code>GiangVien</code> thêm <code>hocVi</code>, <code>luong</code>. Cả hai ghi đè <code>xuat()</code> nhưng gọi lại <code>Nguoi::xuat()</code>.</li>
+  <li><b>BT5.2</b> — Đặt <code>cout</code> trong hàm tạo và hàm hủy của cả 3 lớp trên; chạy và ghi lại thứ tự để chứng minh quy tắc “cha sinh trước, con hủy trước”.</li>
+  <li><b>BT5.3</b> — Cây <code>Diem → HinhTron</code> (theo slide môn học): <code>HinhTron</code> thêm bán kính, hàm tạo gọi <code>Diem(x, y)</code>, có <code>dienTich()</code>, <code>tinhTien(dx, dy)</code>.</li>
+  <li><b>BT5.4</b> — Thử để thuộc tính của <code>Nguoi</code> là <code>private</code>, rồi truy cập từ <code>SinhVien</code>. Đọc lỗi. Đổi sang <code>protected</code>. Bạn vừa hiểu <code>protected</code> tồn tại để làm gì.</li>
+  <li><b>BT5.5</b> — Viết hàm <code>void xuatDanhSach(Nguoi* ds[], int n)</code> nhận mảng con trỏ lớp cha chứa lẫn <code>SinhVien</code> và <code>GiangVien</code>, in tất cả. (Kết quả có thể chưa như mong đợi — Chặng 6 sẽ giải thích tại sao và cách sửa.)</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 4</h4>
+  <ul style="margin-bottom:0">
+    <li>Tách <code>DanhMuc.h</code> thành cây: <code>DanhMuc</code> (cha) →
+        <code>TheLoai</code>, <code>TacGia</code> (+<code>quocTich</code>),
+        <code>NhaXuatBan</code> (+<code>diaChi</code>, <code>dienThoai</code>).</li>
+    <li>Viết <code>KhachHang.h/.cpp</code>, <code>NhaCungCap.h/.cpp</code>,
+        <code>TaiKhoan.h/.cpp</code> kế thừa <code>Nguoi</code>.</li>
+    <li>Viết <code>SachGiaoKhoa</code>, <code>SachVanHoc</code>, <code>SachThieuNhi</code>
+        kế thừa <code>Sach</code>, mỗi lớp thêm 2 thuộc tính riêng.</li>
+    <li>Viết <code>HoaDon</code>, <code>PhieuNhap</code> kế thừa <code>ChungTu</code>.</li>
+    <li>Mọi lớp con: <code>toCSV()</code> phải gọi <code>LopCha::toCSV()</code> rồi nối thêm
+        trường riêng. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Viết đúng danh sách khởi tạo gọi hàm tạo lớp cha &nbsp;·&nbsp;
+  ☐ Nêu được thứ tự sinh/hủy &nbsp;·&nbsp;
+  ☐ Dùng được <code>LopCha::ham()</code> để tái sử dụng &nbsp;·&nbsp;
+  ☐ Giải thích upcast an toàn còn downcast thì không</p>
+</div>
+
+<!-- ============================ CHẶNG 6 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 6 — Đa hình, hàm ảo, lớp trừu tượng <span class="tag">Tuần 4–5</span></h2>
+
+<p class="lead">Đây là chặng <b>quan trọng nhất</b> của cả môn học. Nếu chỉ nắm được một
+chương duy nhất, hãy nắm chương này.</p>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Hiểu <b>liên kết tĩnh</b> vs <b>liên kết động</b> và vì sao thiếu <code>virtual</code> là sai.</li>
+  <li>Viết được lớp trừu tượng bằng hàm thuần ảo.</li>
+  <li>Biết vì sao hàm hủy của lớp cơ sở <b>phải</b> là <code>virtual</code>.</li>
+  <li>Cài được hàm xưởng (factory) và <code>nhanBan()</code> (clone).</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Vấn đề: gọi con trỏ lớp cha thì được hàm nào?</h4>
+<pre><code>class Sach {
+public:
+    std::string loaiSach() const { return "Sach"; }        <span class="cmt">// CHƯA có virtual</span>
+};
+class SachVanHoc : public Sach {
+public:
+    std::string loaiSach() const { return "Van hoc"; }
+};
+
+SachVanHoc vh;
+Sach* p = &amp;vh;
+cout &lt;&lt; p-&gt;loaiSach();     <span class="cmt">// In ra "Sach"  -&gt; SAI so với mong đợi!</span></code></pre>
+<p>Vì trình biên dịch chỉ nhìn <b>kiểu tĩnh</b> của <code>p</code> (là <code>Sach*</code>)
+và quyết định ngay lúc dịch — gọi là <b>liên kết tĩnh</b> (static binding / early binding).</p>
+
+<h4>2. Giải pháp: từ khoá <code>virtual</code></h4>
+<pre><code>class Sach {
+public:
+    virtual std::string loaiSach() const { return "Sach"; }   <span class="cmt">// hàm ẢO</span>
+};
+
+SachVanHoc vh;
+Sach* p = &amp;vh;
+cout &lt;&lt; p-&gt;loaiSach();     <span class="cmt">// In ra "Van hoc"  -&gt; ĐÚNG</span></code></pre>
+<p><code>virtual</code> yêu cầu trình biên dịch hoãn việc chọn hàm đến <b>lúc chạy</b>,
+dựa vào <b>kiểu động</b> — vật mà con trỏ đang thực sự trỏ tới. Đó là
+<b>liên kết động</b> (dynamic binding / late binding), và <b>đa hình động</b> chính là
+điều nó tạo ra.</p>
+
+<table>
+  <thead><tr><th style="width:24%"></th><th style="width:38%">Liên kết tĩnh</th><th>Liên kết động</th></tr></thead>
+  <tbody>
+    <tr><td>Quyết định lúc</td><td>biên dịch</td><td>chạy</td></tr>
+    <tr><td>Dựa vào</td><td>kiểu khai báo (kiểu tĩnh)</td><td>đối tượng thật (kiểu động)</td></tr>
+    <tr><td>Cần</td><td>không cần gì</td><td>hàm <code>virtual</code> + gọi qua con trỏ / tham chiếu</td></tr>
+    <tr><td>Chi phí</td><td>không</td><td>một lần tra bảng hàm ảo (rất nhỏ)</td></tr>
+  </tbody>
+</table>
+
+<div class="box warn">
+  <h4>Điều kiện để đa hình hoạt động — thiếu một là mất tác dụng</h4>
+  <ol style="margin-bottom:0">
+    <li>Hàm ở lớp cha phải khai báo <code>virtual</code>.</li>
+    <li>Hàm ở lớp con phải <b>trùng khớp hoàn toàn</b>: cùng tên, cùng danh sách tham số,
+        cùng kiểu trả về, cùng có/không có <code>const</code>. Lệch một chi tiết là thành
+        hàm mới, không phải ghi đè.</li>
+    <li>Phải gọi qua <b>con trỏ</b> hoặc <b>tham chiếu</b> lớp cha. Gọi qua đối tượng giá trị
+        thì đã bị slicing, không còn gì để đa hình.</li>
+  </ol>
+</div>
+
+<h4>3. Hàm thuần ảo và lớp trừu tượng</h4>
+<p>“Một cuốn sách chung chung” là cái gì? Nó không có giá giảm cụ thể, không có tên loại.
+Vậy ta <b>cấm</b> tạo đối tượng <code>Sach</code>:</p>
+<pre><code>class Sach {
+public:
+    <span class="cmt">// = 0 nghĩa là: KHAI BÁO mà không định nghĩa -&gt; hàm THUẦN ẢO</span>
+    virtual std::string loaiSach() const = 0;
+    virtual std::string maLoai()   const = 0;
+    virtual Sach*       nhanBan()  const = 0;
+};
+
+<span class="cmt">// Sach s;          // LỖI BIÊN DỊCH: Sach là lớp trừu tượng</span>
+Sach* p = new SachVanHoc(...);   <span class="cmt">// OK: con trỏ tới lớp cha thì được</span></code></pre>
+<p>Lớp có ít nhất một hàm thuần ảo là <b>lớp trừu tượng</b> (Abstract Base Class).
+Nó buộc mọi lớp con phải cài đặt các hàm đó nếu muốn tạo được đối tượng —
+một cách “ra đề” cho lớp con rất mạnh.</p>
+
+<h4>4. Hàm ảo vs hàm thuần ảo — chọn cái nào?</h4>
+<table>
+  <thead><tr><th style="width:30%">Loại</th><th style="width:34%">Ý nghĩa</th><th>Ví dụ trong PBL2</th></tr></thead>
+  <tbody>
+    <tr><td><code>virtual f() = 0;</code><br>thuần ảo</td><td>lớp cha <b>không thể</b> biết, con <b>buộc phải</b> làm</td>
+        <td><code>Sach::loaiSach()</code>, <code>Sach::maLoai()</code>, <code>Sach::nhanBan()</code>,
+            <code>Nguoi::vaiTro()</code>, <code>DanhMuc::loai()</code>,
+            <code>ChungTu::thanhToan()</code></td></tr>
+    <tr><td><code>virtual f() { ... }</code><br>ảo có sẵn thân</td><td>có mặc định hợp lý, con <b>có thể</b> đổi</td>
+        <td><code>Sach::tiLeGiamGia()</code> (mặc định 0%, ba lớp con đổi thành 10/5/15%),
+            <code>Sach::nhap()</code>, <code>Sach::toCSV()</code></td></tr>
+    <tr><td><code>f() { ... }</code><br>không ảo</td><td>không cho phép đổi</td>
+        <td><code>Sach::giaTriTonKho()</code>, <code>Sach::banBotKho()</code> — nghiệp vụ chung mọi loại sách</td></tr>
+  </tbody>
+</table>
+
+<h4>5. Đa hình trong PBL2 — mấu chốt của toàn bộ chương trình</h4>
+<pre><code><span class="cmt">// Một mảng duy nhất chứa CẢ BA loại sách:</span>
+Vector&lt;Sach*&gt; ds;
+ds.them(new SachGiaoKhoa("GK001", ..., "Toan", 12));
+ds.them(new SachVanHoc  ("VH001", ..., "Tieu thuyet", "Khong"));
+ds.them(new SachThieuNhi("TN001", ..., 6, true));
+
+<span class="cmt">// In bảng: một vòng lặp duy nhất, KHÔNG cần if/else theo loại sách</span>
+for (size_t i = 0; i &lt; ds.kichThuoc(); ++i) {
+    ds[i]-&gt;xuatDong();      <span class="cmt">// mỗi loại tự in dòng của mình</span>
+    cout &lt;&lt; "\n";
+}
+
+<span class="cmt">// Tính tiền: mỗi loại tự biết mức giảm giá của nó</span>
+double t = 0;
+for (size_t i = 0; i &lt; ds.kichThuoc(); ++i)
+    t += ds[i]-&gt;giaSauGiam();   <span class="cmt">// gọi tiLeGiamGia() của ĐÚNG lớp con</span></code></pre>
+<p>Hãy hình dung nếu <b>không</b> có đa hình: mỗi chỗ hiển thị hay tính tiền sẽ phải viết
+<code>if (loai == "GK") ... else if (loai == "VH") ...</code>. Thêm một loại sách thứ tư
+là phải sửa hàng chục chỗ. Với đa hình, bạn chỉ cần thêm một lớp con và một dòng trong
+hàm xưởng.</p>
+
+<h4>6. Hàm hủy ảo — lỗi rò rỉ bộ nhớ kinh điển</h4>
+<pre><code>class Sach            { public: ~Sach(); };                <span class="cmt">// KHÔNG virtual -&gt; SAI</span>
+class SachVanHoc : public Sach { ... };
+
+Sach* p = new SachVanHoc(...);
+delete p;   <span class="cmt">// CHỈ gọi ~Sach(), KHÔNG gọi ~SachVanHoc() -&gt; rò rỉ tài nguyên riêng</span></code></pre>
+<pre><code>class Sach { public: virtual ~Sach(); };                   <span class="cmt">// ĐÚNG</span>
+<span class="cmt">// delete p; -&gt; gọi ~SachVanHoc() rồi tự động ~Sach()</span></code></pre>
+<div class="box warn">
+  <p style="margin-bottom:0"><b>Quy tắc không có ngoại lệ:</b> lớp nào được thiết kế để làm
+  lớp cơ sở thì hàm hủy <b>phải</b> là <code>virtual</code> — kể cả khi thân hàm rỗng.
+  Trong PBL2: <code>Nguoi</code>, <code>Sach</code>, <code>DanhMuc</code>, <code>ChungTu</code>
+  đều có <code>virtual ~...()</code>.</p>
+</div>
+
+<h4>7. Hàm xưởng (factory) — tạo đúng loại từ một chuỗi</h4>
+<p>Khi đọc tệp, ta chỉ có chuỗi <code>"GK"</code>. Làm sao biết phải <code>new</code> lớp nào?</p>
+<pre><code>Sach* taoSachTheoMaLoai(const std::string&amp; maLoai) {
+    if (maLoai == "GK") return new SachGiaoKhoa();
+    if (maLoai == "VH") return new SachVanHoc();
+    if (maLoai == "TN") return new SachThieuNhi();
+    throw LoiDuLieu("Ma loai sach khong hop le: " + maLoai);
+}
+
+<span class="cmt">// Dùng khi đọc tệp - QuanLySach::docFile()</span>
+vector&lt;string&gt; p = tachChuoi(dong, '|');
+Sach* s = taoSachTheoMaLoai(p[0]);   <span class="cmt">// p[0] là "GK"/"VH"/"TN"</span>
+s-&gt;fromCSV(p);                       <span class="cmt">// gọi fromCSV của ĐÚNG lớp con (đa hình!)</span>
+them(s);</code></pre>
+<p>Đây là <b>chỗ duy nhất</b> trong toàn dự án còn <code>if</code> theo loại sách.
+Mọi nơi khác đều dùng đa hình.</p>
+
+<h4>8. <code>nhanBan()</code> — hàm tạo sao chép “ảo”</h4>
+<p>Bạn không thể làm hàm tạo thành <code>virtual</code>. Nếu chỉ có <code>Sach* p</code> mà
+muốn tạo bản sao đúng loại, dùng mẫu clone:</p>
+<pre><code>class Sach          { public: virtual Sach* nhanBan() const = 0; };
+Sach* SachVanHoc::nhanBan() const { return new SachVanHoc(*this); }   <span class="cmt">// mỗi con tự nhân bản</span>
+
+Sach* ban = p-&gt;nhanBan();    <span class="cmt">// đúng loại, không bị slicing</span></code></pre>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT6.1</b> — Cây <code>HinhHoc</code> (trừu tượng, <code>virtual double dienTich() const = 0</code>, <code>virtual string ten() const = 0</code>) → <code>HinhTron</code>, <code>HinhChuNhat</code>, <code>HinhTamGiac</code>. Tạo <code>HinhHoc* ds[5]</code>, in tên + diện tích, tính tổng, tìm hình lớn nhất.</li>
+  <li><b>BT6.2</b> — Quay lại BT5.5: thêm <code>virtual</code> và chạy lại. So sánh kết quả trước/sau. Ghi lại quan sát vào báo cáo — đây là bằng chứng bạn hiểu đa hình.</li>
+  <li><b>BT6.3</b> — Chứng minh lỗi hàm hủy không ảo: lớp con cấp phát <code>new int[1000000]</code> trong hàm tạo và <code>delete[]</code> trong hàm hủy. Tạo/hủy 1000 lần qua con trỏ lớp cha, quan sát RAM trong Task Manager khi hàm hủy <b>không</b> ảo, rồi thêm <code>virtual</code> và quan sát lại.</li>
+  <li><b>BT6.4</b> — Cây <code>Monkey</code> (theo slide): <code>virtual void work() = 0</code>, <code>void eatABanana()</code>; ba lớp con <code>LazyMonkey</code>, <code>CircusMonkey</code>, <code>MusicalMonkey</code>. Thử tạo <code>Monkey m;</code> và đọc lỗi.</li>
+  <li><b>BT6.5</b> — Viết hàm xưởng <code>HinhHoc* taoHinh(const string&amp; loai)</code> cho BT6.1, đọc danh sách hình từ tệp văn bản <code>"TRON|5"</code>, <code>"CHUNHAT|3|4"</code>.</li>
+  <li><b>BT6.6</b> — Thêm <code>virtual HinhHoc* nhanBan() const</code> cho cây hình học và viết hàm nhân đôi mọi phần tử của mảng.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 4–5</h4>
+  <ul style="margin-bottom:0">
+    <li>Chuyển <code>Sach</code>, <code>Nguoi</code>, <code>DanhMuc</code>, <code>ChungTu</code>
+        thành <b>lớp trừu tượng</b>: thêm các hàm thuần ảo, thêm <code>virtual ~...()</code>.</li>
+    <li>Ba lớp sách ghi đè <code>tiLeGiamGia()</code> trả về 0.10 / 0.05 / 0.15 và
+        <code>moTaThem()</code> mô tả thuộc tính riêng.</li>
+    <li>Viết hàm xưởng <code>taoSachTheoMaLoai()</code> và <code>nhanBan()</code> cho 3 lớp con.</li>
+    <li>Viết <code>Sach::xuatDong()</code> + <code>Sach::inTieuDeBang()</code> (static) để in bảng thẳng cột bằng <code>setw</code>.</li>
+    <li>Viết <code>main.cpp</code> tạo mảng <code>Sach*</code> chứa cả 3 loại, in bảng bằng
+        <b>một</b> vòng lặp, nhớ <code>delete</code> hết cuối chương trình. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Giải thích được liên kết tĩnh vs động &nbsp;·&nbsp;
+  ☐ Nêu đủ 3 điều kiện để đa hình hoạt động &nbsp;·&nbsp;
+  ☐ Biết vì sao hàm hủy lớp cơ sở phải ảo &nbsp;·&nbsp;
+  ☐ Viết được hàm xưởng &nbsp;·&nbsp;
+  ☐ In được bảng gồm 3 loại sách bằng một vòng lặp không có <code>if</code></p>
+</div>
+
+<!-- ============================ CHẶNG 7 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 7 — Template: lập trình tổng quát <span class="tag">Tuần 5–6</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Viết được hàm template và lớp template.</li>
+  <li>Hiểu vì sao mã template phải nằm trong tệp <code>.h</code>.</li>
+  <li>Dùng một lớp <code>KhoDuLieu&lt;T&gt;</code> duy nhất để quản lý 8 loại đối tượng khác nhau.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Vấn đề: cùng thuật toán, khác kiểu dữ liệu</h4>
+<pre><code>void doiCho(int&amp;    a, int&amp;    b) { int    t = a; a = b; b = t; }
+void doiCho(double&amp; a, double&amp; b) { double t = a; a = b; b = t; }
+void doiCho(string&amp; a, string&amp; b) { string t = a; a = b; b = t; }
+<span class="cmt">// ... còn bao nhiêu kiểu nữa? Cùng một logic bị chép lại.</span></code></pre>
+
+<h4>2. Hàm template</h4>
+<pre><code>template &lt;class T&gt;
+void doiCho(T&amp; a, T&amp; b) { T t = a; a = b; b = t; }
+
+int x = 1, y = 2;         doiCho(x, y);           <span class="cmt">// T suy ra là int</span>
+string s = "a", u = "b";  doiCho(s, u);           <span class="cmt">// T suy ra là string</span>
+doiCho&lt;double&gt;(m, n);                             <span class="cmt">// chỉ định tường minh nếu cần</span></code></pre>
+<p>Trình biên dịch sẽ <b>sinh ra</b> một bản hàm riêng cho mỗi kiểu bạn dùng — không mất
+hiệu năng so với viết tay, chỉ tốn thêm thời gian dịch.</p>
+
+<h4>3. Lớp template</h4>
+<pre><code>template &lt;class T&gt;
+class Vector {
+private:
+    T*          duLieu;
+    std::size_t soPhanTu, dungLuong;
+public:
+    Vector();
+    Vector(const Vector&lt;T&gt;&amp; khac);
+    Vector&lt;T&gt;&amp; operator=(const Vector&lt;T&gt;&amp; khac);
+    ~Vector();
+
+    std::size_t kichThuoc() const { return soPhanTu; }
+    T&amp;          operator[](std::size_t i)       { return duLieu[i]; }
+    const T&amp;    operator[](std::size_t i) const { return duLieu[i]; }
+    void        them(const T&amp; x);
+};
+
+<span class="cmt">// Định nghĩa hàm thành viên NGOÀI lớp: phải lặp lại template và tên có &lt;T&gt;</span>
+template &lt;class T&gt;
+void Vector&lt;T&gt;::them(const T&amp; x) {
+    baoDamChua(soPhanTu + 1);
+    duLieu[soPhanTu++] = x;
+}</code></pre>
+<p>Khác với hàm template, <b>lớp template phải chỉ kiểu tường minh</b> khi tạo đối tượng
+(vì trình biên dịch cần biết kích thước bộ nhớ):</p>
+<pre><code>Vector&lt;Sach*&gt;     dsSach;      <span class="cmt">// OK</span>
+Vector&lt;KhachHang&gt; dsKhach;     <span class="cmt">// OK</span>
+<span class="cmt">// Vector v;                   // LỖI</span></code></pre>
+
+<div class="box warn">
+  <h4>Luật vàng: mã template nằm trong <code>.h</code></h4>
+  <p style="margin-bottom:0">Trình biên dịch chỉ sinh mã cho <code>Vector&lt;int&gt;</code> tại
+  <b>chỗ bạn dùng</b> nó. Nếu bạn đặt định nghĩa trong <code>Vector.cpp</code>, tệp đó được
+  dịch riêng và không biết bạn cần <code>Vector&lt;int&gt;</code> — kết quả là lỗi liên kết
+  <i>undefined reference</i>. Vì vậy trong PBL2, cả 5 tệp template
+  (<code>Vector.h</code>, <code>DanhSachLienKet.h</code>, <code>BangBam.h</code>,
+  <code>ThuatToan.h</code>, <code>KhoDuLieu.h</code>) đều <b>không có tệp <code>.cpp</code> đi kèm</b>.</p>
+</div>
+
+<h4>4. Template với hàm so sánh truyền vào</h4>
+<pre><code>template &lt;class T, class SoSanh&gt;
+void quickSort(Vector&lt;T&gt;&amp; a, SoSanh cmp) { ... }
+
+<span class="cmt">// cmp có thể là con trỏ hàm:</span>
+bool sxTheoGiaTang(Sach* a, Sach* b) { return a-&gt;giaSauGiam() &lt; b-&gt;giaSauGiam(); }
+quickSort(ds, sxTheoGiaTang);
+
+bool sxTheoTenTang(Sach* a, Sach* b) { return veThuong(a-&gt;getTen()) &lt; veThuong(b-&gt;getTen()); }
+quickSort(ds, sxTheoTenTang);      <span class="cmt">// cùng một thuật toán, đổi tiêu chí</span></code></pre>
+
+<h4>5. Ràng buộc ngầm — “T phải có gì”</h4>
+<p>C++17 không có cú pháp khai báo ràng buộc, nên ta ghi rõ bằng chú thích.
+Đầu tệp <code>KhoDuLieu.h</code> của dự án viết:</p>
+<pre><code><span class="cmt">// Kiểu T phải có:  T()                       - hàm tạo không tham số
+//                  getMa()                   - trả về mã (chuỗi, duy nhất)
+//                  getTen()                  - trả về tên để tìm kiếm
+//                  toCSV()                   - ghi ra 1 dòng văn bản
+//                  fromCSV(vector&lt;string&gt;)   - đọc lại từ 1 dòng</span>
+template &lt;class T&gt;
+class KhoDuLieu { ... };</code></pre>
+<p>Nếu <code>T</code> thiếu một hàm, lỗi chỉ xuất hiện khi bạn <b>gọi</b> hàm thành viên dùng tới
+nó — vì hàm thành viên của lớp template chỉ được sinh mã khi được dùng.</p>
+
+<h4>6. Sức mạnh thật sự: một lớp cho 8 kho dữ liệu</h4>
+<pre><code>class CuaHang {
+    QuanLySach            khoSach;          <span class="cmt">// riêng, vì chứa đa hình Sach*</span>
+    KhoDuLieu&lt;TheLoai&gt;    khoTheLoai;
+    KhoDuLieu&lt;TacGia&gt;     khoTacGia;
+    KhoDuLieu&lt;NhaXuatBan&gt; khoNXB;
+    KhoDuLieu&lt;KhachHang&gt;  khoKhachHang;
+    KhoDuLieu&lt;NhaCungCap&gt; khoNhaCungCap;
+    KhoDuLieu&lt;TaiKhoan&gt;   khoTaiKhoan;
+    KhoDuLieu&lt;HoaDon&gt;     khoHoaDon;
+    KhoDuLieu&lt;PhieuNhap&gt;  khoPhieuNhap;
+};</code></pre>
+<p>Tám kho dữ liệu, đầy đủ thêm/sửa/xoá/tìm/sinh mã/đọc tệp/ghi tệp —
+tất cả từ <b>một</b> tệp <code>KhoDuLieu.h</code> khoảng 150 dòng. Nếu viết tay,
+đó là 8 × 150 = 1.200 dòng gần như giống nhau, và mỗi lần sửa lỗi phải sửa 8 chỗ.</p>
+
+<h4>7. Template còn dùng ở tầng giao diện</h4>
+<p>Ba menu quản lý Thể loại / Tác giả / NXB có nghiệp vụ giống nhau, nên
+<code>UngDung_DanhMuc.cpp</code> viết một hàm template dùng chung:</p>
+<pre><code>template &lt;class T&gt;
+static void menuDanhMucChung(CuaHang&amp; cuaHang, KhoDuLieu&lt;T&gt;&amp; kho,
+                             const string&amp; tienTo, const string&amp; tenLoai,
+                             int loaiDM) { <span class="cmt">/* menu 6 mục dùng chung */</span> }
+
+void UngDung::quanLyTheLoai() {
+    menuDanhMucChung&lt;TheLoai&gt;(cuaHang, cuaHang.theLoai(), "TL", "THE LOAI SACH", DM_THELOAI);
+}
+void UngDung::quanLyTacGia() {
+    menuDanhMucChung&lt;TacGia&gt;(cuaHang, cuaHang.tacGia(), "TG", "TAC GIA", DM_TACGIA);
+}</code></pre>
+<p>Bên trong hàm template, lời gọi <code>x.nhap()</code> và <code>x.xuatDong()</code> vẫn tự
+chạy đúng phiên bản của từng lớp con — <b>template và đa hình phối hợp với nhau</b>.</p>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT7.1</b> — <code>template&lt;class T&gt; T lonNhat(T a, T b)</code> và <code>T lonNhatMang(T a[], int n)</code>. Thử với <code>int</code>, <code>double</code>, <code>string</code>.</li>
+  <li><b>BT7.2</b> — <code>template&lt;class T&gt; struct Cap { T dau; T cuoi; };</code> rồi mở rộng thành <code>template&lt;class T, class U&gt;</code> (hai kiểu khác nhau).</li>
+  <li><b>BT7.3</b> — Lớp template <code>Stack&lt;T&gt;</code> với <code>push</code>, <code>pop</code>, <code>rong()</code>, <code>day()</code>, dung lượng cố định 100. Dùng với <code>int</code> và <code>string</code>.</li>
+  <li><b>BT7.4</b> — Cố tình chuyển định nghĩa hàm thành viên của <code>Stack&lt;T&gt;</code> sang tệp <code>Stack.cpp</code>. Đọc lỗi liên kết. Chuyển lại vào <code>.h</code>. Bài học: hiểu bản chất chứ không học vẹt.</li>
+  <li><b>BT7.5</b> — <code>template&lt;class T, class SoSanh&gt; void sapXepChon(T a[], int n, SoSanh cmp)</code>; gọi với hai hàm so sánh tăng và giảm.</li>
+  <li><b>BT7.6</b> — Lớp template <code>KhoDonGian&lt;T&gt;</code> có <code>them</code>, <code>timTheoMa</code>, <code>xoa</code>, <code>soLuong</code>; dùng cho <code>TheLoai</code> và <code>TacGia</code> để thấy hiệu quả tái sử dụng.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 5–6</h4>
+  <ul style="margin-bottom:0">
+    <li>Viết <code>include/Vector.h</code>: mảng động template đầy đủ quy tắc ba, có
+        <code>them</code>, <code>chen</code>, <code>xoaTaiViTri</code>, <code>doCho</code>,
+        <code>operator[]</code>, <code>begin()/end()</code>.</li>
+    <li>Viết <code>include/KhoDuLieu.h</code>: lớp template quản lý danh sách với
+        <code>them</code> (chặn trùng mã), <code>sua</code>, <code>xoa</code>,
+        <code>timTheoMa</code>, <code>timTheoTen</code>, <code>sinhMa</code>,
+        <code>luuFile</code>, <code>docFile</code>.</li>
+    <li>Thay mọi <code>std::vector</code> trong dự án bằng <code>Vector</code> tự viết.</li>
+    <li>Kiểm thử: tạo <code>KhoDuLieu&lt;TheLoai&gt;</code>, thêm 4 thể loại, thêm trùng mã
+        (phải báo lỗi), sinh mã tự động phải ra <code>TL005</code>. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Viết được hàm template và lớp template &nbsp;·&nbsp;
+  ☐ Giải thích vì sao template phải ở <code>.h</code> &nbsp;·&nbsp;
+  ☐ Truyền được hàm so sánh vào template &nbsp;·&nbsp;
+  ☐ <code>Vector&lt;T&gt;</code> của bạn không rò rỉ bộ nhớ khi sao chép</p>
+</div>
+<!-- ============================ CHẶNG 8 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 8 — Ngoại lệ và dữ liệu hợp lệ <span class="tag">Tuần 6</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Dùng <code>throw</code> / <code>try</code> / <code>catch</code> đúng chỗ.</li>
+  <li>Xây cây lớp ngoại lệ riêng cho dự án.</li>
+  <li>Hiểu nguyên tắc “kiểm tra hết rồi mới sửa dữ liệu” khi ghi nhận giao dịch.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Vì sao không dùng mã lỗi trả về?</h4>
+<pre><code><span class="cmt">// Kiểu C: hàm trả về mã lỗi</span>
+int banSach(const string&amp; ma, int sl);   <span class="cmt">// 0 = OK, -1 = không có sách, -2 = thiếu hàng...</span>
+
+<span class="cmt">// Người gọi thường... quên kiểm tra:</span>
+banSach("GK001", 999);                   <span class="cmt">// lỗi bị bỏ qua âm thầm, dữ liệu sai</span></code></pre>
+<p>Ngoại lệ giải quyết ba vấn đề: không thể bỏ qua âm thầm, mang được <b>thông điệp</b>
+mô tả lỗi, và tự động “nhảy” qua nhiều tầng hàm về nơi biết cách xử lý.</p>
+
+<h4>2. Cú pháp</h4>
+<pre><code>void Sach::setGiaBan(double g) {
+    if (g &lt; 0) throw LoiDuLieu("Gia ban khong duoc am.");   <span class="cmt">// NÉM lỗi</span>
+    giaBan = g;
+}
+
+<span class="cmt">// Nơi biết cách xử lý (tầng giao diện):</span>
+try {
+    s-&gt;setGiaBan(-5000);
+    cout &lt;&lt; "Da cap nhat\n";
+} catch (const LoiDuLieu&amp; e) {          <span class="cmt">// BẮT theo tham chiếu hằng</span>
+    cout &lt;&lt; "  !! " &lt;&lt; e.what() &lt;&lt; "\n";
+}</code></pre>
+<p>Khi <code>throw</code> chạy, phần còn lại của hàm bị bỏ, và các đối tượng cục bộ được
+hủy đúng cách (gọi là <i>stack unwinding</i>) trên đường “bay” tới <code>catch</code>.</p>
+
+<h4>3. Cây lớp ngoại lệ của PBL2</h4>
+<pre><code>#include &lt;stdexcept&gt;
+
+class LoiUngDung : public std::runtime_error {
+public:
+    explicit LoiUngDung(const std::string&amp; tb) : std::runtime_error(tb) {}
+};
+
+class LoiDuLieu : public LoiUngDung {
+public: explicit LoiDuLieu(const std::string&amp; tb) : LoiUngDung("[DU LIEU] " + tb) {} };
+
+class LoiKhongTimThay : public LoiUngDung {
+public: explicit LoiKhongTimThay(const std::string&amp; tb) : LoiUngDung("[KHONG TIM THAY] " + tb) {} };
+
+class LoiTrungMa    : public LoiUngDung { <span class="cmt">/* "[TRUNG MA] ..."    */</span> };
+class LoiTonKho     : public LoiUngDung { <span class="cmt">/* "[TON KHO] ..."     */</span> };
+class LoiRangBuoc   : public LoiUngDung { <span class="cmt">/* "[RANG BUOC] ..."   */</span> };
+class LoiFile       : public LoiUngDung { <span class="cmt">/* "[FILE] ..."        */</span> };
+class LoiPhanQuyen  : public LoiUngDung { <span class="cmt">/* "[PHAN QUYEN] ..."  */</span> };</code></pre>
+<p>Đây lại là <b>kế thừa và đa hình</b>: nhờ tất cả cùng gốc <code>std::runtime_error</code>,
+một khối <code>catch</code> duy nhất bắt được mọi lỗi và <code>e.what()</code> là hàm ảo
+trả về đúng thông điệp:</p>
+<pre><code>catch (const LoiUngDung&amp; e) { cout &lt;&lt; "  !! " &lt;&lt; e.what() &lt;&lt; "\n"; }  <span class="cmt">// mọi lỗi của ta</span>
+catch (const std::exception&amp; e) { cout &lt;&lt; "  !! Loi khong mong doi: " &lt;&lt; e.what() &lt;&lt; "\n"; }</code></pre>
+
+<h4>4. Nguyên tắc phân tầng: ném ở dưới, bắt ở trên</h4>
+<table>
+  <thead><tr><th style="width:30%">Tầng</th><th style="width:22%">Việc phải làm</th><th>Vì sao</th></tr></thead>
+  <tbody>
+    <tr><td>Lớp dữ liệu (<code>Sach</code>, <code>Nguoi</code>...)</td><td><b>ném</b> lỗi</td>
+        <td>biết rõ ràng buộc bị vi phạm, nhưng không biết nên hiện thông báo hay ghi log</td></tr>
+    <tr><td>Tầng nghiệp vụ (<code>CuaHang</code>)</td><td><b>ném</b> lỗi</td>
+        <td>kiểm tra ràng buộc liên bảng (tồn kho, toàn vẹn)</td></tr>
+    <tr><td>Tầng giao diện (<code>UngDung</code>)</td><td><b>bắt</b> lỗi</td>
+        <td>là nơi duy nhất biết cách nói với người dùng</td></tr>
+  </tbody>
+</table>
+<p>Vì vậy mỗi menu trong PBL2 đều có dạng:</p>
+<pre><code>try {
+    switch (c) {
+        case 1: xemTatCaSach();  break;
+        case 3: batBuocAdmin(); themSach(); break;
+        ...
+    }
+} catch (const LoiUngDung&amp; e) {
+    cout &lt;&lt; "\n  !! " &lt;&lt; e.what() &lt;&lt; "\n";     <span class="cmt">// hiện lỗi, KHÔNG làm sập chương trình</span>
+}
+Man::dungCho();</code></pre>
+
+<h4>5. Kỹ thuật quan trọng: giao dịch “tất cả hoặc không gì”</h4>
+<p>Khi lưu một hoá đơn 5 dòng, nếu dòng thứ 4 thiếu hàng mà 3 dòng đầu đã trừ kho rồi thì
+dữ liệu sai vĩnh viễn. Cách làm đúng: <b>kiểm tra toàn bộ trước, chỉ sửa khi mọi thứ hợp lệ</b>.</p>
+<pre><code>void CuaHang::ghiNhanHoaDon(HoaDon&amp; hd) {
+    if (hd.soDong() == 0) throw LoiDuLieu("Hoa don chua co dong hang nao.");
+
+    <span class="cmt">// BƯỚC 1: kiểm tra TẤT CẢ, chưa sửa gì cả</span>
+    const Vector&lt;DongChiTiet&gt;&amp; dong = hd.cacDong();
+    for (size_t i = 0; i &lt; dong.kichThuoc(); ++i) {
+        Sach* s = khoSach.timTheoMa(dong[i].getMaSach());
+        if (s == 0) throw LoiKhongTimThay("Sach " + dong[i].getMaSach());
+        if (dong[i].getSoLuong() &gt; s-&gt;getSoLuong()) {
+            ostringstream os;
+            os &lt;&lt; "Sach " &lt;&lt; s-&gt;getMa() &lt;&lt; " chi con " &lt;&lt; s-&gt;getSoLuong() &lt;&lt; " cuon.";
+            throw LoiTonKho(os.str());        <span class="cmt">// thoát ra, dữ liệu VẪN NGUYÊN VẸN</span>
+        }
+    }
+
+    <span class="cmt">// BƯỚC 2: đến đây chắc chắn hợp lệ -&gt; mới trừ kho</span>
+    for (size_t i = 0; i &lt; dong.kichThuoc(); ++i)
+        khoSach.timTheoMa(dong[i].getMaSach())-&gt;banBotKho(dong[i].getSoLuong());
+
+    <span class="cmt">// BƯỚC 3: cộng điểm khách hàng   BƯỚC 4: lưu hoá đơn</span>
+    if (!hd.getMaKhachHang().empty()) {
+        KhachHang* kh = khoKhachHang.timTheoMa(hd.getMaKhachHang());
+        if (kh != 0) kh-&gt;congDiemTheoHoaDon(hd.thanhToan());
+    }
+    if (hd.getMa().empty()) hd.setMa(sinhMaHoaDon());
+    khoHoaDon.them(hd);
+}</code></pre>
+
+<h4>6. An toàn ngoại lệ với bộ nhớ động</h4>
+<pre><code>Sach* s = taoSachTheoMaLoai(maLoai);      <span class="cmt">// đã new</span>
+try {
+    s-&gt;nhap();                            <span class="cmt">// có thể ném lỗi</span>
+    s-&gt;setMa(cuaHang.sach().sinhMa(maLoai));
+    cuaHang.sach().them(s);               <span class="cmt">// từ đây CuaHang sở hữu s</span>
+} catch (...) {
+    delete s;                             <span class="cmt">// lỗi -&gt; ta vẫn là chủ, phải tự dọn</span>
+    throw;                                <span class="cmt">// rồi ném tiếp lên trên</span>
+}</code></pre>
+<p><code>catch (...)</code> bắt mọi loại; <code>throw;</code> không tham số nghĩa là
+“ném lại đúng ngoại lệ vừa bắt”. Mẫu này xuất hiện trong <code>UngDung::themSach()</code>
+và <code>QuanLySach::docFile()</code>.</p>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT8.1</b> — Hàm <code>double chia(double a, double b)</code> ném <code>std::runtime_error</code> khi <code>b == 0</code>; bắt trong <code>main</code>.</li>
+  <li><b>BT8.2</b> — Cây ngoại lệ 3 tầng: <code>LoiUngDung</code> → <code>LoiDuLieu</code>, <code>LoiFile</code>. Ném <code>LoiDuLieu</code> và bắt bằng <code>catch (const LoiUngDung&amp;)</code> để chứng minh bắt được lớp con.</li>
+  <li><b>BT8.3</b> — Sửa lớp <code>Ngay</code> (BT2.1): setter ném <code>LoiDuLieu</code> thay vì im lặng bỏ qua. Viết vòng lặp nhập lại cho tới khi hợp lệ.</li>
+  <li><b>BT8.4</b> — Lớp <code>TaiKhoanBank</code> với <code>rutTien(double)</code> ném <code>LoiSoDu</code> nếu không đủ tiền; chứng minh số dư <b>không</b> bị thay đổi khi ném lỗi.</li>
+  <li><b>BT8.5</b> — Viết hàm nhận danh sách 5 giao dịch, kiểm tra hết rồi mới thực hiện (mẫu 2 bước ở trên). Thử với giao dịch thứ 3 sai và kiểm tra dữ liệu còn nguyên.</li>
+  <li><b>BT8.6</b> — Dùng <code>try/catch(...)/throw;</code> để không rò rỉ bộ nhớ khi hàm <code>nhap()</code> ném lỗi giữa lúc đã <code>new</code>.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 6</h4>
+  <ul style="margin-bottom:0">
+    <li>Viết <code>include/NgoaiLe.h</code> với 8 lớp ngoại lệ.</li>
+    <li>Chuyển toàn bộ setter của <code>Sach</code>, <code>Nguoi</code>, <code>DongChiTiet</code>,
+        <code>HoaDon</code> sang <b>ném ngoại lệ</b>.</li>
+    <li><code>Sach::banBotKho()</code> ném <code>LoiTonKho</code> kèm số lượng còn lại cụ thể.</li>
+    <li><code>KhoDuLieu::them()</code> ném <code>LoiTrungMa</code>.</li>
+    <li>Bọc <code>try/catch</code> quanh mọi <code>switch</code> menu. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Bắt ngoại lệ bằng <code>const&amp;</code> chứ không bằng giá trị &nbsp;·&nbsp;
+  ☐ Biết ném ở tầng dưới, bắt ở tầng giao diện &nbsp;·&nbsp;
+  ☐ Cài được giao dịch 2 bước &nbsp;·&nbsp;
+  ☐ Chương trình không bao giờ tự thoát vì lỗi nhập liệu</p>
+</div>
+
+<!-- ============================ CHẶNG 9 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 9 — Đọc/ghi tệp, lưu trữ bền vững <span class="tag">Tuần 6–7</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Ghi và đọc lại đối tượng bằng tệp văn bản.</li>
+  <li>Thiết kế định dạng tệp có thể mở rộng cho cây kế thừa.</li>
+  <li>Đọc tệp “chịu lỗi”: một dòng sai không làm mất cả tệp.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Ba lớp luồng</h4>
+<pre><code>#include &lt;fstream&gt;
+
+std::ofstream f("data/sach.txt");        <span class="cmt">// ghi, xoá nội dung cũ</span>
+if (!f) throw LoiFile("Khong ghi duoc tep");
+f &lt;&lt; "GK|GK001|Toan 12\n";
+f.close();
+
+std::ifstream g("data/sach.txt");        <span class="cmt">// đọc</span>
+if (!g) return false;                    <span class="cmt">// tệp chưa tồn tại: KHÔNG phải lỗi (lần chạy đầu)</span>
+std::string dong;
+while (std::getline(g, dong)) { ... }    <span class="cmt">// đọc từng dòng đến hết tệp</span>
+g.close();</code></pre>
+
+<h4>2. Tuần tự hoá: cặp <code>toCSV()</code> / <code>fromCSV()</code></h4>
+<p>Nguyên tắc: <b>mỗi đối tượng một dòng</b>, các trường cách nhau bởi ký tự phân cách.
+Bản kế hoạch PBL2 chọn ký tự <code>|</code>.</p>
+<pre><code>std::string Sach::toCSV() const {
+    ostringstream os;
+    os &lt;&lt; fixed &lt;&lt; setprecision(0);     <span class="cmt">// tiền: không lấy phần thập phân</span>
+    os &lt;&lt; maSach &lt;&lt; '|' &lt;&lt; tenSach &lt;&lt; '|' &lt;&lt; maTacGia &lt;&lt; '|' &lt;&lt; maTheLoai
+       &lt;&lt; '|' &lt;&lt; maNXB &lt;&lt; '|' &lt;&lt; namXuatBan &lt;&lt; '|' &lt;&lt; giaNhap &lt;&lt; '|' &lt;&lt; giaBan
+       &lt;&lt; '|' &lt;&lt; soLuongTon &lt;&lt; '|' &lt;&lt; viTriKe &lt;&lt; '|' &lt;&lt; moTa;
+    return os.str();
+}
+
+void Sach::fromCSV(const std::vector&lt;std::string&gt;&amp; p) {
+    if (p.size() &lt; 12) throw LoiFile("Dong du lieu Sach thieu truong.");
+    maSach     = p[1];   tenSach    = p[2];   maTacGia   = p[3];
+    maTheLoai  = p[4];   maNXB      = p[5];
+    namXuatBan = atoi(p[6].c_str());
+    giaNhap    = atof(p[7].c_str());
+    giaBan     = atof(p[8].c_str());
+    soLuongTon = atoi(p[9].c_str());
+    viTriKe    = p[10];  moTa       = p[11];
+}</code></pre>
+
+<h4>3. Ghi cây kế thừa: ký tự đầu dòng cho biết loại</h4>
+<p>Tệp <code>sach.txt</code> chứa lẫn ba loại sách. Giải pháp: <b>trường đầu tiên là mã loại</b>,
+sau đó là dữ liệu lớp cha, cuối cùng là dữ liệu riêng của lớp con.</p>
+<pre><code><span class="cmt">// Lớp con nối thêm phần của mình:</span>
+std::string SachGiaoKhoa::toCSV() const {
+    ostringstream os;
+    os &lt;&lt; maLoai() &lt;&lt; '|' &lt;&lt; Sach::toCSV() &lt;&lt; '|' &lt;&lt; monHoc &lt;&lt; '|' &lt;&lt; khoiLop;
+    return os.str();
+}
+void SachGiaoKhoa::fromCSV(const std::vector&lt;std::string&gt;&amp; p) {
+    if (p.size() &lt; 14) throw LoiFile("Dong du lieu SachGiaoKhoa thieu truong.");
+    Sach::fromCSV(p);                    <span class="cmt">// cha đọc p[1]..p[11]</span>
+    monHoc  = p[12];                     <span class="cmt">// con đọc p[12], p[13]</span>
+    khoiLop = atoi(p[13].c_str());
+}</code></pre>
+<p>Kết quả trong tệp <code>data/sach.txt</code> thật:</p>
+<pre><code>GK|GK001|Toan 12 - Tap 1|TG001|TL001|NX001|2023|26000|35000|147|A1-01|Sach chinh thuc|Toan|12
+VH|VH001|So Do|TG002|TL002|NX003|2020|62000|89000|23|B2-05||Tieu thuyet|Khong
+TN|TN001|Doraemon Tap 1|TG004|TL003|NX002|2019|18000|25000|240|C1-01||6|1</code></pre>
+<p>Khi đọc lại: lấy <code>p[0]</code> → gọi hàm xưởng → gọi <code>fromCSV()</code> đa hình.
+<b>Đây là chỗ Chặng 6 và Chặng 9 gặp nhau.</b></p>
+
+<h4>4. Chứng từ có nhiều dòng con: dùng ký tự phân cách thứ hai</h4>
+<pre><code>HD00001|04/09/2026|admin|KH001|0.0200|2|VH002#Nha Gia Kim#2#75050|TN001#Doraemon Tap 1#5#21250
+<span class="cmt">//  ^mã   ^ngày   ^người ^khách ^%CK  ^số dòng  ^--- mỗi dòng chi tiết dùng dấu # ---</span></code></pre>
+<pre><code>std::string ChungTu::chuoiChiTiet() const {
+    ostringstream os;
+    os &lt;&lt; chiTiet.kichThuoc();                          <span class="cmt">// ghi SỐ DÒNG trước</span>
+    for (size_t i = 0; i &lt; chiTiet.kichThuoc(); ++i)
+        os &lt;&lt; '|' &lt;&lt; chiTiet[i].toChuoi();
+    return os.str();
+}
+void ChungTu::docChiTiet(const std::vector&lt;std::string&gt;&amp; p, size_t batDau) {
+    chiTiet.xoaHet();
+    int n = atoi(p[batDau].c_str());                    <span class="cmt">// đọc số dòng</span>
+    for (int i = 0; i &lt; n; ++i) {
+        size_t vt = batDau + 1 + (size_t)i;
+        if (vt &gt;= p.size()) break;
+        DongChiTiet d;  d.fromChuoi(p[vt]);  chiTiet.them(d);
+    }
+}</code></pre>
+
+<div class="box warn">
+  <h4>Bảo vệ định dạng: lọc ký tự phân cách khỏi dữ liệu người dùng</h4>
+  <p style="margin-bottom:0">Nếu người dùng đặt tên sách là <code>"Toan|12"</code> thì tệp sẽ hỏng.
+  Vì vậy mọi hàm nhập của dự án đều lọc trước khi trả về:</p>
+<pre style="margin-bottom:0"><code>std::string locKyTu(const std::string&amp; s) {
+    std::string kq;
+    for (size_t i = 0; i &lt; s.size(); ++i)
+        if (s[i] != '|' &amp;&amp; s[i] != '#') kq += s[i];
+    return kq;
+}</code></pre>
+</div>
+
+<h4>5. Đọc tệp chịu lỗi</h4>
+<pre><code>bool KhoDuLieu&lt;T&gt;::docFile(const std::string&amp; tenTep) {
+    soDongLoi = 0;
+    std::ifstream f(tenTep.c_str());
+    if (!f) return false;                       <span class="cmt">// chưa có tệp: bình thường ở lần chạy đầu</span>
+    ds.xoaHet();
+    std::string dong;
+    while (std::getline(f, dong)) {
+        if (chuanHoa(dong).empty()) continue;   <span class="cmt">// bỏ dòng trống</span>
+        try {
+            std::vector&lt;std::string&gt; p = tachChuoi(dong, '|');
+            T x;  x.fromCSV(p);  ds.them(x);
+        } catch (const std::exception&amp;) {
+            ++soDongLoi;                        <span class="cmt">// dòng sai -&gt; ĐẾM rồi ĐỌC TIẾP</span>
+        }
+    }
+    f.close();
+    return true;
+}</code></pre>
+<p>Bản kế hoạch yêu cầu <i>“kiểm tra và xử lý ngoại lệ khi file không tồn tại hoặc dữ liệu
+sai định dạng”</i> — đây chính là cài đặt của yêu cầu đó. Khi khởi động, chương trình báo:
+<code>&gt;&gt; Canh bao: bo qua 2 dong sai dinh dang trong cac tep du lieu.</code></p>
+
+<h4>6. Sao lưu</h4>
+<pre><code>std::ifstream vao(duongDan(ten[i]).c_str(), std::ios::binary);
+std::ofstream ra((thuMucSao + "/" + ten[i]).c_str(), std::ios::binary);
+ra &lt;&lt; vao.rdbuf();                    <span class="cmt">// sao chép nguyên khối cả tệp</span></code></pre>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT9.1</b> — Ghi 5 số nguyên xuống tệp rồi đọc lại, tính tổng.</li>
+  <li><b>BT9.2</b> — Lớp <code>SinhVien</code> có <code>toCSV()</code>/<code>fromCSV()</code>; ghi 3 sinh viên xuống <code>sv.txt</code>, đọc lại vào <code>Vector&lt;SinhVien&gt;</code>, in ra và đối chiếu.</li>
+  <li><b>BT9.3</b> — Thêm vào <code>sv.txt</code> một dòng rác (<code>"abc"</code>) và một dòng trống; sửa hàm đọc để bỏ qua, đếm và báo số dòng lỗi.</li>
+  <li><b>BT9.4</b> — Cây <code>HinhHoc</code> (BT6.1): thêm <code>toCSV()</code>/<code>fromCSV()</code> với trường đầu là mã loại, ghi 5 hình lẫn loại xuống tệp rồi đọc lại bằng hàm xưởng.</li>
+  <li><b>BT9.5</b> — Viết <code>HoaDonDonGian::toCSV()</code> theo mẫu <code>ma|ngay|soDong|dong1|dong2</code> với mỗi dòng dùng dấu <code>#</code>; đọc lại và kiểm tra tổng tiền khớp.</li>
+  <li><b>BT9.6</b> — Viết hàm <code>saoLuu(nguon, dich)</code> dùng <code>rdbuf()</code>.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 6–7</h4>
+  <ul style="margin-bottom:0">
+    <li>Cài <code>toCSV()</code>/<code>fromCSV()</code> cho <b>tất cả</b> 12 lớp dữ liệu.</li>
+    <li>Cài <code>KhoDuLieu::luuFile()</code>/<code>docFile()</code> và
+        <code>QuanLySach::luuFile()</code>/<code>docFile()</code> (bản này dùng hàm xưởng).</li>
+    <li>Cài <code>CuaHang::napTatCa()</code>, <code>luuTatCa()</code>, <code>saoLuu()</code>,
+        <code>tongSoDongLoi()</code>.</li>
+    <li><b>Kiểm thử vòng tròn</b>: tạo dữ liệu → lưu → thoát → chạy lại → dữ liệu phải giống
+        hệt. Đây là mốc bắt buộc, không đạt thì không đi tiếp.</li>
+    <li>Kiểm thử với tệp rỗng, tệp có dòng rác, thư mục <code>data/</code> chưa tồn tại. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Dữ liệu tồn nguyên sau khi tắt và mở lại chương trình &nbsp;·&nbsp;
+  ☐ Tệp có dòng rác vẫn đọc được phần còn lại &nbsp;·&nbsp;
+  ☐ Đọc lại đúng loại sách nhờ hàm xưởng &nbsp;·&nbsp;
+  ☐ Tên sách chứa <code>|</code> không phá vỡ tệp</p>
+</div>
+
+<!-- ============================ CHẶNG 10 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 10 — Tự cài cấu trúc dữ liệu <span class="tag">Tuần 7</span></h2>
+
+<p>Bản kế hoạch PBL2 yêu cầu <i>“các cấu trúc dữ liệu (mảng động, danh sách liên kết, bảng băm)
+được nhóm tự cài đặt”</i>. Chặng này làm đúng việc đó.</p>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Cài <code>Vector&lt;T&gt;</code> (mảng động) với chiến lược tăng đôi dung lượng.</li>
+  <li>Cài <code>DanhSachLienKet&lt;T&gt;</code> có lớp bộ duyệt để dùng vòng <code>for</code> phạm vi.</li>
+  <li>Cài <code>BangBam&lt;V&gt;</code> xử lý va chạm bằng nối kết.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Mảng động — vì sao tăng gấp đôi?</h4>
+<pre><code>template &lt;class T&gt;
+void Vector&lt;T&gt;::baoDamChua(std::size_t canCo) {
+    if (canCo &lt;= dungLuong) return;                 <span class="cmt">// còn chỗ, không làm gì</span>
+    std::size_t moi = (dungLuong == 0) ? 4 : dungLuong * 2;   <span class="cmt">// TĂNG GẤP ĐÔI</span>
+    while (moi &lt; canCo) moi *= 2;
+    T* vungMoi = new T[moi];
+    for (std::size_t i = 0; i &lt; soPhanTu; ++i) vungMoi[i] = duLieu[i];
+    delete[] duLieu;
+    duLieu = vungMoi;  dungLuong = moi;
+}
+
+template &lt;class T&gt;
+void Vector&lt;T&gt;::them(const T&amp; x) {
+    baoDamChua(soPhanTu + 1);
+    duLieu[soPhanTu++] = x;
+}</code></pre>
+<p>Nếu mỗi lần thêm chỉ tăng 1 ô, thêm <i>n</i> phần tử phải sao chép
+1+2+…+<i>n</i> ≈ <i>n</i>²/2 lần → O(n²). Tăng gấp đôi thì tổng số lần sao chép
+là n+n/2+n/4+… &lt; 2n → mỗi lần thêm tốn <b>O(1) trung bình khấu hao</b>.
+Cái giá là dùng thừa nhiều nhất 2× bộ nhớ.</p>
+
+<table>
+  <thead><tr><th style="width:34%">Thao tác <code>Vector&lt;T&gt;</code></th><th style="width:22%">Độ phức tạp</th><th>Ghi chú</th></tr></thead>
+  <tbody>
+    <tr><td><code>operator[]</code></td><td>O(1)</td><td>truy cập trực tiếp bằng chỉ số</td></tr>
+    <tr><td><code>them()</code> (cuối)</td><td>O(1) khấu hao</td><td>đôi khi phải cấp phát lại</td></tr>
+    <tr><td><code>chen(i, x)</code></td><td>O(n)</td><td>phải dịch các phần tử sau</td></tr>
+    <tr><td><code>xoaTaiViTri(i)</code></td><td>O(n)</td><td>phải dồn lại</td></tr>
+  </tbody>
+</table>
+
+<h4>2. Danh sách liên kết + lớp bộ duyệt</h4>
+<pre><code>template &lt;class T&gt;
+class DanhSachLienKet {
+private:
+    struct Nut {                      <span class="cmt">// struct lồng bên trong: chỉ lớp này dùng</span>
+        T    duLieu;
+        Nut* tiep;
+        Nut(const T&amp; x) : duLieu(x), tiep(0) {}
+    };
+    Nut* dau;  Nut* cuoi;  std::size_t soPhanTu;
+
+public:
+    void themCuoi(const T&amp; x) {
+        Nut* moi = new Nut(x);
+        if (dau == 0) { dau = moi; cuoi = moi; }        <span class="cmt">// danh sách rỗng</span>
+        else          { cuoi-&gt;tiep = moi; cuoi = moi; } <span class="cmt">// O(1) nhờ giữ con trỏ cuoi</span>
+        ++soPhanTu;
+    }
+    void xoaHet() {
+        Nut* p = dau;
+        while (p != 0) { Nut* t = p-&gt;tiep; delete p; p = t; }   <span class="cmt">// giữ tiep TRƯỚC khi delete</span>
+        dau = 0; cuoi = 0; soPhanTu = 0;
+    }
+
+    <span class="cmt">// Lớp bộ duyệt: nạp chồng * ++ != -&gt; dùng được for phạm vi</span>
+    class BoDuyet {
+        Nut* hienTai;
+    public:
+        BoDuyet(Nut* p) : hienTai(p) {}
+        T&amp;       operator*()  const { return hienTai-&gt;duLieu; }
+        BoDuyet&amp; operator++()       { hienTai = hienTai-&gt;tiep; return *this; }
+        bool operator!=(const BoDuyet&amp; k) const { return hienTai != k.hienTai; }
+    };
+    BoDuyet begin() const { return BoDuyet(dau); }
+    BoDuyet end()   const { return BoDuyet(0); }
+};
+
+<span class="cmt">// Nhờ begin()/end() ta viết được:</span>
+for (int&amp; v : ds) cout &lt;&lt; v &lt;&lt; " ";</code></pre>
+
+<table>
+  <thead><tr><th style="width:26%">So sánh</th><th style="width:37%">Mảng động</th><th>Danh sách liên kết</th></tr></thead>
+  <tbody>
+    <tr><td>Truy cập phần tử thứ i</td><td>O(1) — <b>thắng</b></td><td>O(n) — phải đi từ đầu</td></tr>
+    <tr><td>Chèn/xoá ở đầu</td><td>O(n)</td><td>O(1) — <b>thắng</b></td></tr>
+    <tr><td>Bộ nhớ</td><td>liền khối, thân thiện cache</td><td>mỗi nút thêm 1 con trỏ, rời rạc</td></tr>
+    <tr><td>Dùng trong PBL2</td><td>kho dữ liệu chính (hay truy cập theo chỉ số)</td><td>các chuỗi nối kết của bảng băm</td></tr>
+  </tbody>
+</table>
+
+<h4>3. Bảng băm — tra cứu O(1)</h4>
+<p>Ý tưởng: từ khoá <code>"GK001"</code> tính ra một số, dùng số đó làm chỉ số ô.
+Hai khoá khác nhau có thể cho cùng ô (<b>va chạm</b>) → mỗi ô giữ một danh sách nối kết.</p>
+<pre><code>template &lt;class V&gt;
+class BangBam {
+private:
+    struct Nut { std::string khoa; V giaTri; Nut* tiep; ... };
+    Nut**       bang;        <span class="cmt">// mảng con trỏ, mỗi ô là đầu một chuỗi nối kết</span>
+    std::size_t soBucket, demSo;
+
+    <span class="cmt">// Hàm băm Horner cơ số 31 (31 là số nguyên tố -&gt; phân tán tốt)</span>
+    std::size_t bam(const std::string&amp; khoa) const {
+        unsigned long h = 0;
+        for (std::size_t i = 0; i &lt; khoa.size(); ++i)
+            h = h * 31u + (unsigned char)khoa[i];
+        return (std::size_t)(h % soBucket);          <span class="cmt">// soBucket = 211 (số nguyên tố)</span>
+    }
+
+public:
+    void dat(const std::string&amp; khoa, const V&amp; gt) {
+        std::size_t i = bam(khoa);
+        for (Nut* p = bang[i]; p != 0; p = p-&gt;tiep)
+            if (p-&gt;khoa == khoa) { p-&gt;giaTri = gt; return; }   <span class="cmt">// đã có -&gt; cập nhật</span>
+        Nut* moi = new Nut(khoa, gt);
+        moi-&gt;tiep = bang[i];  bang[i] = moi;                   <span class="cmt">// chèn đầu chuỗi: O(1)</span>
+        ++demSo;
+    }
+    bool lay(const std::string&amp; khoa, V&amp; ketQua) const {
+        for (Nut* p = bang[bam(khoa)]; p != 0; p = p-&gt;tiep)
+            if (p-&gt;khoa == khoa) { ketQua = p-&gt;giaTri; return true; }
+        return false;
+    }
+    std::size_t chuoiDaiNhat() const;    <span class="cmt">// để ĐÁNH GIÁ chất lượng hàm băm</span>
+};</code></pre>
+<p>Độ phức tạp: O(1) trung bình; xấu nhất O(n) nếu mọi khoá dồn vào một ô.
+Hàm <code>chuoiDaiNhat()</code> cho biết chuỗi dài nhất — số càng nhỏ, hàm băm càng tốt.
+Menu <i>Tìm kiếm → 1</i> của chương trình in ra chỉ số này.</p>
+
+<h4>4. PBL2 dùng cả hai cùng lúc</h4>
+<pre><code>class QuanLySach {
+    Vector&lt;Sach*&gt; ds;        <span class="cmt">// LUÔN sắp xếp tăng theo mã sách -&gt; tìm nhị phân được</span>
+    BangBam&lt;int&gt;  chiMuc;    <span class="cmt">// mã sách -&gt; vị trí trong ds  -&gt; tìm O(1)</span>
+};
+
+void QuanLySach::them(Sach* s) {
+    if (chiMuc.co(veThuong(s-&gt;getMa())))
+        throw LoiTrungMa("Ma sach " + s-&gt;getMa() + " da ton tai.");
+    size_t vt = 0;                                  <span class="cmt">// tìm chỗ chèn để giữ thứ tự</span>
+    while (vt &lt; ds.kichThuoc() &amp;&amp; veThuong(ds[vt]-&gt;getMa()) &lt; veThuong(s-&gt;getMa())) ++vt;
+    ds.chen(vt, s);
+    xayLaiChiMuc();                                 <span class="cmt">// cập nhật bảng băm</span>
+}</code></pre>
+<p>Đây là kỹ thuật <b>chỉ mục</b> (index) mà cơ sở dữ liệu thật cũng dùng: một cấu trúc
+để lưu dữ liệu, một cấu trúc phụ để tra nhanh.</p>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT10.1</b> — Cài <code>Vector&lt;T&gt;</code> đầy đủ: quy tắc ba, <code>them</code>, <code>chen</code>, <code>xoaTaiViTri</code>, <code>doCho</code>, <code>tai()</code> (ném lỗi khi vượt chỉ số), <code>begin/end</code>.</li>
+  <li><b>BT10.2</b> — In <code>kichThuoc()</code> và <code>sucChua()</code> sau mỗi lần thêm 1→20 phần tử; vẽ bảng để thấy dung lượng nhảy 4, 8, 16, 32.</li>
+  <li><b>BT10.3</b> — Cài <code>DanhSachLienKet&lt;T&gt;</code> với <code>themDau</code>, <code>themCuoi</code>, <code>xoaDau</code>, <code>xoaTaiViTri</code>, <code>tai</code>, và lớp <code>BoDuyet</code>; kiểm thử bằng vòng <code>for</code> phạm vi.</li>
+  <li><b>BT10.4</b> — Đo thời gian: thêm 100.000 phần tử vào đầu danh sách (mảng động vs liên kết) bằng <code>clock()</code>. Ghi kết quả vào báo cáo.</li>
+  <li><b>BT10.5</b> — Cài <code>BangBam&lt;V&gt;</code> với <code>dat</code>, <code>lay</code>, <code>co</code>, <code>xoa</code>, <code>chuoiDaiNhat</code>. Nạp 1.000 khoá dạng <code>"GK0001"</code>… và in chuỗi dài nhất.</li>
+  <li><b>BT10.6</b> — Thử đổi <code>soBucket</code> từ 211 xuống 10 rồi lên 1009, so sánh <code>chuoiDaiNhat()</code>. Rút ra kết luận về vai trò số ô và số nguyên tố.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 7</h4>
+  <ul style="margin-bottom:0">
+    <li>Hoàn thiện 3 tệp <code>Vector.h</code>, <code>DanhSachLienKet.h</code>, <code>BangBam.h</code>.</li>
+    <li>Viết <code>QuanLySach</code>: <code>Vector&lt;Sach*&gt;</code> sắp xếp theo mã +
+        <code>BangBam&lt;int&gt;</code> làm chỉ mục; <code>them</code>, <code>xoa</code>,
+        <code>timTheoMa</code>, <code>xayLaiChiMuc</code>, hàm hủy giải phóng mọi con trỏ.</li>
+    <li>Cấm sao chép <code>QuanLySach</code> (hàm tạo sao chép + toán tử gán đặt ở <code>private</code>).</li>
+    <li>Kiểm thử rò rỉ: nạp 1.000 sách, xoá hết, chạy lặp 100 lần, quan sát RAM. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Giải thích được vì sao tăng gấp đôi dung lượng &nbsp;·&nbsp;
+  ☐ Vẽ được hình bảng băm có va chạm &nbsp;·&nbsp;
+  ☐ Nêu được khi nào mảng thắng, khi nào liên kết thắng &nbsp;·&nbsp;
+  ☐ Chương trình không rò rỉ bộ nhớ</p>
+</div>
+
+<!-- ============================ CHẶNG 11 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 11 — Thuật toán tìm kiếm &amp; sắp xếp <span class="tag">Tuần 8</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Cài tìm tuyến tính, tìm nhị phân, Quick Sort, Merge Sort dưới dạng hàm template.</li>
+  <li>Biết đánh giá độ phức tạp và <b>chứng minh bằng số đo</b> — yêu cầu của tuần 8.</li>
+  <li>Chọn đúng thuật toán cho từng tình huống.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Tìm tuyến tính — O(n), luôn dùng được</h4>
+<pre><code>template &lt;class T, class DieuKien&gt;
+long timTuyenTinh(const Vector&lt;T&gt;&amp; a, DieuKien dk) {
+    for (std::size_t i = 0; i &lt; a.kichThuoc(); ++i)
+        if (dk(a[i])) return (long)i;
+    return -1;
+}</code></pre>
+<p>Ưu điểm: không cần dữ liệu sắp xếp, tìm được theo <b>bất kỳ</b> điều kiện.
+PBL2 dùng nó cho tìm gần đúng theo tên sách (chuỗi con).</p>
+
+<h4>2. Tìm nhị phân — O(log n), cần đã sắp xếp</h4>
+<pre><code>template &lt;class T, class K, class LayKhoa&gt;
+long timNhiPhan(const Vector&lt;T&gt;&amp; a, const K&amp; khoa, LayKhoa layKhoa) {
+    long tra = 0, phai = (long)a.kichThuoc() - 1;
+    while (tra &lt;= phai) {
+        long giua = tra + (phai - tra) / 2;      <span class="cmt">// viết vậy để không tràn số</span>
+        K    kg   = layKhoa(a[(std::size_t)giua]);
+        if      (kg == khoa) return giua;
+        else if (kg &lt;  khoa) tra  = giua + 1;    <span class="cmt">// bỏ nửa trái</span>
+        else                 phai = giua - 1;    <span class="cmt">// bỏ nửa phải</span>
+    }
+    return -1;
+}</code></pre>
+<p>Mỗi lần lặp loại bỏ <b>một nửa</b> dữ liệu. Với 1.000.000 phần tử chỉ cần ≈ 20 phép so sánh
+(vì 2²⁰ ≈ 10⁶) trong khi tuyến tính cần tới 1.000.000.</p>
+
+<h4>3. Quick Sort — O(n log n) trung bình</h4>
+<pre><code>template &lt;class T, class SoSanh&gt;
+void quickSortDeQuy(Vector&lt;T&gt;&amp; a, long tra, long phai, SoSanh cmp) {
+    if (tra &gt;= phai) return;
+    T    moc = a[(std::size_t)(tra + (phai - tra) / 2)];   <span class="cmt">// chọn mốc ở GIỮA</span>
+    long i = tra, j = phai;
+    while (i &lt;= j) {
+        while (cmp(a[(std::size_t)i], moc)) ++i;   <span class="cmt">// từ trái, tìm phần tử &gt;= mốc</span>
+        while (cmp(moc, a[(std::size_t)j])) --j;   <span class="cmt">// từ phải, tìm phần tử &lt;= mốc</span>
+        if (i &lt;= j) { a.doCho((std::size_t)i, (std::size_t)j); ++i; --j; }
+    }
+    quickSortDeQuy(a, tra, j, cmp);       <span class="cmt">// đệ quy nửa trái</span>
+    quickSortDeQuy(a, i, phai, cmp);      <span class="cmt">// đệ quy nửa phải</span>
+}</code></pre>
+<p>Rất nhanh trong thực tế, sắp xếp tại chỗ (không cần bộ nhớ phụ). Nhược điểm:
+<b>không ổn định</b> (hai phần tử bằng nhau có thể đổi thứ tự) và xấu nhất O(n²).</p>
+
+<h4>4. Merge Sort — O(n log n) mọi trường hợp, ổn định</h4>
+<pre><code>template &lt;class T, class SoSanh&gt;
+void tron(Vector&lt;T&gt;&amp; a, std::size_t tra, std::size_t giua, std::size_t phai,
+          Vector&lt;T&gt;&amp; tam, SoSanh cmp) {
+    std::size_t i = tra, j = giua + 1, k = tra;
+    while (i &lt;= giua &amp;&amp; j &lt;= phai) {
+        if (cmp(a[j], a[i])) tam.datLai(k++, a[j++]);
+        else                 tam.datLai(k++, a[i++]);   <span class="cmt">// bằng nhau -&gt; ưu tiên bên TRÁI</span>
+    }                                                    <span class="cmt">// -&gt; đó là tính ỔN ĐỊNH</span>
+    while (i &lt;= giua) tam.datLai(k++, a[i++]);
+    while (j &lt;= phai) tam.datLai(k++, a[j++]);
+    for (std::size_t t = tra; t &lt;= phai; ++t) a.datLai(t, tam[t]);
+}</code></pre>
+
+<table>
+  <thead><tr><th style="width:20%">Thuật toán</th><th style="width:16%">Trung bình</th><th style="width:14%">Xấu nhất</th>
+  <th style="width:14%">Bộ nhớ phụ</th><th style="width:12%">Ổn định</th><th>PBL2 dùng cho</th></tr></thead>
+  <tbody>
+    <tr><td>Tìm tuyến tính</td><td>O(n)</td><td>O(n)</td><td>—</td><td>—</td><td>tìm theo tên, tác giả, lọc giá</td></tr>
+    <tr><td>Tìm nhị phân</td><td>O(log n)</td><td>O(log n)</td><td>—</td><td>—</td><td>tìm theo mã sách</td></tr>
+    <tr><td>Bảng băm</td><td>O(1)</td><td>O(n)</td><td>O(n)</td><td>—</td><td>chỉ mục mã sách</td></tr>
+    <tr><td>Quick Sort</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td><td>Không</td><td>sắp theo mã, giá, tồn</td></tr>
+    <tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td><td><b>Có</b></td><td>sắp theo tên, năm XB</td></tr>
+  </tbody>
+</table>
+<p>Vì sao sắp theo tên lại chọn Merge Sort? Vì hai cuốn cùng tên nên giữ nguyên thứ tự mã sách
+ban đầu — người dùng thấy kết quả “ổn định”, không nhảy loạn mỗi lần sắp lại.</p>
+
+<h4>5. Dùng trong dự án — một hàm, năm tiêu chí</h4>
+<pre><code>Vector&lt;Sach*&gt; QuanLySach::sapXepTheo(TieuChi tc, bool tangDan) const {
+    Vector&lt;Sach*&gt; ban(ds);        <span class="cmt">// làm việc trên BẢN SAO -&gt; không phá thứ tự theo mã</span>
+    switch (tc) {
+        case THEO_MA:  quickSort(ban, tangDan ? sxTheoMaTang  : sxTheoMaGiam);  break;
+        case THEO_TEN: mergeSort(ban, tangDan ? sxTheoTenTang : sxTheoTenGiam); break;
+        case THEO_GIA: quickSort(ban, tangDan ? sxTheoGiaTang : sxTheoGiaGiam); break;
+        case THEO_TON: quickSort(ban, tangDan ? sxTheoTonTang : sxTheoTonGiam); break;
+        case THEO_NAM: mergeSort(ban, tangDan ? sxTheoNamTang : sxTheoNamGiam); break;
+    }
+    return ban;
+}</code></pre>
+<div class="box warn">
+  <p style="margin-bottom:0"><b>Chú ý thiết kế:</b> hàm trả về <b>bản sao</b> danh sách con trỏ.
+  Nếu sắp xếp trực tiếp <code>ds</code>, thứ tự theo mã bị phá và <b>tìm nhị phân sẽ sai</b>.
+  Đây là loại lỗi rất khó tìm nếu không nghĩ trước.</p>
+</div>
+
+<h4>6. Chứng minh bằng số đo — đúng yêu cầu tuần 8</h4>
+<p>Chương trình có menu <i>Tìm kiếm → 10. So sánh hiệu năng</i>, tự đếm số phép so sánh
+của cả ba cách và in bảng:</p>
+<pre><code>------------------------------------------------------------------------------
+PHUONG PHAP                 KET QUA       SO PHEP SO SANH     DO PHUC TAP
+------------------------------------------------------------------------------
+Tim tuyen tinh              Tim thay      6                   O(n)
+Tim nhi phan                Tim thay      3                   O(log n)
+Bang bam (hash table)       Tim thay      ~1                  O(1) tr.binh
+------------------------------------------------------------------------------
+  So dau sach hien co: 6</code></pre>
+<p>Hãy nạp 1.000–10.000 sách rồi chạy lại: bảng này chính là dữ liệu để đưa vào
+mục “đánh giá độ phức tạp thuật toán” của báo cáo PBL2.</p>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT11.1</b> — Cài tìm tuyến tính và tìm nhị phân trên mảng <code>int</code>; đếm số phép so sánh của cả hai với n = 10, 100, 1.000, 10.000 và lập bảng.</li>
+  <li><b>BT11.2</b> — Cài Bubble Sort, Selection Sort, Insertion Sort; đo thời gian với n = 10.000 bằng <code>clock()</code>.</li>
+  <li><b>BT11.3</b> — Cài Quick Sort và Merge Sort dạng template nhận hàm so sánh; sắp mảng 100.000 số và so sánh thời gian với 3 thuật toán O(n²) ở trên.</li>
+  <li><b>BT11.4</b> — Chứng minh Quick Sort không ổn định: sắp mảng cặp <code>(diem, ten)</code> theo điểm, quan sát thứ tự tên của các phần tử cùng điểm; làm lại bằng Merge Sort.</li>
+  <li><b>BT11.5</b> — Tạo trường hợp xấu nhất của Quick Sort (mảng đã sắp xếp sẵn, mốc chọn ở đầu) và đo thời gian; sau đó đổi sang chọn mốc ở giữa và đo lại.</li>
+  <li><b>BT11.6</b> — Sắp <code>Vector&lt;Sach*&gt;</code> theo 5 tiêu chí, mỗi tiêu chí 2 chiều — tổng 10 hàm so sánh.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 8</h4>
+  <ul style="margin-bottom:0">
+    <li>Viết <code>include/ThuatToan.h</code>: <code>timTuyenTinh</code>, <code>timNhiPhan</code>,
+        <code>quickSort</code>, <code>mergeSort</code> — tất cả là hàm template.</li>
+    <li><code>QuanLySach</code>: <code>timNhiPhanTheoMa</code>, <code>timTheoTen/TacGia/TheLoai/NXB</code>,
+        <code>locTheoKhoangGia</code>, <code>locTheoTinhTrang</code>, <code>locTheoLoai</code>,
+        <code>sapXepTheo</code> + 10 hàm so sánh.</li>
+    <li>Viết chức năng <b>so sánh hiệu năng</b> để lấy số liệu cho báo cáo.</li>
+    <li>Lập <b>bảng phân tích độ phức tạp</b> của mọi thao tác chính (nộp trong báo cáo). <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Cài được tìm nhị phân không lỗi biên &nbsp;·&nbsp;
+  ☐ Giải thích được tính ổn định &nbsp;·&nbsp;
+  ☐ Có bảng số đo thực tế, không chỉ nói lý thuyết &nbsp;·&nbsp;
+  ☐ Hiểu vì sao phải sắp xếp trên bản sao</p>
+</div>
+<!-- ============================ CHẶNG 12 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 12 — Kiến trúc 3 tầng &amp; nghiệp vụ nhập – bán <span class="tag">Tuần 9–10</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Tách chương trình thành 3 tầng và hiểu vì sao điều đó giúp bạn chuyển sang Qt dễ dàng.</li>
+  <li>Cài lớp <code>CuaHang</code> — nơi chứa toàn bộ nghiệp vụ.</li>
+  <li>Cài hoàn chỉnh hai nghiệp vụ khó nhất: lập phiếu nhập và lập hoá đơn.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Ba tầng và luật một chiều</h4>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│  TẦNG GIAO DIỆN   UngDung, UngDung_Sach, UngDung_DanhMuc,│
+│                   UngDung_DoiTac, UngDung_GiaoDich,      │
+│                   UngDung_ThongKe                        │
+│  Việc: hỏi người dùng, in bảng, bắt ngoại lệ             │
+└───────────────────────────┬──────────────────────────────┘
+                            │ chỉ gọi xuống, KHÔNG bao giờ gọi lên
+┌───────────────────────────▼──────────────────────────────┐
+│  TẦNG NGHIỆP VỤ   CuaHang, ThongKe, QuanLySach           │
+│  Việc: kiểm tra ràng buộc, trừ/cộng kho, tính doanh thu  │
+└───────────────────────────┬──────────────────────────────┘
+                            │
+┌───────────────────────────▼──────────────────────────────┐
+│  TẦNG DỮ LIỆU     Sach, Nguoi, DanhMuc, ChungTu + con    │
+│                   Vector, DanhSachLienKet, BangBam       │
+│  Việc: giữ dữ liệu, tự kiểm tra hợp lệ, tự đọc/ghi CSV   │
+└──────────────────────────────────────────────────────────┘</code></pre>
+<div class="box">
+  <p style="margin-bottom:0"><b>Vì sao đây là chặng quyết định điểm PBL2?</b> Trong tầng nghiệp vụ
+  và tầng dữ liệu <b>không có một dòng <code>cout</code> hay <code>cin</code> nào</b> liên quan
+  tới menu. Nhờ vậy, khi làm giao diện Qt ở học kỳ sau, bạn <b>chỉ viết lại tầng trên cùng</b> —
+  gần 3.000 dòng nghiệp vụ giữ nguyên. Nếu trộn lẫn giao diện với nghiệp vụ, bạn sẽ phải
+  viết lại toàn bộ.</p>
+</div>
+
+<h4>2. Lớp <code>CuaHang</code> — “có” chín kho dữ liệu</h4>
+<pre><code>class CuaHang {
+private:
+    std::string tenCuaHang, thuMuc;
+    int         nguongCanhBao;              <span class="cmt">// tồn &lt;= ngưỡng -&gt; cảnh báo</span>
+
+    QuanLySach            khoSach;          <span class="cmt">// đa hình Sach*</span>
+    KhoDuLieu&lt;TheLoai&gt;    khoTheLoai;
+    KhoDuLieu&lt;TacGia&gt;     khoTacGia;
+    KhoDuLieu&lt;NhaXuatBan&gt; khoNXB;
+    KhoDuLieu&lt;KhachHang&gt;  khoKhachHang;
+    KhoDuLieu&lt;NhaCungCap&gt; khoNhaCungCap;
+    KhoDuLieu&lt;TaiKhoan&gt;   khoTaiKhoan;
+    KhoDuLieu&lt;HoaDon&gt;     khoHoaDon;
+    KhoDuLieu&lt;PhieuNhap&gt;  khoPhieuNhap;
+
+    CuaHang(const CuaHang&amp;);                <span class="cmt">// cấm sao chép</span>
+    CuaHang&amp; operator=(const CuaHang&amp;);
+
+public:
+    QuanLySach&amp;         sach()      { return khoSach; }       <span class="cmt">// cho tầng trên truy cập</span>
+    KhoDuLieu&lt;TheLoai&gt;&amp; theLoai()   { return khoTheLoai; }
+    ...
+    void ghiNhanHoaDon(HoaDon&amp; hd);
+    void ghiNhanPhieuNhap(PhieuNhap&amp; pn);
+    void napTatCa();  void luuTatCa() const;  void saoLuu() const;
+};</code></pre>
+
+<h4>3. Sinh mã tự động</h4>
+<p>Yêu cầu: <i>“Mã sách, mã khách hàng, mã hoá đơn là duy nhất và được chương trình sinh
+tự động”</i>. Cách làm: tìm số lớn nhất đang có sau tiền tố, rồi cộng 1.</p>
+<pre><code>template &lt;class T&gt;
+std::string KhoDuLieu&lt;T&gt;::sinhMa(const std::string&amp; tienTo, int soChuSo) const {
+    long lonNhat = 0;
+    for (std::size_t i = 0; i &lt; ds.kichThuoc(); ++i) {
+        std::string m = ds[i].getMa();
+        if (m.size() &gt; tienTo.size()
+            &amp;&amp; veThuong(m.substr(0, tienTo.size())) == veThuong(tienTo)) {
+            long v = atol(m.substr(tienTo.size()).c_str());
+            if (v &gt; lonNhat) lonNhat = v;
+        }
+    }
+    std::ostringstream os;
+    os &lt;&lt; tienTo &lt;&lt; std::setw(soChuSo) &lt;&lt; std::setfill('0') &lt;&lt; (lonNhat + 1);
+    return os.str();                <span class="cmt">// "KH001", "HD00007", ...</span>
+}</code></pre>
+
+<h4>4. Nghiệp vụ nhập kho</h4>
+<pre><code>void CuaHang::ghiNhanPhieuNhap(PhieuNhap&amp; pn) {
+    if (pn.soDong() == 0) throw LoiDuLieu("Phieu nhap chua co dong hang nao.");
+    if (!khoNhaCungCap.coMa(pn.getMaNhaCungCap()))
+        throw LoiKhongTimThay("Nha cung cap " + pn.getMaNhaCungCap());
+
+    <span class="cmt">// kiểm tra hết trước</span>
+    const Vector&lt;DongChiTiet&gt;&amp; dong = pn.cacDong();
+    for (size_t i = 0; i &lt; dong.kichThuoc(); ++i)
+        if (khoSach.timTheoMa(dong[i].getMaSach()) == 0)
+            throw LoiKhongTimThay("Sach " + dong[i].getMaSach());
+
+    <span class="cmt">// rồi mới cộng kho và cập nhật giá nhập mới nhất</span>
+    for (size_t i = 0; i &lt; dong.kichThuoc(); ++i) {
+        Sach* s = khoSach.timTheoMa(dong[i].getMaSach());
+        s-&gt;nhapThemKho(dong[i].getSoLuong());
+        s-&gt;setGiaNhap(dong[i].getDonGia());
+    }
+    if (pn.getMa().empty()) pn.setMa(sinhMaPhieuNhap());
+    khoPhieuNhap.them(pn);
+}</code></pre>
+
+<h4>5. Nghiệp vụ bán hàng — chiết khấu ba lớp</h4>
+<p>Giá cuối cùng của một cuốn sách trong hoá đơn được quyết định bởi hai mức giảm độc lập:</p>
+<table>
+  <thead><tr><th style="width:32%">Mức giảm</th><th style="width:24%">Do đâu quyết định</th><th>Cài đặt</th></tr></thead>
+  <tbody>
+    <tr><td>Theo <b>loại sách</b><br>(10% / 5% / 15%)</td><td>đa hình — mỗi lớp con</td>
+        <td><code>Sach::giaSauGiam()</code> = <code>giaBan × (1 − tiLeGiamGia())</code></td></tr>
+    <tr><td>Theo <b>cấp thành viên</b><br>(0/2/5/8%)</td><td>điểm tích luỹ của khách</td>
+        <td><code>KhachHang::tiLeGiamThanhVien()</code> → gán vào <code>HoaDon::tiLeChietKhau</code></td></tr>
+    <tr><td>Nhân viên nhập tay</td><td>khuyến mãi đặc biệt, tối đa 50%</td>
+        <td><code>HoaDon::setTiLeChietKhau()</code></td></tr>
+  </tbody>
+</table>
+<pre><code>double HoaDon::tienChietKhau() const { return tongTienHang() * tiLeChietKhau; }
+double HoaDon::thanhToan()     const { return tongTienHang() - tienChietKhau(); }</code></pre>
+<p>Cấp thành viên tính theo điểm, mỗi 10.000đ mua hàng được 1 điểm:</p>
+<pre><code>double KhachHang::tiLeGiamThanhVien() const {
+    if (diemTichLuy &gt;= 1000) return 0.08;      <span class="cmt">// Kim cương</span>
+    if (diemTichLuy &gt;= 500)  return 0.05;      <span class="cmt">// Vàng</span>
+    if (diemTichLuy &gt;= 200)  return 0.02;      <span class="cmt">// Bạc</span>
+    return 0.0;                                 <span class="cmt">// Thường</span>
+}
+void KhachHang::congDiemTheoHoaDon(double soTienMua) {
+    if (soTienMua &lt;= 0) return;
+    diemTichLuy += (int)(soTienMua / 10000.0);
+}</code></pre>
+
+<h4>6. Vòng lặp nhập dòng hàng ở tầng giao diện</h4>
+<pre><code>while (true) {
+    string maSach = Nhap::chuoi("  Ma sach (Enter de ket thuc): ", true);
+    if (maSach.empty()) break;                     <span class="cmt">// Enter rỗng = xong</span>
+
+    Sach* s = cuaHang.sach().timTheoMa(maSach);
+    if (s == 0)               { cout &lt;&lt; "  !! Khong tim thay\n";  continue; }
+    if (s-&gt;getSoLuong() &lt;= 0) { cout &lt;&lt; "  !! Da HET HANG\n";     continue; }
+
+    <span class="cmt">// chặn ngay tại chỗ nhập: không cho nhập quá số tồn</span>
+    int sl = Nhap::soNguyen("  So luong ban: ", 1, s-&gt;getSoLuong());
+    hd.themDong(DongChiTiet(s-&gt;getMa(), s-&gt;getTen(), sl, s-&gt;giaSauGiam()));
+    cout &lt;&lt; "  &gt;&gt; Tam tinh: " &lt;&lt; dinhDangTien(hd.tongTienHang()) &lt;&lt; " VND\n";
+}</code></pre>
+<p>Lưu ý <b>hai lớp bảo vệ</b>: giao diện chặn từ lúc nhập (thân thiện), tầng nghiệp vụ vẫn
+kiểm tra lại lúc lưu (an toàn). Không bao giờ tin tầng trên đã kiểm tra hộ.</p>
+
+<h4>7. Vì sao lưu tên sách vào dòng chi tiết?</h4>
+<pre><code>class DongChiTiet {
+    std::string maSach;
+    std::string tenSach;      <span class="cmt">// bản chụp tại thời điểm lập chứng từ</span>
+    int         soLuong;
+    double      donGia;       <span class="cmt">// giá tại thời điểm bán, KHÔNG phải giá hiện tại</span>
+};</code></pre>
+<p>Nếu sau này sách được đổi tên hoặc tăng giá, hoá đơn cũ vẫn phải in đúng như lúc bán —
+đó là nguyên tắc kế toán. Vì vậy chứng từ <b>không</b> tra lại tên/giá từ kho.</p>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT12.1</b> — Viết lớp <code>QuanLyThuVien</code> (tầng nghiệp vụ) gồm <code>Vector&lt;Sach&gt;</code> và <code>Vector&lt;BanDoc&gt;</code>, có <code>choMuon(maSach, maBanDoc)</code> kiểm tra: sách còn không, bạn đọc đã mượn quá 3 cuốn chưa. Tầng giao diện chỉ gọi hàm này.</li>
+  <li><b>BT12.2</b> — Viết <code>sinhMa("BD", 4)</code> và kiểm thử: kho rỗng → <code>BD0001</code>; đã có <code>BD0007</code> → <code>BD0008</code>; có mã lạ <code>"XYZ"</code> → bỏ qua.</li>
+  <li><b>BT12.3</b> — Viết nghiệp vụ <code>traSach()</code> có tính phí trễ hạn, dùng lớp <code>Ngay</code> ở BT2.1.</li>
+  <li><b>BT12.4</b> — Cài chiết khấu hai lớp cho <code>QuanLyThuVien</code>: theo loại sách và theo hạng thẻ bạn đọc.</li>
+  <li><b>BT12.5</b> — Viết hàm nhập nhiều dòng hàng theo mẫu ở mục 6, có gộp dòng khi nhập trùng mã sách.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 9–10</h4>
+  <ul style="margin-bottom:0">
+    <li>Viết <code>include/CuaHang.h</code> + <code>src/CuaHang.cpp</code>: 9 kho, các hàm
+        <code>tenTacGia/tenTheLoai/tenNXB/tenKhachHang/tenNhaCungCap</code>,
+        <code>kiemTraMaDanhMucTonTai</code>, 3 hàm <code>xoa...AnToan</code>,
+        <code>ghiNhanHoaDon</code>, <code>ghiNhanPhieuNhap</code>, <code>taoDuLieuMau</code>.</li>
+    <li>Viết <code>UngDung_DoiTac.cpp</code>: quản lý khách hàng (kèm điểm tích luỹ,
+        lịch sử mua hàng) và nhà cung cấp (kèm lịch sử nhập hàng).</li>
+    <li>Viết <code>UngDung_GiaoDich.cpp</code>: lập phiếu nhập, lập hoá đơn, tra cứu theo
+        ngày / khách hàng / nhà cung cấp, in lại chứng từ.</li>
+    <li><code>ChungTu::inChungTu()</code> in chứng từ có khung, thẳng cột.</li>
+    <li><b>Kiểm thử nghiệp vụ</b>: bán 3 cuốn → tồn giảm 3, điểm khách tăng, doanh thu tăng;
+        nhập 50 cuốn → tồn tăng 50. Tắt mở lại phải khớp. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Tầng nghiệp vụ không có <code>cin</code>/menu &nbsp;·&nbsp;
+  ☐ Bán quá tồn kho bị chặn ở cả hai tầng &nbsp;·&nbsp;
+  ☐ Mã hoá đơn sinh tự động không trùng &nbsp;·&nbsp;
+  ☐ Hoá đơn cũ giữ đúng giá lúc bán</p>
+</div>
+
+<!-- ============================ CHẶNG 13 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 13 — Thống kê, báo cáo, đăng nhập &amp; phân quyền <span class="tag">Tuần 11–12</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Tổng hợp dữ liệu từ nhiều hoá đơn thành báo cáo.</li>
+  <li>Vẽ biểu đồ cột ngay trên console.</li>
+  <li>Cài đăng nhập, băm mật khẩu và phân quyền hai mức.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Nhóm dữ liệu bằng bảng băm — mẫu “gộp theo khoá”</h4>
+<p>Bài toán: từ tất cả hoá đơn, tính mỗi đầu sách bán được bao nhiêu cuốn.
+Cách dở là quét hai vòng lồng nhau O(n·m). Cách hay là dùng bảng băm ánh xạ
+mã sách → vị trí trong mảng kết quả:</p>
+<pre><code>Vector&lt;MucBanChay&gt; CuaHang::bangSachBanChay() const {
+    Vector&lt;MucBanChay&gt; kq;
+    BangBam&lt;int&gt;       viTri;                <span class="cmt">// mã sách -&gt; chỉ số trong kq</span>
+
+    const Vector&lt;HoaDon&gt;&amp; ds = khoHoaDon.duLieu();
+    for (size_t i = 0; i &lt; ds.kichThuoc(); ++i) {
+        const Vector&lt;DongChiTiet&gt;&amp; dong = ds[i].cacDong();
+        for (size_t j = 0; j &lt; dong.kichThuoc(); ++j) {
+            std::string ma = dong[j].getMaSach();
+            int vt;
+            if (!viTri.lay(ma, vt)) {                    <span class="cmt">// gặp lần đầu -&gt; tạo mục mới</span>
+                kq.them(MucBanChay(ma, dong[j].getTenSach()));
+                vt = (int)kq.kichThuoc() - 1;
+                viTri.dat(ma, vt);
+            }
+            kq[(size_t)vt].soLuongBan += dong[j].getSoLuong();
+            kq[(size_t)vt].doanhThu   += dong[j].thanhTien();
+        }
+    }
+    quickSort(kq, bcTheoSoLuongGiam);        <span class="cmt">// sắp giảm dần -&gt; top bán chạy</span>
+    return kq;
+}</code></pre>
+<p>Cùng một mẫu này được dùng lại cho “doanh thu theo ngày”, “doanh thu theo tháng”,
+“thể loại được mua nhiều nhất”. Tổng độ phức tạp O(số dòng chi tiết).</p>
+
+<h4>2. So sánh ngày tháng — đổi về số</h4>
+<pre><code>long soHoaNgay(const std::string&amp; d) {         <span class="cmt">// "05/09/2026" -&gt; 20260905</span>
+    std::vector&lt;std::string&gt; p = tachChuoi(d, '/');
+    if (p.size() != 3) return 0;
+    return atol(p[2].c_str()) * 10000L + atol(p[1].c_str()) * 100L + atol(p[0].c_str());
+}
+<span class="cmt">// Nhờ vậy so sánh khoảng thời gian chỉ là so sánh hai số nguyên:</span>
+long n = soHoaNgay(ds[i].getNgay());
+if (n &gt;= soHoaNgay(tu) &amp;&amp; n &lt;= soHoaNgay(den)) { tong += ds[i].thanhToan(); ++soHoaDon; }</code></pre>
+
+<h4>3. Biểu đồ cột trên console</h4>
+<p>Bản kế hoạch yêu cầu “hiển thị bằng biểu đồ trực quan”. Bản Qt sẽ dùng Qt Charts;
+bản console vẽ bằng ký tự — vẫn đủ để bảo vệ ý tưởng:</p>
+<pre><code>void Man::bieuDoCot(const std::string&amp; nhan, double giaTri,
+                    double giaTriLonNhat, int doDaiToiDa) {
+    int soO = 0;
+    if (giaTriLonNhat &gt; 0)
+        soO = (int)((giaTri / giaTriLonNhat) * doDaiToiDa + 0.5);   <span class="cmt">// tỉ lệ</span>
+    std::cout &lt;&lt; "  " &lt;&lt; std::left &lt;&lt; std::setw(24) &lt;&lt; catBot(nhan, 23) &lt;&lt; "| ";
+    for (int i = 0; i &lt; soO; ++i) std::cout &lt;&lt; '#';
+    std::cout &lt;&lt; "  " &lt;&lt; dinhDangTien(giaTri) &lt;&lt; '\n';
+}</code></pre>
+<pre><code>  BIEU DO SO LUONG BAN:
+  Doraemon Tap 1          | ########################################  5
+  Toan 12 - Tap 1         | ########################  3
+  Nha Gia Kim             | ################  2</code></pre>
+
+<h4>4. In bảng thẳng cột với <code>&lt;iomanip&gt;</code></h4>
+<pre><code>#include &lt;iomanip&gt;
+std::cout &lt;&lt; std::left  &lt;&lt; std::setw(9)  &lt;&lt; catBot(maSach, 8)      <span class="cmt">// căn trái, rộng 9</span>
+          &lt;&lt; std::left  &lt;&lt; std::setw(30) &lt;&lt; catBot(tenSach, 29)
+          &lt;&lt; std::right &lt;&lt; std::setw(13) &lt;&lt; dinhDangTien(giaBan)    <span class="cmt">// căn phải cho số</span>
+          &lt;&lt; std::right &lt;&lt; std::setw(7)  &lt;&lt; soLuongTon;</code></pre>
+<div class="box warn">
+  <p style="margin-bottom:0"><b>Vì sao dự án dùng tiếng Việt không dấu?</b>
+  <code>setw</code> đếm theo <b>byte</b>, còn một chữ có dấu trong UTF-8 chiếm 2–3 byte.
+  Chỉ cần một chữ “ố” là cả bảng lệch cột. Vì vậy bản console dùng chữ không dấu, còn
+  <code>catBot()</code> cắt chuỗi quá dài để không phá khung. Sang Qt dùng
+  <code>QTableWidget</code> thì tiếng Việt có dấu hiển thị bình thường.</p>
+</div>
+
+<h4>5. Băm mật khẩu — không bao giờ lưu bản rõ</h4>
+<pre><code>std::string bamMatKhau(const std::string&amp; mk) {
+    unsigned long h = 5381;                          <span class="cmt">// hàm băm djb2</span>
+    for (size_t i = 0; i &lt; mk.size(); ++i)
+        h = ((h &lt;&lt; 5) + h) + (unsigned char)mk[i];   <span class="cmt">// h*33 + ký tự</span>
+    std::ostringstream os;  os &lt;&lt; std::hex &lt;&lt; h;
+    return os.str();
+}
+<span class="cmt">// Kiểm tra: băm cái người dùng vừa gõ rồi SO SÁNH CHUỖI BĂM</span>
+bool TaiKhoan::kiemTraMatKhau(const std::string&amp; mkRo) const {
+    return bamMatKhau(mkRo) == matKhauBam;
+}</code></pre>
+<p>Tệp <code>taikhoan.txt</code> vì vậy chỉ chứa <code>admin|Quan tri he thong||||185030e4|ADMIN</code>
+— mở ra cũng không đọc được mật khẩu. (Lưu ý: djb2 chỉ đủ cho bài tập; hệ thống thật
+dùng bcrypt/argon2 có thêm “muối”.)</p>
+
+<h4>6. Phân quyền</h4>
+<pre><code>class TaiKhoan : public Nguoi {
+public:
+    static const std::string QUYEN_ADMIN;      <span class="cmt">// "ADMIN"</span>
+    static const std::string QUYEN_NHANVIEN;   <span class="cmt">// "NHANVIEN"</span>
+    bool laAdmin() const { return quyen == QUYEN_ADMIN; }
+};
+
+<span class="cmt">// --- tầng giao diện ---</span>
+void UngDung::batBuocAdmin() {
+    if (!laAdmin())
+        throw LoiPhanQuyen("Chuc nang nay chi danh cho quan tri vien.");
+}
+
+switch (c) {
+    case 1: menuQuanLySach();                    break;   <span class="cmt">// ai cũng vào được</span>
+    case 2: batBuocAdmin(); menuDanhMuc();       break;   <span class="cmt">// chỉ admin</span>
+    case 5: batBuocAdmin(); menuNhapKho();       break;
+    case 6: menuBanHang();                       break;   <span class="cmt">// nhân viên bán hàng được</span>
+}</code></pre>
+<p>Nếu nhân viên chọn mục 2, chương trình hiện
+<code>!! [PHAN QUYEN] Chuc nang nay chi danh cho quan tri vien.</code> rồi quay lại menu —
+không sập, không cho qua.</p>
+
+<h4>7. Một bẫy nhớ đời: con trỏ treo vào <code>Vector</code></h4>
+<pre><code><span class="cmt">// CÁCH SAI: giữ con trỏ vào phần tử của Vector</span>
+TaiKhoan* nguoiDangNhap;                  <span class="cmt">// trỏ vào bên trong khoTaiKhoan</span>
+cuaHang.taiKhoan().them(tkMoi);           <span class="cmt">// Vector cấp phát lại -&gt; con trỏ thành RÁC</span>
+nguoiDangNhap-&gt;getTen();                  <span class="cmt">// chương trình đổ, rất khó tìm nguyên nhân</span>
+
+<span class="cmt">// CÁCH ĐÚNG: lưu KHOÁ, tra cứu lại mỗi lần cần</span>
+std::string maNguoiDung;
+TaiKhoan* UngDung::nguoiDung() {
+    if (maNguoiDung.empty()) return 0;
+    return cuaHang.taiKhoan().timTheoMa(maNguoiDung);
+}</code></pre>
+<p>Đây là lỗi thật đã xảy ra khi viết dự án này và được sửa theo cách trên. Bài học:
+<b>đừng giữ con trỏ dài hạn vào phần tử của một cấu trúc có thể cấp phát lại</b>.</p>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT13.1</b> — Từ <code>Vector&lt;HoaDonDonGian&gt;</code>, tính tổng doanh thu theo ngày dùng mẫu “gộp theo khoá” với bảng băm.</li>
+  <li><b>BT13.2</b> — Viết <code>soHoaNgay()</code> và hàm đếm số hoá đơn trong khoảng hai ngày; kiểm thử với ngày đầu &gt; ngày cuối (phải tự đổi chỗ).</li>
+  <li><b>BT13.3</b> — Viết <code>bieuDoCot()</code> và vẽ biểu đồ điểm 5 môn học của bạn.</li>
+  <li><b>BT13.4</b> — In bảng 6 cột thẳng hàng bằng <code>setw</code>; thử thêm một chữ có dấu và quan sát bảng lệch cột để tự hiểu vì sao dùng chữ không dấu.</li>
+  <li><b>BT13.5</b> — Viết <code>bamMatKhau()</code>; băm 5 mật khẩu và kiểm tra không có hai chuỗi băm trùng nhau (kiểm tra va chạm).</li>
+  <li><b>BT13.6</b> — Viết chương trình đăng nhập cho tối đa 3 lần thử, hai mức quyền, mỗi mức thấy một menu khác nhau.</li>
+  <li><b>BT13.7</b> — Tái hiện lỗi con trỏ treo: giữ <code>int* p = &amp;v[0]</code> của <code>Vector&lt;int&gt;</code>, thêm 100 phần tử, rồi dùng <code>*p</code>. Sau đó sửa theo cách đúng.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 11–12</h4>
+  <ul style="margin-bottom:0">
+    <li>Viết <code>src/ThongKe.cpp</code>: <code>doanhThuTheoNgay/Thang/Khoang</code>,
+        <code>bangDoanhThuTheoNgay/Thang</code>, <code>bangSachBanChay</code>,
+        <code>bangTheLoaiUaChuong</code>, <code>tongChiNhapHang</code>,
+        <code>xuatBaoCaoRaTep</code>.</li>
+    <li>Viết <code>UngDung_ThongKe.cpp</code>: 8 mục thống kê, 4 mục có biểu đồ cột.</li>
+    <li>Cài đăng nhập 3 lần thử, băm mật khẩu, đổi mật khẩu, quản lý tài khoản (admin).</li>
+    <li>Gắn <code>batBuocAdmin()</code> vào đúng các mục menu theo bảng phân quyền ở mục 2.1
+        của bản kế hoạch.</li>
+    <li>Hoàn thiện <code>xuatBaoCaoRaTep()</code> gồm 6 phần: tổng quan, doanh thu ngày,
+        doanh thu tháng, top bán chạy, thể loại, cảnh báo tồn kho. <b>Commit.</b></li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra</h4>
+  <p style="margin-bottom:0">☐ Số liệu thống kê khớp với tính tay &nbsp;·&nbsp;
+  ☐ Biểu đồ tỉ lệ đúng &nbsp;·&nbsp;
+  ☐ Mật khẩu không xuất hiện dạng rõ trong tệp &nbsp;·&nbsp;
+  ☐ Nhân viên bị chặn khỏi mục admin &nbsp;·&nbsp;
+  ☐ Không giữ con trỏ dài hạn vào <code>Vector</code></p>
+</div>
+
+<!-- ============================ CHẶNG 14 ============================ -->
+<div class="chang"></div>
+<h2>Chặng 14 — Kiểm thử, tối ưu, chuẩn bị sang Qt <span class="tag">Tuần 13–15</span></h2>
+
+<h3>Mục tiêu</h3>
+<ul>
+  <li>Kiểm thử có phương pháp, không phải “chạy thử vài lần thấy được”.</li>
+  <li>Dọn rò rỉ bộ nhớ và cảnh báo biên dịch.</li>
+  <li>Biết chính xác phải làm gì khi chuyển sang Qt.</li>
+</ul>
+
+<h3>Lý thuyết cốt lõi</h3>
+
+<h4>1. Bốn bộ dữ liệu kiểm thử (đúng yêu cầu tuần 13)</h4>
+<table>
+  <thead><tr><th style="width:22%">Bộ dữ liệu</th><th style="width:34%">Cách tạo</th><th>Phải quan sát</th></tr></thead>
+  <tbody>
+    <tr><td>Rỗng</td><td>xoá hết tệp trong <code>data/</code></td>
+        <td>không đổ; hỏi tạo dữ liệu mẫu; mọi menu hiện “(chưa có dữ liệu)”; thống kê ra 0 chứ không chia cho 0</td></tr>
+    <tr><td>Ít</td><td>bộ dữ liệu mẫu sẵn có (6 sách)</td><td>mọi chức năng chạy đúng; số liệu khớp tính tay</td></tr>
+    <tr><td>Lớn</td><td>viết script sinh 5.000 sách, 2.000 hoá đơn</td>
+        <td>tốc độ còn chấp nhận; đo tìm tuyến tính vs nhị phân; RAM không phình</td></tr>
+    <tr><td>Sai định dạng</td><td>mở <code>sach.txt</code>, thêm dòng rác, xoá bớt trường, để dòng trống</td>
+        <td>bỏ qua dòng lỗi, đếm và báo, phần còn lại vẫn đọc được</td></tr>
+  </tbody>
+</table>
+
+<h4>2. Ca kiểm thử biên — nơi lỗi thường trốn</h4>
+<table>
+  <thead><tr><th style="width:38%">Ca kiểm thử</th><th>Kết quả mong đợi</th></tr></thead>
+  <tbody>
+    <tr><td>Bán số lượng = đúng số tồn</td><td>thành công, tồn về 0</td></tr>
+    <tr><td>Bán số lượng = tồn + 1</td><td>bị chặn, tồn không đổi</td></tr>
+    <tr><td>Bán sách đã hết hàng</td><td>báo “da HET HANG”, không cho thêm dòng</td></tr>
+    <tr><td>Nhập giá bán âm / năm 1800 / SĐT có chữ</td><td>bị từ chối, hỏi lại</td></tr>
+    <tr><td>Thêm sách với mã thể loại không tồn tại</td><td><code>LoiRangBuoc</code>, cho nhập lại 3 mã</td></tr>
+    <tr><td>Xoá thể loại đang có sách dùng</td><td>bị chặn kèm số lượng sách đang tham chiếu</td></tr>
+    <tr><td>Xoá khách hàng đã có hoá đơn</td><td>bị chặn</td></tr>
+    <tr><td>Nhập chữ khi chương trình chờ số</td><td>“Phai la so nguyen. Nhap lai.”, không treo</td></tr>
+    <tr><td>Tên sách chứa ký tự <code>|</code> hoặc <code>#</code></td><td>bị lọc, tệp không hỏng</td></tr>
+    <tr><td>Ngày 31/02/2026</td><td>bị từ chối (kiểm tra số ngày theo tháng)</td></tr>
+    <tr><td>Đăng nhập sai 3 lần</td><td>thoát chương trình</td></tr>
+    <tr><td>Nhân viên vào menu admin</td><td><code>LoiPhanQuyen</code></td></tr>
+  </tbody>
+</table>
+<p>Hãy lập <b>biên bản kiểm thử</b> dạng bảng: STT – Ca kiểm thử – Dữ liệu vào – Kết quả mong đợi –
+Kết quả thực tế – Đạt/Không. Đây là tài liệu bắt buộc của tuần 13.</p>
+
+<h4>3. Tìm rò rỉ bộ nhớ</h4>
+<pre><code>g++ -std=c++17 -Wall -Wextra -Iinclude src/*.cpp -o QuanLySach.exe    <span class="cmt">// PHẢI không còn cảnh báo</span>
+
+<span class="cmt">// Cách thủ công: chạy vòng lặp tạo/hủy 1000 lần rồi xem RAM ở Task Manager.
+// Danh sách kiểm tra thủ công:</span>
+<span class="cmt">//   [ ] Mỗi new có đúng một delete?</span>
+<span class="cmt">//   [ ] Hàm hủy của QuanLySach delete hết mọi Sach*?</span>
+<span class="cmt">//   [ ] Hàm hủy của BangBam và DanhSachLienKet delete hết mọi nút?</span>
+<span class="cmt">//   [ ] Lớp cơ sở nào cũng có virtual ~...()?</span>
+<span class="cmt">//   [ ] Có delete trong khối catch khi đã new mà chưa giao quyền sở hữu?</span>
+<span class="cmt">//   [ ] Lớp tự quản lý bộ nhớ có đủ quy tắc ba (hoặc bị cấm sao chép)?</span></code></pre>
+
+<h4>4. Chuẩn hoá mã nguồn</h4>
+<ul>
+  <li><b>Đặt tên nhất quán</b>: lớp <code>PascalCase</code>, hàm và biến <code>camelCase</code>,
+      hằng <code>VIET_HOA</code>. Toàn dự án dùng tiếng Việt không dấu, đọc là hiểu:
+      <code>ghiNhanHoaDon</code>, <code>tiLeGiamThanhVien</code>.</li>
+  <li><b>Chú thích cái “vì sao”, không chú thích cái “làm gì”</b>. Dòng
+      <code>i++; // tăng i</code> là vô ích. Dòng <code>// làm việc trên BẢN SAO để không phá
+      thứ tự theo mã</code> mới có giá trị.</li>
+  <li><b>Mỗi hàm một việc.</b> Hàm dài hơn 50 dòng thường là dấu hiệu nên tách.</li>
+  <li><b>Không lặp code.</b> Thấy chép 3 lần → nghĩ tới template hoặc hàm chung.</li>
+</ul>
+
+<h4>5. Chuyển sang Qt cần làm gì?</h4>
+<p>Nếu bạn đã tách đúng 3 tầng, việc chuyển đổi rất gọn:</p>
+<table>
+  <thead><tr><th style="width:34%">Thành phần</th><th style="width:22%">Số phận</th><th>Ghi chú</th></tr></thead>
+  <tbody>
+    <tr><td><code>Vector</code>, <code>DanhSachLienKet</code>, <code>BangBam</code>, <code>ThuatToan</code>, <code>KhoDuLieu</code></td>
+        <td><b>giữ nguyên 100%</b></td><td>không phụ thuộc giao diện</td></tr>
+    <tr><td><code>Sach</code>, <code>Nguoi</code>, <code>DanhMuc</code>, <code>ChungTu</code> + lớp con</td>
+        <td><b>giữ nguyên</b></td><td>chỉ bỏ các hàm <code>nhap()</code> dùng <code>cin</code></td></tr>
+    <tr><td><code>QuanLySach</code>, <code>CuaHang</code>, <code>ThongKe</code></td>
+        <td><b>giữ nguyên</b></td><td>đây là phần giá trị nhất, gần 2.000 dòng</td></tr>
+    <tr><td><code>NgoaiLe.h</code></td><td>giữ nguyên</td><td>Qt bắt lỗi và hiện <code>QMessageBox</code></td></tr>
+    <tr><td><code>TienIch.h</code></td><td>giữ phần chuỗi/ngày</td><td>bỏ namespace <code>Nhap</code>, <code>Man</code></td></tr>
+    <tr><td><code>UngDung*.cpp</code> (6 tệp)</td><td><b>viết lại bằng Qt</b></td>
+        <td><code>MainWindow</code>, <code>BookWidget</code>, <code>InvoiceDialog</code>...</td></tr>
+  </tbody>
+</table>
+<p>Bản đồ tương ứng khi viết Qt:</p>
+<table>
+  <thead><tr><th style="width:42%">Bản console</th><th>Bản Qt</th></tr></thead>
+  <tbody>
+    <tr><td><code>inBangSach()</code> dùng <code>setw</code></td><td><code>QTableWidget</code> hoặc <code>QTableView</code> + model</td></tr>
+    <tr><td><code>Nhap::chuoi()</code>, <code>Nhap::soNguyen()</code></td><td><code>QLineEdit</code>, <code>QSpinBox</code> + <code>QValidator</code></td></tr>
+    <tr><td><code>Nhap::xacNhan()</code></td><td><code>QMessageBox::question()</code></td></tr>
+    <tr><td><code>cout &lt;&lt; "!! " &lt;&lt; e.what()</code></td><td><code>QMessageBox::warning()</code></td></tr>
+    <tr><td>menu số 1/2/3...</td><td><code>QMenuBar</code> + <code>QToolBar</code> + <code>QStackedWidget</code></td></tr>
+    <tr><td><code>Man::bieuDoCot()</code></td><td><code>QChartView</code> + <code>QBarSeries</code> (Qt Charts)</td></tr>
+    <tr><td>chọn mã bằng cách gõ tay</td><td><code>QComboBox</code> nạp sẵn danh mục</td></tr>
+  </tbody>
+</table>
+
+<h3>Bài tập luyện tay</h3>
+<ol>
+  <li><b>BT14.1</b> — Viết script (C++ hoặc Python) sinh <code>sach.txt</code> có 5.000 dòng hợp lệ; nạp vào chương trình và đo thời gian khởi động.</li>
+  <li><b>BT14.2</b> — Chạy hết 12 ca kiểm thử biên ở bảng trên, ghi biên bản. Mỗi ca không đạt → sửa và ghi lại cách sửa.</li>
+  <li><b>BT14.3</b> — Rà lại toàn bộ <code>new</code> trong dự án (dùng <code>grep -rn "new " src/</code>) và đối chiếu từng cái với <code>delete</code> tương ứng.</li>
+  <li><b>BT14.4</b> — Bật <code>-Wall -Wextra</code>, sửa cho hết cảnh báo. Thử thêm <code>-Wpedantic</code>.</li>
+  <li><b>BT14.5</b> — Vẽ sơ đồ lớp cuối cùng bằng draw.io, đủ 4 cây kế thừa và các quan hệ; xuất PNG đưa vào báo cáo.</li>
+  <li><b>BT14.6</b> — Viết bản demo 5 phút: đăng nhập → thêm sách → nhập kho → bán hàng → thống kê → xuất báo cáo. Tập trước cho thuộc.</li>
+</ol>
+
+<div class="box pbl">
+  <h4>Mốc PBL — Tuần 13–15</h4>
+  <ul style="margin-bottom:0">
+    <li><b>Tuần 13</b>: tích hợp toàn bộ; kiểm thử 4 bộ dữ liệu; lập biên bản kiểm thử và
+        danh sách lỗi phát hiện.</li>
+    <li><b>Tuần 14</b>: sửa hết lỗi; dọn rò rỉ bộ nhớ; chuẩn hoá tên và chú thích;
+        chụp ảnh minh hoạ mọi màn hình; viết bản thảo báo cáo.</li>
+    <li><b>Tuần 15</b>: hoàn thiện báo cáo theo mẫu khoa (mục lục, danh mục hình,
+        tài liệu tham khảo); làm slide; tập demo; bàn giao mã nguồn.</li>
+  </ul>
+</div>
+
+<div class="box check">
+  <h4>Tự kiểm tra cuối cùng</h4>
+  <p style="margin-bottom:0">☐ Biên dịch không còn cảnh báo &nbsp;·&nbsp;
+  ☐ Có biên bản kiểm thử đầy đủ &nbsp;·&nbsp;
+  ☐ Không rò rỉ bộ nhớ &nbsp;·&nbsp;
+  ☐ Sơ đồ lớp khớp với mã nguồn &nbsp;·&nbsp;
+  ☐ Demo chạy trơn trong 5 phút &nbsp;·&nbsp;
+  ☐ Giải thích được mọi dòng code khi thầy hỏi</p>
+</div>
+<!-- ============================ PHỤ LỤC A ============================ -->
+<div class="chang"></div>
+<h2>Phụ lục A — Lịch 15 tuần: chặng học ↔ mốc dự án</h2>
+
+<table>
+  <thead><tr><th style="width:9%">Tuần</th><th style="width:23%">Học chặng</th>
+  <th style="width:38%">Sản phẩm code phải có</th><th>Tài liệu phải nộp</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Chặng 0 + 1</td>
+        <td><code>TienIch.h/.cpp</code>, <code>build.bat</code>, <code>Makefile</code>, repo Git</td>
+        <td>Phát biểu bài toán, bảng phân công</td></tr>
+    <tr><td>2</td><td>Chặng 2</td>
+        <td><code>Sach.h/.cpp</code>, <code>TheLoai</code> (chưa kế thừa)</td>
+        <td>Sơ đồ phân rã chức năng, mô tả Input–Output</td></tr>
+    <tr><td>3</td><td>Chặng 3 + 4</td>
+        <td>4 toán tử của <code>Sach</code>; <code>Nguoi.h/.cpp</code>; <code>ChungTu.h/.cpp</code></td>
+        <td>Sơ đồ lớp bản nháp, đặc tả định dạng tệp</td></tr>
+    <tr><td>4</td><td>Chặng 5 + 6</td>
+        <td>4 cây kế thừa hoàn chỉnh; hàm xưởng; <code>nhanBan()</code></td>
+        <td>Sơ đồ lớp chính thức</td></tr>
+    <tr><td>5</td><td>Chặng 6 + 7</td>
+        <td><code>Vector.h</code>; in bảng 3 loại sách bằng một vòng lặp</td>
+        <td>Bộ dữ liệu mẫu</td></tr>
+    <tr><td>6</td><td>Chặng 7 + 8 + 9</td>
+        <td><code>KhoDuLieu.h</code>, <code>NgoaiLe.h</code>, <code>toCSV/fromCSV</code> mọi lớp</td>
+        <td>—</td></tr>
+    <tr><td>7</td><td>Chặng 9 + 10</td>
+        <td><code>DanhSachLienKet.h</code>, <code>BangBam.h</code>, <code>QuanLySach</code>;
+            đọc/ghi tệp chạy đúng</td>
+        <td>Đặc tả cấu trúc dữ liệu tự cài</td></tr>
+    <tr><td>8</td><td>Chặng 11</td>
+        <td><code>ThuatToan.h</code>; tìm kiếm – sắp xếp – lọc; chức năng so sánh hiệu năng</td>
+        <td><b>Bảng phân tích độ phức tạp</b></td></tr>
+    <tr><td>9</td><td>Chặng 12</td>
+        <td><code>CuaHang</code>; quản lý khách hàng; nhập kho; cảnh báo tồn</td>
+        <td>—</td></tr>
+    <tr><td>10</td><td>Chặng 12</td>
+        <td>Lập hoá đơn hoàn chỉnh; tra cứu hoá đơn</td>
+        <td>—</td></tr>
+    <tr><td>11</td><td>Chặng 13</td>
+        <td><code>ThongKe.cpp</code>; 8 mục thống kê; biểu đồ cột; xuất báo cáo</td>
+        <td>Ảnh biểu đồ đưa vào báo cáo</td></tr>
+    <tr><td>12</td><td>Chặng 13</td>
+        <td>Đăng nhập, phân quyền, quản lý tài khoản; chuẩn hoá toàn bộ menu</td>
+        <td>—</td></tr>
+    <tr><td>13</td><td>Chặng 14</td>
+        <td>Tích hợp; kiểm thử 4 bộ dữ liệu</td>
+        <td><b>Biên bản kiểm thử</b>, danh sách lỗi</td></tr>
+    <tr><td>14</td><td>Chặng 14</td>
+        <td>Sửa lỗi; dọn bộ nhớ; chuẩn hoá tên &amp; chú thích</td>
+        <td>Bản thảo báo cáo + ảnh minh hoạ</td></tr>
+    <tr><td>15</td><td>—</td>
+        <td>Bàn giao mã nguồn</td>
+        <td>Báo cáo hoàn chỉnh, slide, demo</td></tr>
+  </tbody>
+</table>
+
+<div class="box warn">
+  <h4>Nếu bạn bị chậm tiến độ</h4>
+  <p style="margin-bottom:0">Thứ tự ưu tiên cắt giảm (cắt từ dưới lên):
+  ① biểu đồ cột → ② thống kê theo khoảng thời gian → ③ danh sách liên kết
+  (dùng <code>Vector</code> thay) → ④ Merge Sort (chỉ giữ Quick Sort) → ⑤ sao lưu.
+  <b>Tuyệt đối không cắt</b>: 4 cây kế thừa, đa hình, template, ngoại lệ, đọc/ghi tệp,
+  nghiệp vụ nhập – bán. Đó là phần thể hiện bạn hiểu OOP và là phần chấm điểm chính.</p>
+</div>
+
+<!-- ============================ PHỤ LỤC B ============================ -->
+<div class="chang"></div>
+<h2>Phụ lục B — 20 lỗi người mới thường gặp và cách sửa</h2>
+
+<table>
+  <thead><tr><th style="width:4%">#</th><th style="width:30%">Triệu chứng</th>
+  <th style="width:32%">Nguyên nhân</th><th>Cách sửa</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><code>undefined reference to 'Sach::nhap()'</code></td>
+        <td>khai báo trong <code>.h</code> nhưng chưa định nghĩa trong <code>.cpp</code>,
+            hoặc quên thêm tệp <code>.cpp</code> vào lệnh dịch</td>
+        <td>viết định nghĩa; dịch bằng <code>src/*.cpp</code></td></tr>
+    <tr><td>2</td><td><code>undefined reference</code> với lớp template</td>
+        <td>đặt định nghĩa template trong <code>.cpp</code></td>
+        <td>chuyển toàn bộ vào <code>.h</code></td></tr>
+    <tr><td>3</td><td><code>redefinition of class</code></td>
+        <td>thiếu include guard</td><td>thêm <code>#ifndef/#define/#endif</code></td></tr>
+    <tr><td>4</td><td><code>cannot declare variable to be of abstract type</code></td>
+        <td>tạo đối tượng của lớp có hàm thuần ảo</td>
+        <td>dùng lớp con, hoặc dùng con trỏ <code>Sach*</code></td></tr>
+    <tr><td>5</td><td>Gọi hàm lớp cha thay vì lớp con</td>
+        <td>thiếu <code>virtual</code>, hoặc chữ ký lệch (thiếu <code>const</code>)</td>
+        <td>thêm <code>virtual</code>; đối chiếu chữ ký từng chữ</td></tr>
+    <tr><td>6</td><td>Rò rỉ bộ nhớ khi <code>delete</code> qua con trỏ lớp cha</td>
+        <td>hàm hủy lớp cơ sở không <code>virtual</code></td>
+        <td>thêm <code>virtual ~LopCha();</code></td></tr>
+    <tr><td>7</td><td><code>getline</code> đọc được chuỗi rỗng</td>
+        <td>trước đó dùng <code>cin &gt;&gt;</code>, còn Enter trong bộ đệm</td>
+        <td>chỉ dùng <code>getline</code> + <code>istringstream</code></td></tr>
+    <tr><td>8</td><td>Chương trình đổ khi sao chép đối tượng</td>
+        <td>lớp có con trỏ mà thiếu quy tắc ba → xoá hai lần</td>
+        <td>viết đủ 3 hàm, hoặc cấm sao chép</td></tr>
+    <tr><td>9</td><td>Đổ ngẫu nhiên sau khi thêm phần tử</td>
+        <td>giữ con trỏ vào phần tử <code>Vector</code>, <code>Vector</code> đã cấp phát lại</td>
+        <td>lưu khoá, tra cứu lại khi cần</td></tr>
+    <tr><td>10</td><td>Tệp dữ liệu bị hỏng sau khi nhập</td>
+        <td>người dùng nhập ký tự <code>|</code> hoặc <code>#</code></td>
+        <td>gọi <code>locKyTu()</code> trong hàm nhập</td></tr>
+    <tr><td>11</td><td>Đọc tệp ra số 0 hết</td>
+        <td>chỉ số <code>p[i]</code> lệch một ô (quên trường mã loại ở <code>p[0]</code>)</td>
+        <td>đối chiếu <code>toCSV</code> và <code>fromCSV</code> từng trường</td></tr>
+    <tr><td>12</td><td>Bảng bị lệch cột</td>
+        <td>chuỗi dài hơn <code>setw</code>, hoặc chữ có dấu UTF-8</td>
+        <td>dùng <code>catBot()</code>; dùng chữ không dấu</td></tr>
+    <tr><td>13</td><td>Tìm nhị phân trả về sai</td>
+        <td>danh sách chưa sắp xếp, hoặc bị sắp lại theo tiêu chí khác</td>
+        <td>sắp xếp trên bản sao; giữ danh sách chính theo mã</td></tr>
+    <tr><td>14</td><td>Tìm kiếm không ra dù có dữ liệu</td>
+        <td>so sánh phân biệt hoa/thường</td>
+        <td>so sánh sau <code>veThuong()</code></td></tr>
+    <tr><td>15</td><td>Tồn kho âm</td>
+        <td>trừ kho trước khi kiểm tra hết ràng buộc</td>
+        <td>áp dụng giao dịch 2 bước</td></tr>
+    <tr><td>16</td><td>Quick Sort đệ quy vô hạn / tràn stack</td>
+        <td>điều kiện dừng sai, hoặc hàm so sánh không đúng thứ tự chặt</td>
+        <td>kiểm tra <code>if (tra &gt;= phai) return;</code>; hàm cmp phải là “&lt;” chứ không “&lt;=”</td></tr>
+    <tr><td>17</td><td><code>ofstream</code> không ghi được</td>
+        <td>thư mục <code>data/</code> chưa tồn tại</td>
+        <td>tạo thư mục trước; kiểm tra <code>if (!f) throw LoiFile(...)</code></td></tr>
+    <tr><td>18</td><td>Ngoại lệ làm chương trình thoát đột ngột</td>
+        <td>không có <code>catch</code> nào bắt</td>
+        <td>bọc <code>try/catch</code> ở mọi menu và trong <code>main</code></td></tr>
+    <tr><td>19</td><td><code>passing const X as this argument discards qualifiers</code></td>
+        <td>gọi hàm không <code>const</code> trên đối tượng <code>const</code></td>
+        <td>thêm <code>const</code> cho hàm chỉ đọc</td></tr>
+    <tr><td>20</td><td>Sửa <code>.h</code> mà chương trình không đổi</td>
+        <td>chỉ dịch lại một phần</td>
+        <td>dịch lại toàn bộ (<code>make rebuild</code> hoặc xoá <code>build/</code>)</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================ PHỤ LỤC C ============================ -->
+<div class="chang"></div>
+<h2>Phụ lục C — Bảng tra nhanh cú pháp OOP</h2>
+
+<h3>Khai báo lớp</h3>
+<pre><code>class TenLop : public LopCha {          <span class="cmt">// kế thừa công khai</span>
+private:    <span class="cmt">// chỉ lớp này          </span>
+protected:  <span class="cmt">// lớp này + lớp con    </span>
+public:     <span class="cmt">// mọi nơi              </span>
+    TenLop();                                       <span class="cmt">// hàm tạo mặc định</span>
+    TenLop(int a, const std::string&amp; b);            <span class="cmt">// hàm tạo có tham số</span>
+    TenLop(const TenLop&amp; k);                        <span class="cmt">// hàm tạo sao chép</span>
+    TenLop&amp; operator=(const TenLop&amp; k);             <span class="cmt">// toán tử gán</span>
+    virtual ~TenLop();                              <span class="cmt">// hàm hủy ảo</span>
+
+    int  getX() const { return x; }                 <span class="cmt">// hàm hằng (chỉ đọc)</span>
+    void setX(int v);
+    static int demSo;                               <span class="cmt">// thành viên của LỚP</span>
+    virtual void f();                               <span class="cmt">// hàm ảo</span>
+    virtual void g() = 0;                           <span class="cmt">// hàm thuần ảo -&gt; lớp trừu tượng</span>
+    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, const TenLop&amp;);
+};</code></pre>
+
+<h3>Định nghĩa trong <code>.cpp</code></h3>
+<pre><code>int TenLop::demSo = 0;                              <span class="cmt">// định nghĩa biến static</span>
+
+TenLop::TenLop(int a, const std::string&amp; b)
+    : LopCha(a), x(a), ten(b) { }                   <span class="cmt">// danh sách khởi tạo</span>
+
+void TenLop::setX(int v) {
+    if (v &lt; 0) throw LoiDuLieu("x khong duoc am.");
+    this-&gt;x = v;
+}
+
+void TenLop::f() {
+    LopCha::f();                                    <span class="cmt">// gọi lại phiên bản của cha</span>
+    <span class="cmt">// rồi làm thêm phần riêng</span>
+}</code></pre>
+
+<h3>Template</h3>
+<pre><code>template &lt;class T&gt;              void hamMau(T a);
+template &lt;class T&gt;              class LopMau { ... };
+template &lt;class T, class U&gt;     class Cap    { T dau; U cuoi; };
+template &lt;class T, class Cmp&gt;   void quickSort(Vector&lt;T&gt;&amp; a, Cmp cmp);
+
+template &lt;class T&gt;
+void LopMau&lt;T&gt;::phuongThuc() { ... }                <span class="cmt">// định nghĩa ngoài lớp</span></code></pre>
+
+<h3>Ngoại lệ</h3>
+<pre><code>class LoiCuaToi : public std::runtime_error {
+public: explicit LoiCuaToi(const std::string&amp; tb) : std::runtime_error(tb) {}
+};
+
+throw LoiCuaToi("thong diep");
+try { ... }
+catch (const LoiCuaToi&amp; e)    { cout &lt;&lt; e.what(); }
+catch (const std::exception&amp; e){ cout &lt;&lt; e.what(); }
+catch (...)                    { <span class="cmt">/* dọn dẹp */</span> throw; }</code></pre>
+
+<h3>Tệp và định dạng xuất</h3>
+<pre><code>#include &lt;fstream&gt;   #include &lt;sstream&gt;   #include &lt;iomanip&gt;
+
+std::ofstream f("t.txt");   if (!f) throw LoiFile("...");   f &lt;&lt; "x\n";   f.close();
+std::ifstream g("t.txt");   std::string dong;   while (std::getline(g, dong)) { ... }
+
+std::ostringstream os;  os &lt;&lt; std::fixed &lt;&lt; std::setprecision(0) &lt;&lt; 1234.5;
+std::istringstream is(s); int v; is &gt;&gt; v;
+
+std::cout &lt;&lt; std::left  &lt;&lt; std::setw(20) &lt;&lt; ten          <span class="cmt">// căn trái, rộng 20</span>
+          &lt;&lt; std::right &lt;&lt; std::setw(12) &lt;&lt; gia;         <span class="cmt">// căn phải, rộng 12</span>
+std::cout &lt;&lt; std::setw(2) &lt;&lt; std::setfill('0') &lt;&lt; 5;     <span class="cmt">// "05"</span></code></pre>
+
+<h3>Con trỏ và đa hình</h3>
+<pre><code>Sach* p = new SachVanHoc(...);      <span class="cmt">// upcast tự động</span>
+p-&gt;loaiSach();                       <span class="cmt">// gọi bản của SachVanHoc (nhờ virtual)</span>
+delete p;                            <span class="cmt">// gọi ~SachVanHoc rồi ~Sach (nhờ virtual ~)</span>
+
+Vector&lt;Sach*&gt; ds;
+for (size_t i = 0; i &lt; ds.kichThuoc(); ++i) ds[i]-&gt;xuatDong();   <span class="cmt">// một vòng, ba loại</span>
+for (size_t i = 0; i &lt; ds.kichThuoc(); ++i) delete ds[i];        <span class="cmt">// nhớ giải phóng</span></code></pre>
+
+<!-- ============================ PHỤ LỤC D ============================ -->
+<div class="chang"></div>
+<h2>Phụ lục D — Thống kê chương trình cuối cùng &amp; tài liệu tham khảo</h2>
+
+<h3>Chương trình bạn sẽ có sau 15 tuần</h3>
+<table>
+  <thead><tr><th style="width:34%">Chỉ tiêu</th><th>Giá trị</th></tr></thead>
+  <tbody>
+    <tr><td>Số tệp mã nguồn</td><td>23 tệp <code>.h</code> + 23 tệp <code>.cpp</code> (~5.900 dòng)</td></tr>
+    <tr><td>Số lớp</td><td>31 lớp + 2 struct: 4 trừu tượng, 11 dẫn xuất, 4 template, 8 ngoại lệ, 4 lớp quản lý &amp; giao diện</td></tr>
+    <tr><td>Cây kế thừa</td><td>4 cây: <code>Nguoi</code>, <code>DanhMuc</code>, <code>Sach</code>, <code>ChungTu</code></td></tr>
+    <tr><td>Cấu trúc dữ liệu tự cài</td><td>mảng động, danh sách liên kết, bảng băm — không dùng STL container</td></tr>
+    <tr><td>Thuật toán tự cài</td><td>tìm tuyến tính, tìm nhị phân, Quick Sort, Merge Sort</td></tr>
+    <tr><td>Nhóm chức năng</td><td>10 nhóm menu, hơn 70 chức năng con</td></tr>
+    <tr><td>Tệp dữ liệu</td><td>9 tệp <code>.txt</code> + thư mục sao lưu + tệp báo cáo</td></tr>
+    <tr><td>Mức quyền</td><td>2 (quản trị viên / nhân viên bán hàng), mật khẩu được băm</td></tr>
+    <tr><td>Chất lượng biên dịch</td><td>sạch với <code>-Wall -Wextra</code>, chuẩn C++17</td></tr>
+  </tbody>
+</table>
+
+<h3>Đối chiếu với các mục yêu cầu của bản kế hoạch PBL2</h3>
+<table>
+  <thead><tr><th style="width:12%">Mục</th><th style="width:44%">Yêu cầu</th><th>Chặng dạy · Nơi cài đặt</th></tr></thead>
+  <tbody>
+    <tr><td>2.1</td><td>Đăng nhập, phân quyền, đổi mật khẩu</td><td>Chặng 13 · <code>TaiKhoan</code>, <code>UngDung::batBuocAdmin()</code></td></tr>
+    <tr><td>2.2</td><td>Quản lý sách: thêm/sửa/xoá/hiển thị, sinh mã, cập nhật tồn – giá</td><td>Chặng 2, 5, 6 · <code>Sach</code> + 3 lớp con, <code>UngDung_Sach.cpp</code></td></tr>
+    <tr><td>2.3</td><td>Quản lý danh mục + ràng buộc toàn vẹn khi xoá</td><td>Chặng 4, 5, 7 · <code>DanhMuc</code>, <code>CuaHang::xoa...AnToan()</code></td></tr>
+    <tr><td>2.4</td><td>Nhà cung cấp, phiếu nhập, tự cộng tồn kho, lịch sử nhập</td><td>Chặng 12 · <code>PhieuNhap</code>, <code>CuaHang::ghiNhanPhieuNhap()</code></td></tr>
+    <tr><td>2.5</td><td>Khách hàng, điểm tích luỹ, lịch sử mua hàng</td><td>Chặng 5, 12 · <code>KhachHang</code>, <code>UngDung_DoiTac.cpp</code></td></tr>
+    <tr><td>2.6</td><td>Hoá đơn, tính tiền – chiết khấu, trừ tồn kho, in lại</td><td>Chặng 8, 12 · <code>HoaDon</code>, <code>CuaHang::ghiNhanHoaDon()</code></td></tr>
+    <tr><td>2.7</td><td>Tìm kiếm (nhị phân, bảng băm, tuyến tính), sắp xếp, lọc</td><td>Chặng 10, 11 · <code>ThuatToan.h</code>, <code>QuanLySach</code></td></tr>
+    <tr><td>2.8</td><td>Thống kê doanh thu, bán chạy, tồn kho, cảnh báo, biểu đồ, xuất tệp</td><td>Chặng 13 · <code>ThongKe.cpp</code>, <code>Man::bieuDoCot()</code></td></tr>
+    <tr><td>2.9</td><td>Đọc/ghi tệp, xử lý ngoại lệ, sao lưu</td><td>Chặng 8, 9 · <code>NgoaiLe.h</code>, <code>toCSV/fromCSV</code>, <code>CuaHang::saoLuu()</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Tài liệu tham khảo</h3>
+<ol>
+  <li>Đặng Hoài Phương — <i>Slide Lập trình hướng đối tượng (C++)</i>, Khoa CNTT, Trường Đại học
+      Bách khoa – Đại học Đà Nẵng: <i>OOP_C++</i>, <i>Class_Object</i>, <i>ObjectRelation</i>,
+      <i>KeThua_DaHinh</i>, <i>Template</i>, <i>Exception</i>.</li>
+  <li>Lê Thị Mỹ Hạnh — <i>Giáo trình Lập trình hướng đối tượng</i> và bộ slide OOP0–OOP8,
+      Khoa CNTT, Trường Đại học Bách khoa – Đại học Đà Nẵng.</li>
+  <li><i>Hướng dẫn sử dụng Visual Studio Code</i> (tài liệu môn học) — cài đặt VS Code, MinGW,
+      <code>tasks.json</code>, <code>launch.json</code>, gỡ lỗi.</li>
+  <li>Phạm Văn Ất — <i>Lập trình hướng đối tượng và C++</i>.</li>
+  <li>Bruce Eckel — <i>Thinking in C++</i>, tập 1 &amp; 2.</li>
+  <li>Nicolai M. Josuttis — <i>The C++ Standard Library</i>, 2nd Edition (tham khảo khi so sánh
+      <code>Vector</code> tự cài với <code>std::vector</code>).</li>
+  <li>Stanley B. Lippman — <i>Inside the C++ Object Model</i> (hiểu bảng hàm ảo hoạt động ra sao).</li>
+  <li><i>PBL2: Dự án cơ sở lập trình — Xây dựng kế hoạch thực hiện đề tài: Quản lý sách
+      trong cửa hàng chuyên về sách</i>, Khoa CNTT, Trường Đại học Bách khoa – Đại học Đà Nẵng.</li>
+</ol>
+
+<div class="box">
+  <h4>Lời cuối</h4>
+  <p>Sáu nghìn dòng code không đáng sợ nếu bạn viết nó thành mười bốn lần, mỗi lần vài trăm dòng,
+  và mỗi lần đều <b>chạy được</b> trước khi đi tiếp. Đó là toàn bộ ý tưởng của tài liệu này.</p>
+  <p style="margin-bottom:0">Điều thầy cô đánh giá không phải là chương trình dài bao nhiêu, mà là bạn có
+  <b>giải thích được vì sao mình thiết kế như vậy</b> hay không: vì sao <code>Sach</code> phải trừu tượng,
+  vì sao hàm hủy phải ảo, vì sao sắp xếp trên bản sao, vì sao kiểm tra hết rồi mới trừ kho.
+  Mỗi câu “vì sao” đó đều đã được trả lời ở một chặng trong tài liệu này. Hãy học để trả lời được,
+  đừng học để nhớ cú pháp.</p>
+</div>
+
+</body>
+</html>
