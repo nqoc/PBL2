@@ -3,9 +3,34 @@
 #include"Sach.h"
 #include<string>
 #include<iomanip>
+#include<ctime>
+#include<cstdio>
 
 
 using namespace std ;
+
+namespace {
+bool laNgayHopLe(const string& ngay) {
+    int ngayTrongThang, thang, nam;
+    char dau1, dau2;
+
+    if (sscanf(ngay.c_str(), "%d%c%d%c%d", &ngayTrongThang, &dau1,
+               &thang, &dau2, &nam) != 5 || dau1 != '/' || dau2 != '/') {
+        return false;
+    }
+
+    tm ngayLich = {};
+    ngayLich.tm_mday = ngayTrongThang;
+    ngayLich.tm_mon = thang - 1;
+    ngayLich.tm_year = nam - 1900;
+    ngayLich.tm_isdst = -1;
+    mktime(&ngayLich);
+
+    return ngayTrongThang >= 1 && thang >= 1 && thang <= 12 && nam >= 1 &&
+           ngayLich.tm_mday == ngayTrongThang &&
+           ngayLich.tm_mon == thang - 1 && ngayLich.tm_year == nam - 1900;
+}
+}
 
 // gia tri cho toan bo
 const int Sach::NAM_MIN = 1900;
@@ -14,17 +39,17 @@ const int Sach::NAM_MAX = 2100;
 
 Sach::Sach() : maSach(""), tenSach(""), maTacGia(""), maTheLoai(""), maNXB(""),
       namXuatBan(2024), giaNhap(0), giaBan(0), soLuongTon(0),
-      viTriKe(""), moTa("") {}
+      viTriKe(""), moTa(""), ngayTao("") {}
 
       
 Sach::Sach(const string& maSach_, const string& tenSach_,
            const string& maTacGia_, const string& maTheLoai_,
            const string& maNXB_, int namXuatBan_,
            double giaNhap_, double giaBan_, int soLuongTon_,
-           const string& viTriKe_, const string& moTa_)
+           const string& viTriKe_, const string& moTa_, const string& ngayTao_)
     : maSach(""), tenSach(""), maTacGia(""), maTheLoai(""), maNXB(""),
       namXuatBan(2024), giaNhap(0), giaBan(0), soLuongTon(0),
-      viTriKe(""), moTa("")
+      viTriKe(""), moTa(""), ngayTao("") 
 
       // gan truoc roi moi check ham trong , neu true thi gan , false thi out 
 {
@@ -33,7 +58,7 @@ Sach::Sach(const string& maSach_, const string& tenSach_,
     setMaNXB(maNXB_);        setNamXuatBan(namXuatBan_);
     setGiaNhap(giaNhap_);    setGiaBan(giaBan_);
     setSoLuongTon(soLuongTon_); setViTriKe(viTriKe_);
-    setMoTa(moTa_);
+    setMoTa(moTa_); setNgayTao(ngayTao_);
 }
 
 
@@ -43,7 +68,6 @@ Sach::~Sach() {}
 
 bool Sach::setMaSach( const string& s) {
     string tmp = ChuanHoa(s) ; 
-    if( CoKyTuNganCach(tmp) ) return false ;    // '|' '#' se lam vo record khi ghi file
     if( !tmp.empty() ) {
         this->maSach = tmp ; 
         return true ; 
@@ -53,7 +77,6 @@ bool Sach::setMaSach( const string& s) {
 
 bool Sach::setTenSach( const string& s) {
     string tmp = ChuanHoa(s) ; 
-    if( CoKyTuNganCach(tmp) ) return false ; 
     if( !tmp.empty() ) {
         this->tenSach = tmp ; 
         return true ; 
@@ -64,7 +87,6 @@ bool Sach::setTenSach( const string& s) {
 bool Sach::setMaTacGia(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;    
-    if (CoKyTuNganCach(t)) return false;
     maTacGia = t;                   
     return true;
 }
@@ -72,7 +94,6 @@ bool Sach::setMaTacGia(const string& s) {
 bool Sach::setMaTheLoai(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;
-    if (CoKyTuNganCach(t)) return false;
     maTheLoai = t;
     return true;
 }
@@ -80,7 +101,6 @@ bool Sach::setMaTheLoai(const string& s) {
 bool Sach::setMaNXB(const string& s) {
     string t = ChuanHoa(s);
     if (t.empty()) return false;
-    if (CoKyTuNganCach(t)) return false;
     maNXB = t;
     return true;
 }
@@ -110,19 +130,20 @@ bool Sach::setSoLuongTon(int a) {
 }
 
 bool Sach::setViTriKe(const string& s) {
-    string t = ChuanHoa(s);         //  duoc phep rong
-    if (CoKyTuNganCach(t)) return false;
-    viTriKe = t;
+    viTriKe = ChuanHoa(s);          //  duoc phep rong
     return true;
 }
 
 bool Sach::setMoTa(const string& s) {
-    string t = ChuanHoa(s);        // duoc phep rong
-    if (CoKyTuNganCach(t)) return false;
-    moTa = t;
+    moTa = ChuanHoa(s);            // duoc phep rong
     return true;
 }
-
+bool Sach::setNgayTao(const string& s) {
+    string t = ChuanHoa(s);
+    if (!laNgayHopLe(t)) return false;
+    ngayTao = t;
+    return true;
+}
 // ham tinh nang
 
 bool  Sach::nhapThemKho(int sl) {
@@ -149,29 +170,18 @@ double Sach::loiNhuanMotCuon() const {
 void Sach::nhap() {
     
     // neu sai : 
-    // Moi vong lap deu phai co loi thoat khi cin dong ( Ctrl+Z , hoac chay
-    // main.exe < test.txt ) , neu khong Nhap::Chuoi() tra "" mai mai -> treo vo han.
-
-    while (!setMaSach(Nhap::Chuoi("  Ma sach       : "))) {
-        if (Nhap::HetInput()) return;
-        cout << "  !! Ma khong duoc rong / khong chua '|' '#'.\n";
-    }
-    while (!setTenSach(Nhap::Chuoi("  Ten sach      : "))) {
-        if (Nhap::HetInput()) return;
-        cout << "  !! Ten khong duoc rong / khong chua '|' '#'.\n";
-    }
-    while (!setMaTacGia(Nhap::Chuoi("  Ma tac gia    : "))) {
-        if (Nhap::HetInput()) return;
+    while (!setMaSach(Nhap::Chuoi("  Ma sach       : ")))
+        cout << "  !! Ma khong duoc rong.\n";
+    while (!setTenSach(Nhap::Chuoi("  Ten sach      : ")))
+        cout << "  !! Ten khong duoc rong.\n";
+    while (!setMaTacGia(Nhap::Chuoi("  Ma tac gia    : ")))
         cout << "  !! Ma tac gia khong duoc rong.\n";
-    }
-    while (!setMaTheLoai(Nhap::Chuoi("  Ma the loai   : "))) {
-        if (Nhap::HetInput()) return;
+    while (!setMaTheLoai(Nhap::Chuoi("  Ma the loai   : ")))
         cout << "  !! Ma the loai khong duoc rong.\n";
-    }
-    while (!setMaNXB(Nhap::Chuoi("  Ma NXB        : "))) {
-        if (Nhap::HetInput()) return;
+    while (!setMaNXB(Nhap::Chuoi("  Ma NXB        : ")))
         cout << "  !! Ma NXB khong duoc rong.\n";
-    }
+    while (!setNgayTao(Nhap::Chuoi("  Ngay tao      : ")))
+        cout << "  !! Ngay tao khong hop le.\n";
     
     // neu dung , goi ham set , set-> truyen gia tri vao thuoc tinh
 
@@ -179,14 +189,8 @@ void Sach::nhap() {
     setGiaNhap    (Nhap::SoThuc  ("  Gia nhap      : ", 0, 1e9));
     setGiaBan     (Nhap::SoThuc  ("  Gia ban       : ", 0, 1e9));
     setSoLuongTon    (Nhap::SoNguyen("  So luong ton  : ", 0, 1000000));
-    while (!setViTriKe(Nhap::Chuoi("  Vi tri ke     : ", true))) {
-        if (Nhap::HetInput()) return;
-        cout << "  !! Vi tri ke khong duoc chua '|' hoac '#'.\n";
-    }
-    while (!setMoTa(Nhap::Chuoi("  Mo ta         : ", true))) {
-        if (Nhap::HetInput()) return;
-        cout << "  !! Mo ta khong duoc chua '|' hoac '#'.\n";
-    }
+    setViTriKe(Nhap::Chuoi("  Vi tri ke     : ", true));
+    setMoTa   (Nhap::Chuoi("  Mo ta         : ", true));
 
 }
 
@@ -201,21 +205,20 @@ void Sach::inTieuDeBang() {
          << right << setw(6)  << "NAM"
          << right << setw(13) << "GIA BAN"
          << right << setw(7)  << "TON" << "\n";  // trong 7 o thi TON xep o mep phai
-    cout << " " << string(81, '-') << "\n";    // 9+30+8+8+6+13+7 = 81
+    cout << " " << string(80, '-') << "\n";
 }
 
 void Sach::xuatDong() const {
 
     // xuat tren 1 dong
-    // Cot CHU dung CanTrai (dem ky tu) , cot SO van dung setw duoc vi chi co ASCII
-    cout << " " << CanTrai(CatBot(maSach,    8),  9)
-         << CanTrai(CatBot(tenSach,  29), 30)
-         << CanTrai(CatBot(maTacGia,  7),  8)
-         << CanTrai(CatBot(maTheLoai, 7),  8)
+    cout << " " << left  << setw(9)  << CatBot(maSach, 8)
+         << left  << setw(30) << CatBot(tenSach, 29)
+         << left  << setw(8)  << CatBot(maTacGia, 7)
+         << left  << setw(8)  << CatBot(maTheLoai, 7)
          << right << setw(6)  << namXuatBan
          << right << setw(13) << ChuyenSo(giaBan)
          << right << setw(7)  << soLuongTon << "\n";
-}
+}       
 
 void Sach::xuatChiTiet() const {
 
@@ -231,7 +234,8 @@ void Sach::xuatChiTiet() const {
          << "  So luong ton : " << soLuongTon << "\n"
          << "  Vi tri ke    : " << viTriKe    << "\n"
          << "  Mo ta        : " << moTa       << "\n"
-         << "  Gia tri ton  : " << ChuyenSo(giaTriTonKho()) << " VND\n";
+         << "  Gia tri ton  : " << ChuyenSo(giaTriTonKho()) << " VND\n"
+         << "  Ngay tao    : " << ngayTao    << "\n";
 }
 
 // nap chong toan tu 

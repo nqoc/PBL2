@@ -1,6 +1,2 @@
-admin|Nguyễn Tuấn Kiệt|0905111222|54 Nguyễn Lương Bằng, Liên Chiểu, Đà Nẵng|admin@quanlysach.vn|407908580|ADMIN
-ptkiet|Phạm Trung Kiên|0905111333|120 Ngô Quyền, Sơn Trà, Đà Nẵng|ptkiet@quanlysach.vn|3250753276|ADMIN
-nvhoa|Trần Thị Hoa|0905222333|78 Hoàng Diệu, Hải Châu, Đà Nẵng|nvhoa@quanlysach.vn|3167321500|NHANVIEN
-nvlong|Nguyễn Văn Long|0905333444|15 Lê Duẩn, Hải Châu, Đà Nẵng|nvlong@quanlysach.vn|2415198079|NHANVIEN
-nvmai|Lê Thị Mai|0905444555|33 Trần Cao Vân, Thanh Khê, Đà Nẵng|nvmai@quanlysach.vn|923572347|NHANVIEN
-nvtuan|Võ Minh Tuấn|0905555666|9 Điện Biên Phủ, Thanh Khê, Đà Nẵng|nvtuan@quanlysach.vn|2718740071|NHANVIEN
+1|admin|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855|salt123|admin|01/03/2026
+2|employee1|a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3|salt456|employee|02/03/2026
