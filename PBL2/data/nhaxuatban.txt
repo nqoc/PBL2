@@ -1,30 +1,30 @@
-1|NXB Trẻ|161B Lý Chính Thắng, Q3, TP.HCM|02839391234|nxbtre@nxbtre.com.vn
-2|NXB Văn học|51 Trần Hưng Đạo, Hoàn Kiếm, HN|02438246229|nxbvanhoc@vanhoc.vn
-3|NXB Kim Đồng|55 Quang Trung, Hai Bà Trưng, HN|02439425217|kimdong@kimdong.com.vn
-4|NXB Thế giới|46 Trần Hưng Đạo, Hoàn Kiếm, HN|02438254838|tg@thegioi.com.vn
-5|NXB Giáo dục|81 Trần Hưng Đạo, HN|02438220801|giaoduc@giaoduc.vn
-6|NXB Phụ nữ|39 Hàng Chuối, Hai Bà Trưng, HN|02439710717|phunu@phunu.vn
-7|NXB Lao động|175 Giảng Võ, Đống Đa, HN|02438515380|laodong@laodong.vn
-8|NXB Tổng hợp|62 Nguyễn Thị Minh Khai, Q3|02839303233|tonghop@tphcm.gov.vn
-9|NXB Thanh niên|64 Bà Triệu, Hoàn Kiếm, HN|02439434240|thanhnien@thanhnien.vn
-10|NXB Bách khoa|52 Lê Đại Hành, Hai Bà Trưng|02438683444|bachkhoa@hust.edu.vn
-11|NXB Đại học Quốc gia|16 Hàng Chuối, HN|02439714896|vnuhanoi@vnu.edu.vn
-12|NXB Khoa học|18 Hoàng Quốc Việt, Cầu Giấy|02437564315|khkt@khkt.vn
-13|NXB Công thương|655 Phạm Văn Đồng, HN|02439345122|congthuong@moit.gov.vn
-14|NXB Giao thông|80B Trần Hưng Đạo, HN|02439421654|giaothong@giaothong.vn
-15|NXB Mỹ thuật|44B Ngô Quyền, Hoàn Kiếm|02438263952|mythuat@mythuat.vn
-16|NXB Âm nhạc|61 Nguyễn Thái Học, Ba Đình|02438455411|amnhac@amnhac.vn
-17|NXB Hồng Đức|65 Tràng Thi, Hoàn Kiếm|02439260061|hongduc@hongduc.vn
-18|NXB Dân trí|9 Phạm Hùng, Nam Từ Liêm|02437852345|dantri@dantri.vn
-19|NXB Hà Nội|47 Hàng Bồ, Hoàn Kiếm|02439260026|nxbhanoi@hanoi.gov.vn
-20|NXB Đà Nẵng|19 Trần Phú, Hải Châu|02363822011|nxbdanang@danang.vn
-21|NXB Nghệ An|37 Nguyễn Thị Minh Khai, Vinh|02383592211|nxbna@nghean.vn
-22|NXB Đồng Nai|12 Nguyễn Ái Quốc, Biên Hòa|02513824567|nxbdongnai@dongnai.vn
-23|NXB Cần Thơ|3A Trần Hưng Đạo, Ninh Kiều|02923821122|nxbct@cantho.vn
-24|NXB Phương Đông|20 Nguyễn Đình Chiểu, Q3|02839303222|phuongdong@phuongdong.vn
-25|NXB Tri thức|53 Nguyễn Du, Hai Bà Trưng|02439434241|trithuc@trithuc.vn
-26|NXB Dự báo|79 Nguyễn Chí Thanh, Đống Đa|02437732989|dubaoxuatban@dubaobac.vn
-27|NXB Anpha|55 Nguyễn Thị Minh Khai, Q1|02838221145|anpha@anpha.vn
-28|NXB Alpha Books|176 Thái Hà, Đống Đa|02439728080|alpha@alphabooks.vn
-29|NXB Nhã Nam|59 Đỗ Quang, Cầu Giấy|02435146876|nhanam@nhanam.vn
-30|NXB Đông A|35 Đông Tác, Đống Đa|02435739999|donga@donga.vn
+NX001|NXB Trẻ|Chuyên sách văn học và thiếu nhi trong nước|161B Lý Chính Thắng, Q3, TP.HCM|02839391234
+NX002|NXB Văn học|Chuyên văn học Việt Nam và dịch thuật|51 Trần Hưng Đạo, Hoàn Kiếm, HN|02438246229
+NX003|NXB Kim Đồng|Nhà xuất bản hàng đầu cho thiếu nhi|55 Quang Trung, Hai Bà Trưng, HN|02439425217
+NX004|NXB Thế giới|Sách đối ngoại và văn hoá thế giới|46 Trần Hưng Đạo, Hoàn Kiếm, HN|02438254838
+NX005|NXB Giáo dục|Xuất bản sách giáo khoa và tham khảo|81 Trần Hưng Đạo, Hoàn Kiếm, HN|02438220801
+NX006|NXB Phụ nữ|Sách về gia đình và phụ nữ|39 Hàng Chuối, Hai Bà Trưng, HN|02439710717
+NX007|NXB Lao động|Sách xã hội và nghề nghiệp|175 Giảng Võ, Đống Đa, HN|02438515380
+NX008|NXB Tổng hợp|Nhà xuất bản tổng hợp TP.HCM|62 Nguyễn Thị Minh Khai, Q3, TP.HCM|02839303233
+NX009|NXB Thanh niên|Sách cho thanh thiếu niên|64 Bà Triệu, Hoàn Kiếm, HN|02439434240
+NX010|NXB Bách khoa|Sách kỹ thuật và công nghệ|52 Lê Đại Hành, Hai Bà Trưng, HN|02438683444
+NX011|NXB Đại học Quốc gia|Giáo trình và sách chuyên khảo|16 Hàng Chuối, Hai Bà Trưng, HN|02439714896
+NX012|NXB Khoa học|Sách khoa học và kỹ thuật|18 Hoàng Quốc Việt, Cầu Giấy, HN|02437564315
+NX013|NXB Công thương|Sách kinh tế và thương mại|655 Phạm Văn Đồng, Bắc Từ Liêm, HN|02439345122
+NX014|NXB Giao thông|Sách ngành giao thông vận tải|80B Trần Hưng Đạo, Hoàn Kiếm, HN|02439421654
+NX015|NXB Mỹ thuật|Sách hội hoạ và mỹ thuật|44B Ngô Quyền, Hoàn Kiếm, HN|02438263952
+NX016|NXB Âm nhạc|Sách và tài liệu âm nhạc|61 Nguyễn Thái Học, Ba Đình, HN|02438455411
+NX017|NXB Hồng Đức|Sách pháp luật và tổng hợp|65 Tràng Thi, Hoàn Kiếm, HN|02439260061
+NX018|NXB Dân trí|Sách phổ thông và đời sống|9 Phạm Hùng, Nam Từ Liêm, HN|02437852345
+NX019|NXB Hà Nội|Sách về Thủ đô và địa phương|47 Hàng Bồ, Hoàn Kiếm, HN|02439260026
+NX020|NXB Đà Nẵng|Nhà xuất bản khu vực miền Trung|19 Trần Phú, Hải Châu, Đà Nẵng|02363822011
+NX021|NXB Nghệ An|Nhà xuất bản địa phương Nghệ An|37 Nguyễn Thị Minh Khai, Vinh, Nghệ An|02383592211
+NX022|NXB Đồng Nai|Nhà xuất bản địa phương Đồng Nai|12 Nguyễn Ái Quốc, Biên Hòa, Đồng Nai|02513824567
+NX023|NXB Cần Thơ|Nhà xuất bản khu vực Tây Nam Bộ|3A Trần Hưng Đạo, Ninh Kiều, Cần Thơ|02923821122
+NX024|NXB Phương Đông|Sách văn hoá và xã hội|20 Nguyễn Đình Chiểu, Q3, TP.HCM|02839303222
+NX025|NXB Tri thức|Sách học thuật và tinh hoa|53 Nguyễn Du, Hai Bà Trưng, HN|02439434241
+NX026|NXB Dự báo|Sách nghiên cứu và dự báo|79 Nguyễn Chí Thanh, Đống Đa, HN|02437732989
+NX027|NXB Anpha|Sách kinh doanh và quản trị|55 Nguyễn Thị Minh Khai, Q1, TP.HCM|02838221145
+NX028|NXB Alpha Books|Sách kinh tế và phát triển bản thân|176 Thái Hà, Đống Đa, HN|02439728080
+NX029|NXB Nhã Nam|Chuyên văn học dịch chọn lọc|59 Đỗ Quang, Cầu Giấy, HN|02435146876
+NX030|NXB Đông A|Sách đẹp và ấn bản giới hạn|35 Đông Tác, Đống Đa, HN|02435739999

@@ -1,0 +1,15 @@
+NCC001|Công ty CP Phát hành sách TP.HCM - Fahasa|02838225796|60-62 Lê Lợi, Q1, TP.HCM|kinhdoanh@fahasa.com.vn|0300445655
+NCC002|Công ty CP Văn hoá Phương Nam|02839309888|940 Đường 3/2, Q11, TP.HCM|pnc@phuongnambook.com.vn|0301463315
+NCC003|Công ty CP Sách Thái Hà|02436288704|119C5 Tô Hiệu, Cầu Giấy, HN|info@thaihabooks.com|0102410248
+NCC004|Công ty CP Sách Alpha|02439728080|176 Thái Hà, Đống Đa, HN|sales@alphabooks.vn|0101913650
+NCC005|Công ty CP Văn hoá và Truyền thông Nhã Nam|02435146876|59 Đỗ Quang, Cầu Giấy, HN|kinhdoanh@nhanam.vn|0102015123
+NCC006|Công ty TNHH Nhà sách Đông A|02435739999|35 Đông Tác, Đống Đa, HN|contact@donga.vn|0104729355
+NCC007|Công ty CP Đầu tư và Phát triển Giáo dục Hà Nội|02438572641|25 Hàn Thuyên, Hai Bà Trưng, HN|info@hevobco.com.vn|0100108924
+NCC008|Công ty CP Sách và Thiết bị trường học Đà Nẵng|02363822011|78 Bạch Đằng, Hải Châu, Đà Nẵng|sachtbdn@danangbook.vn|0400101234
+NCC009|Công ty CP Phát hành sách Nghệ An|02383844556|37 Nguyễn Thị Minh Khai, Vinh, Nghệ An|phsna@ngheanbook.vn|2900325678
+NCC010|Công ty TNHH Sách Nhân Văn|02838370248|875 Cách Mạng Tháng 8, Tân Bình, TP.HCM|cskh@nhanvan.vn|0303765432
+NCC011|Công ty CP Sách Omega Việt Nam|02473050668|139 Nguyễn Thái Học, Ba Đình, HN|contact@omegaplus.vn|0106987654
+NCC012|Công ty CP Sách Bách Việt|02437959067|7/8 Thái Hà, Đống Đa, HN|info@bachvietbooks.vn|0102876543
+NCC013|Công ty CP Truyền thông và Văn hoá Tri Thức Trẻ|02839105678|161B Lý Chính Thắng, Q3, TP.HCM|contact@trithuctre.vn|0305123456
+NCC014|Công ty TNHH MTV Sách Kim Đồng miền Trung|02363889977|19 Trần Phú, Hải Châu, Đà Nẵng|kimdongmt@kimdong.com.vn|0400223344
+NCC015|Công ty CP Phát hành sách Cần Thơ|02923821122|3A Trần Hưng Đạo, Ninh Kiều, Cần Thơ|phsct@canthobook.vn|1800334455

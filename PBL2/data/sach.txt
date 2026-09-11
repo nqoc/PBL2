@@ -1,30 +1,30 @@
-1|Cho tôi xin một vé đi tuổi thơ|1|1|1|2008|45000|75000|20|A1-01|Truyện dài của Nguyễn Nhật Ánh|01/01/2026
-2|Nhà giả kim|2|2|2|1988|60000|95000|15|A1-02|Tiểu thuyết nổi tiếng của Paulo Coelho|02/01/2026
-3|Harry Potter và Hòn đá phù thủy|3|3|3|1997|80000|120000|10|A1-03|Phần đầu của series Harry Potter|03/01/2026
-4|Sapiens: Lược sử loài người|4|4|4|2011|120000|180000|8|B2-01|Lược sử về nhân loại của Yuval Harari|04/01/2026
-5|Dế Mèn phiêu lưu ký|7|23|5|1941|35000|60000|25|B2-02|Tác phẩm thiếu nhi kinh điển|05/01/2026
-6|Đắc nhân tâm|8|5|6|1936|50000|85000|18|B2-03|Sách giao tiếp và ứng xử|06/01/2026
-7|Cha giàu cha nghèo|9|6|7|1997|70000|110000|12|C1-01|Kiến thức tài chính cá nhân|07/01/2026
-8|Atomic Habits|10|30|8|2018|90000|150000|14|C1-02|Phương pháp xây dựng thói quen tốt|08/01/2026
-9|1984|11|27|9|1949|55000|95000|16|C1-03|Tiểu thuyết phản địa đàng|09/01/2026
-10|Ông già và biển cả|12|27|10|1952|45000|80000|11|C2-01|Tác phẩm kinh điển thế giới|10/01/2026
-11|Rừng Na Uy|13|2|11|1987|85000|135000|9|C2-02|Tiểu thuyết Nhật Bản hiện đại|11/01/2026
-12|Chiến tranh và hòa bình|14|27|12|1869|140000|220000|7|C2-03|Tiểu thuyết lịch sử Nga|12/01/2026
-13|Những người khốn khổ|15|27|13|1862|130000|210000|6|D1-01|Tác phẩm kinh điển Pháp|13/01/2026
-14|Án mạng trên chuyến tàu tốc hành|16|21|14|1934|75000|125000|10|D1-02|Truyện trinh thám nổi tiếng|14/01/2026
-15|Vũ trụ|17|20|15|1980|100000|165000|8|D1-03|Kiến thức phổ thông về vũ trụ|15/01/2026
-16|Cosmos|18|20|16|1980|110000|180000|9|D2-01|Khám phá thiên văn học|16/01/2026
-17|Lược sử thời gian|19|20|17|1988|95000|155000|7|D2-02|Sách vật lý phổ thông|17/01/2026
-18|Tư duy nhanh và chậm|20|7|18|2011|105000|175000|12|D2-03|Tâm lý học hành vi|18/01/2026
-19|Nhà quản trị hiệu quả|21|28|19|1967|80000|135000|10|E1-01|Kiến thức quản trị doanh nghiệp|19/01/2026
-20|Từ tốt đến vĩ đại|22|28|20|2001|90000|150000|11|E1-02|Nghiên cứu các doanh nghiệp thành công|20/01/2026
-21|Hoàng tử bé|23|23|21|1943|40000|70000|22|E1-03|Truyện thiếu nhi giàu ý nghĩa|21/01/2026
-22|Những cuộc phiêu lưu của Tom Sawyer|24|23|22|1876|50000|85000|13|E2-01|Tác phẩm phiêu lưu thiếu nhi|22/01/2026
-23|Kiêu hãnh và định kiến|25|27|23|1813|60000|100000|9|E2-02|Tiểu thuyết tình cảm kinh điển|23/01/2026
-24|Hamlet|26|27|24|1603|55000|90000|8|E2-03|Bi kịch nổi tiếng của Shakespeare|24/01/2026
-25|Nghệ thuật sống|27|5|25|1990|65000|105000|15|F1-01|Sách suy ngẫm và phát triển bản thân|25/01/2026
-26|Mắt biếc|1|1|26|1990|50000|85000|18|F1-02|Câu chuyện tình tuổi học trò|26/01/2026
-27|Cánh đồng bất tận|29|25|27|2005|60000|100000|12|F1-03|Tập truyện ngắn Việt Nam|27/01/2026
-28|Chiếc thuyền ngoài xa|30|4|28|1987|45000|75000|10|F2-01|Tác phẩm văn học thời kỳ đổi mới|28/01/2026
-29|Tôi thấy hoa vàng trên cỏ xanh|1|1|29|2010|55000|95000|16|F2-02|Truyện tuổi thơ trong sáng|29/01/2026
-30|Bước chậm lại giữa thế gian vội vã|10|30|30|2014|70000|115000|14|F2-03|Sách chữa lành và cân bằng cuộc sống|30/01/2026
+GK|GK001|Toán 12|TG021|TL010|NX005|2023|26000|35000|76|A1-01|Sách giáo khoa Toán lớp 12 chương trình chuẩn|Toán|12
+GK|GK002|Toán 11|TG022|TL010|NX005|2023|24000|32000|38|A1-02|Sách giáo khoa Toán lớp 11 chương trình chuẩn|Toán|11
+GK|GK003|Toán 10|TG021|TL010|NX005|2022|23000|30000|39|A1-03|Sách giáo khoa Toán lớp 10 chương trình chuẩn|Toán|10
+GK|GK004|Vật lí 12|TG023|TL020|NX005|2023|22000|30000|38|A2-01|Sách giáo khoa Vật lí lớp 12|Vật lí|12
+GK|GK005|Vật lí 11|TG023|TL020|NX005|2022|21000|28000|34|A2-02|Sách giáo khoa Vật lí lớp 11|Vật lí|11
+GK|GK006|Hoá học 12|TG024|TL020|NX005|2023|22000|29000|32|A2-03|Sách giáo khoa Hoá học lớp 12|Hoá học|12
+GK|GK007|Tiếng Anh 12|TG029|TL013|NX005|2023|20000|27000|29|A3-01|Sách giáo khoa Tiếng Anh lớp 12|Tiếng Anh|12
+GK|GK008|Sinh học 12|TG025|TL020|NX005|2023|21000|28000|28|A3-02|Sách giáo khoa Sinh học lớp 12|Sinh học|12
+GK|GK009|Lịch sử 12|TG026|TL008|NX005|2022|18000|25000|39|A3-03|Sách giáo khoa Lịch sử lớp 12|Lịch sử|12
+GK|GK010|Địa lí 12|TG027|TL009|NX005|2022|18000|24000|34|B1-01|Sách giáo khoa Địa lí lớp 12|Địa lí|12
+GK|GK011|Ngữ văn 12|TG028|TL010|NX005|2023|25000|33000|67|B1-02|Sách giáo khoa Ngữ văn lớp 12 tập một|Ngữ văn|12
+GK|GK012|Tin học 11|TG030|TL011|NX005|2022|19000|26000|24|B1-03|Sách giáo khoa Tin học lớp 11|Tin học|11
+VH|VH001|Rừng Na Uy|TG009|TL002|NX002|1987|85000|135000|18|C1-01|Tiểu thuyết Nhật Bản hiện đại|Tiểu thuyết|Trịnh Lữ
+VH|VH002|Nhà giả kim|TG002|TL002|NX002|1988|50000|79000|47|C1-02|Tiểu thuyết nổi tiếng của Paulo Coelho|Tiểu thuyết|Lê Chu Cầu
+VH|VH003|1984|TG007|TL002|NX002|1949|55000|95000|23|C1-03|Tiểu thuyết phản địa đàng|Tiểu thuyết|Đặng Phương Anh
+VH|VH004|Ông già và biển cả|TG008|TL027|NX002|1952|45000|80000|18|C2-01|Tác phẩm kinh điển thế giới|Truyện dài|Lê Huy Bắc
+VH|VH005|Chiến tranh và hòa bình|TG010|TL027|NX002|1869|140000|220000|13|C2-02|Tiểu thuyết lịch sử Nga|Tiểu thuyết lịch sử|Cao Xuân Hạo
+VH|VH006|Những người khốn khổ|TG011|TL027|NX002|1862|130000|210000|13|C2-03|Tác phẩm kinh điển Pháp|Tiểu thuyết|Huỳnh Lý
+VH|VH007|Án mạng trên chuyến tàu tốc hành|TG012|TL021|NX029|1934|75000|125000|18|C3-01|Truyện trinh thám nổi tiếng|Trinh thám|Dương Tường
+VH|VH008|Kiêu hãnh và định kiến|TG015|TL027|NX002|1813|60000|100000|17|C3-02|Tiểu thuyết tình cảm kinh điển|Tiểu thuyết|Diệp Minh Tâm
+VH|VH009|Hamlet|TG016|TL027|NX004|1603|55000|90000|14|C3-03|Bi kịch nổi tiếng của Shakespeare|Kịch|Bùi Ý
+VH|VH010|Mắt biếc|TG001|TL002|NX001|1990|50000|85000|42|D1-01|Câu chuyện tình tuổi học trò|Truyện dài|
+VH|VH011|Cánh đồng bất tận|TG019|TL025|NX001|2005|60000|100000|23|D1-02|Tập truyện ngắn Việt Nam|Truyện ngắn|
+VH|VH012|Chiếc thuyền ngoài xa|TG020|TL025|NX002|1987|45000|75000|19|D1-03|Tác phẩm văn học thời kỳ đổi mới|Truyện ngắn|
+TN|TN001|Cho tôi xin một vé đi tuổi thơ|TG001|TL001|NX001|2008|45000|75000|32|E1-01|Truyện dài của Nguyễn Nhật Ánh|8|0
+TN|TN002|Harry Potter và Hòn đá phù thủy|TG003|TL023|NX003|1997|80000|120000|23|E1-02|Phần đầu của series Harry Potter|9|1
+TN|TN003|Dế Mèn phiêu lưu ký|TG004|TL001|NX003|1941|35000|60000|54|E1-03|Tác phẩm thiếu nhi kinh điển|6|1
+TN|TN004|Hoàng tử bé|TG013|TL023|NX003|1943|40000|70000|32|E2-01|Truyện thiếu nhi giàu ý nghĩa|7|1
+TN|TN005|Những cuộc phiêu lưu của Tom Sawyer|TG014|TL023|NX003|1876|50000|85000|23|E2-02|Tác phẩm phiêu lưu thiếu nhi|10|1
+TN|TN006|Tôi thấy hoa vàng trên cỏ xanh|TG001|TL001|NX001|2010|55000|95000|28|E2-03|Truyện tuổi thơ trong sáng|10|0

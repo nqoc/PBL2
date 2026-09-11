@@ -1,30 +1,30 @@
-1|Nguyễn Nhật Ánh|Nhà văn nổi tiếng với truyện thiếu nhi
-2|Paulo Coelho|Tiểu thuyết gia người Brazil
-3|J.K. Rowling|Tác giả của Harry Potter
-4|Yuval Noah Harari|Sử gia và tác giả người Israel
-5|Nam Cao|Tác giả văn học hiện thực Việt Nam
-6|Nguyễn Du|Đại thi hào dân tộc Việt Nam
-7|Tô Hoài|Tác giả truyện thiếu nhi Việt Nam
-8|Dale Carnegie|Tác giả sách kỹ năng sống
-9|Robert Kiyosaki|Tác giả sách tài chính cá nhân
-10|James Clear|Tác giả sách phát triển bản thân
-11|George Orwell|Tác giả văn học Anh
-12|Ernest Hemingway|Nhà văn và nhà báo Mỹ
-13|Haruki Murakami|Nhà văn Nhật Bản đương đại
-14|Lev Tolstoy|Đại văn hào Nga
-15|Victor Hugo|Nhà văn Pháp nổi tiếng
-16|Agatha Christie|Nữ hoàng truyện trinh thám
-17|Isaac Asimov|Tác giả khoa học viễn tưởng
-18|Carl Sagan|Nhà thiên văn và tác giả Mỹ
-19|Stephen Hawking|Nhà vật lý lý thuyết người Anh
-20|Daniel Kahneman|Nhà tâm lý học đoạt Nobel
-21|Peter Drucker|Chuyên gia quản trị hiện đại
-22|Jim Collins|Tác giả sách quản trị doanh nghiệp
-23|Antoine de Saint-Exupéry|Tác giả Hoàng tử bé
-24|Mark Twain|Nhà văn và nhà hài hước Mỹ
-25|Jane Austen|Nữ văn sĩ Anh thế kỷ XIX
-26|William Shakespeare|Đại thi hào nước Anh
-27|Milan Kundera|Nhà văn gốc Séc
-28|Nguyễn Ngọc Thuần|Nhà văn viết cho tuổi học trò
-29|Nguyễn Ngọc Tư|Nhà văn Việt Nam đương đại
-30|Nguyễn Minh Châu|Nhà văn Việt Nam thời kỳ đổi mới
+TG001|Nguyễn Nhật Ánh|Nhà văn nổi tiếng với truyện thiếu nhi|Việt Nam
+TG002|Paulo Coelho|Tiểu thuyết gia người Brazil|Brazil
+TG003|J.K. Rowling|Tác giả của Harry Potter|Anh
+TG004|Tô Hoài|Tác giả truyện thiếu nhi Việt Nam|Việt Nam
+TG005|Nam Cao|Tác giả văn học hiện thực Việt Nam|Việt Nam
+TG006|Nguyễn Du|Đại thi hào dân tộc Việt Nam|Việt Nam
+TG007|George Orwell|Tác giả văn học Anh|Anh
+TG008|Ernest Hemingway|Nhà văn và nhà báo Mỹ|Mỹ
+TG009|Haruki Murakami|Nhà văn Nhật Bản đương đại|Nhật Bản
+TG010|Lev Tolstoy|Đại văn hào Nga|Nga
+TG011|Victor Hugo|Nhà văn Pháp nổi tiếng|Pháp
+TG012|Agatha Christie|Nữ hoàng truyện trinh thám|Anh
+TG013|Antoine de Saint-Exupéry|Tác giả Hoàng tử bé|Pháp
+TG014|Mark Twain|Nhà văn và nhà hài hước Mỹ|Mỹ
+TG015|Jane Austen|Nữ văn sĩ Anh thế kỷ XIX|Anh
+TG016|William Shakespeare|Đại thi hào nước Anh|Anh
+TG017|Milan Kundera|Nhà văn gốc Séc|Pháp
+TG018|Nguyễn Ngọc Thuần|Nhà văn viết cho tuổi học trò|Việt Nam
+TG019|Nguyễn Ngọc Tư|Nhà văn Việt Nam đương đại|Việt Nam
+TG020|Nguyễn Minh Châu|Nhà văn Việt Nam thời kỳ đổi mới|Việt Nam
+TG021|Trần Văn Hạo|Tổng chủ biên sách giáo khoa Toán|Việt Nam
+TG022|Đoàn Quỳnh|Tổng chủ biên sách giáo khoa Toán nâng cao|Việt Nam
+TG023|Lương Duyên Bình|Tổng chủ biên sách giáo khoa Vật lí|Việt Nam
+TG024|Nguyễn Xuân Trường|Tổng chủ biên sách giáo khoa Hoá học|Việt Nam
+TG025|Nguyễn Thành Đạt|Tổng chủ biên sách giáo khoa Sinh học|Việt Nam
+TG026|Phan Ngọc Liên|Tổng chủ biên sách giáo khoa Lịch sử|Việt Nam
+TG027|Lê Thông|Tổng chủ biên sách giáo khoa Địa lí|Việt Nam
+TG028|Nguyễn Khắc Phi|Tổng chủ biên sách giáo khoa Ngữ văn|Việt Nam
+TG029|Hoàng Văn Vân|Tổng chủ biên sách giáo khoa Tiếng Anh|Việt Nam
+TG030|Hồ Sĩ Đàm|Chủ biên sách giáo khoa Tin học|Việt Nam
