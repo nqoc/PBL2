@@ -71,7 +71,7 @@ vector<TaiKhoan> docTaiKhoan(const string& tenFile) {
 
         TaiKhoan taiKhoan;
         if (!taiKhoan.fromChuoi(dong)) {
-            cerr << "Dong users.txt khong hop le: " << soDong << "\n";
+            cerr << "Dong taikhoan.txt khong hop le: " << soDong << "\n";
             continue;
         }
         danhSach.push_back(taiKhoan);
