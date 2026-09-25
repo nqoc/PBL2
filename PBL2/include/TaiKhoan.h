@@ -1,31 +1,38 @@
 #ifndef TAIKHOAN_H
 #define TAIKHOAN_H
 
+#include "Nguoi.h"
 #include <string>
 #include <vector>
 
 using namespace std;
 
-class TaiKhoan {
+class TaiKhoan : public Nguoi {
 private:
-    int id;
     string tenDangNhap;
     string matKhauHash;
-    string salt;
-    string vaiTro;
-    string ngayTao;
+    string quyen;
 
 public:
-    TaiKhoan();
-    TaiKhoan(int id, const string& tenDangNhap, const string& matKhauHash,
-             const string& salt, const string& vaiTro, const string& ngayTao);
+    static const string QUYEN_ADMIN;
+    static const string QUYEN_NHANVIEN;
 
-    int getId() const { return id; }
-    const string& getTenDangNhap() const { return tenDangNhap; }
-    const string& getMatKhauHash() const { return matKhauHash; }
-    const string& getSalt() const { return salt; }
-    const string& getVaiTro() const { return vaiTro; }
-    const string& getNgayTao() const { return ngayTao; }
+    TaiKhoan();
+    TaiKhoan(
+             const string& tenDangNhap_,
+             const string& matKhauHash_,
+             const string& quyen_);
+
+    string getTenDangNhap() const { return tenDangNhap; }
+    string getMatKhauHash() const { return matKhauHash; }
+    string getQuyen() const { return quyen; }
+
+    bool setTenDangNhap(const string& s);
+    bool setMatKhauHash(const string& s);
+    bool setQuyen(const string& s);
+
+    bool laAdmin() const;
+    bool laNhanVien() const;
 
     bool fromChuoi(const string& dong);
     string toChuoi() const;

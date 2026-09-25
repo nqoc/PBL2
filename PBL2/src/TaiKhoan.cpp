@@ -5,53 +5,99 @@
 #include <sstream>
 
 #include "ChungTu.h"
-#include "TienIch.h"   
+#include "TienIch.h"
 
 using namespace std;
 
-TaiKhoan::TaiKhoan()
-    : id(0), tenDangNhap(""), matKhauHash(""), salt(""), vaiTro(""), ngayTao("") {}
+const string TaiKhoan::QUYEN_ADMIN = "admin";
+const string TaiKhoan::QUYEN_NHANVIEN = "nhanvien";
 
-TaiKhoan::TaiKhoan(int id_, const string& tenDangNhap_, const string& matKhauHash_,
-                   const string& salt_, const string& vaiTro_, const string& ngayTao_)
-    : id(0), tenDangNhap(""), matKhauHash(""), salt(""), vaiTro(""), ngayTao("")
+TaiKhoan::TaiKhoan()
+    : Nguoi(),tenDangNhap(""), matKhauHash(""), quyen("") {}
+
+TaiKhoan::TaiKhoan(const string& ma,
+                   const string& hoTen,
+                   const string& soDienThoai,
+                   const string& diaChi,
+                   const string& email,
+                   const string& tenDangNhap_,
+                   const string& matKhauHash_,
+                   const string& quyen_)
+    : Nguoi(ma, hoTen, soDienThoai, diaChi, email),
+      tenDangNhap(""),
+      matKhauHash(""),
+      quyen("")
 {
-    id = id_;
-    tenDangNhap = ChuanHoa(tenDangNhap_);
-    matKhauHash = ChuanHoa(matKhauHash_);
-    salt = ChuanHoa(salt_);
-    vaiTro = ChuanHoa(vaiTro_);
-    ngayTao = ChuanHoa(ngayTao_);
+    setTenDangNhap(tenDangNhap_);
+    setMatKhauHash(matKhauHash_);
+    setQuyen(quyen_);
+}
+
+TaiKhoan::TaiKhoan(const string& tenDangNhap_, const string& matKhauHash_, const string& quyen_)
+    : Nguoi(), tenDangNhap(tenDangNhap_), matKhauHash(matKhauHash_), quyen(quyen_)
+{
+    setTenDangNhap(tenDangNhap_);
+    setMatKhauHash(matKhauHash_);
+    setQuyen(quyen_);
+}
+
+
+bool TaiKhoan::setTenDangNhap(const string& s) {
+    string t = ChuanHoa(s);
+    if (t.empty()) return false;
+    if (CoKyTuNganCach(t)) return false;
+    tenDangNhap = t;
+    return true;
+}
+
+bool TaiKhoan::setMatKhauHash(const string& s) {
+    string t = ChuanHoa(s);
+    if (t.empty()) return false;
+    matKhauHash = t;
+    return true;
+}
+
+bool TaiKhoan::setQuyen(const string& s) {
+    string t = ChuanHoa(ToLower(s));
+    if (t == QUYEN_ADMIN || t == QUYEN_NHANVIEN || t == "employee") {
+        quyen = t;
+        return true;
+    }
+    return false;
+}
+
+bool TaiKhoan::laAdmin() const {
+    return quyen == QUYEN_ADMIN;
+}
+
+bool TaiKhoan::laNhanVien() const {
+    return quyen == QUYEN_NHANVIEN || quyen == "employee";
+}
+
+bool TaiKhoan::laEmployee() const {
+    return laNhanVien();
 }
 
 bool TaiKhoan::fromChuoi(const string& dong) {
     vector<string> p = TachChuoi(dong, '|');
-    if (p.size() != 6) return false;
+    if (p.size() != 3) return false;
 
-    int idMoi;
-    if (!ChuoiSangInt(p[0], idMoi) || idMoi <= 0) return false;
-    if (ChuanHoa(p[1]).empty() || ChuanHoa(p[2]).empty()) return false;
-    if (ChuanHoa(p[3]).empty()) return false;
+    string user = ChuanHoa(p[0]);
+    string hash = ChuanHoa(p[1]);
+    string role = ChuanHoa(ToLower(p[2]));
 
-    string vaiTroMoi = ChuanHoa(ToLower(p[4]));
-    if (vaiTroMoi != "admin" && vaiTroMoi != "employee") return false;
+    if (user.empty() || hash.empty()) return false;
+    if (role != "admin" && role != "employee" && role != "nhanvien") return false;
 
-    string ngayMoi = ChuanHoa(p[5]);
-    if (!ChungTu::laNgayHopLe(ngayMoi)) return false;
-
-    id = idMoi;
-    tenDangNhap = ChuanHoa(p[1]);
-    matKhauHash = ChuanHoa(p[2]);
-    salt = ChuanHoa(p[3]);
-    vaiTro = vaiTroMoi;
-    ngayTao = ngayMoi;
+    tenDangNhap = user;
+    matKhauHash = hash;
+    quyen = role;
     return true;
 }
 
 string TaiKhoan::toChuoi() const {
     ostringstream os;
-    os << id << '|' << tenDangNhap << '|' << matKhauHash << '|'
-       << salt << '|' << vaiTro << '|' << ngayTao;
+    os << tenDangNhap << '|' << matKhauHash << '|' << quyen;
     return os.str();
 }
 
@@ -76,5 +122,6 @@ vector<TaiKhoan> docTaiKhoan(const string& tenFile) {
         }
         danhSach.push_back(taiKhoan);
     }
+
     return danhSach;
 }
