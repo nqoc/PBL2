@@ -7,6 +7,10 @@
 #include "ChungTu.h"
 #include "TienIch.h"
 
+#define vector Vector
+
+#define vector Vector
+
 using namespace std;
 
 const string TaiKhoan::QUYEN_ADMIN = "admin";

@@ -3,6 +3,8 @@
 
 #include<iostream>
 #include<string>
+#include "Vector.h"
+#include<memory>
 
 using namespace std ; 
 
@@ -99,12 +101,77 @@ class Sach {
         // PHAI la virtual : giaSauGiam() goi tiLeGiamGia() , va operator<
         // lai goi giaSauGiam(). Neu khong virtual thi khi upcast ve Sach*
         // ban cua LOP CHA (0.0) van duoc goi -> lop con giam gia bi bo qua.
-        virtual double tiLeGiamGia() const { return 0.0; }
-        double giaSauGiam()  const;     // khong can virtual : no goi ham virtual o tren
-
-
-
+                virtual string loaiSach() const = 0;
+                virtual double tienGiamGia() const = 0;
+                virtual string nhaBan() const = 0;
+                virtual double tiLeGiamGia() const { return tienGiamGia(); }
+                double giaSauGiam() const;
+                virtual string toCSV() const;
+                virtual bool fromCSV(const string& dong);
 };
+
+class SachGiaoKhoa : public Sach {
+        string monHoc;
+        string capHoc;
+        double phanTramGiam;
+public:
+        SachGiaoKhoa();
+        SachGiaoKhoa(const string&, const string&, const string&, const string&, const string&, int,
+                                 double, double, int, const string&, const string&, const string&,
+                                 const string& = "", const string& = "", double = 0.0);
+        string loaiSach() const override { return "Giao khoa"; }
+        double tienGiamGia() const override { return phanTramGiam / 100.0; }
+        string nhaBan() const override { return "Nha sach"; }
+        string getMonHoc() const { return monHoc; }
+        string getCapHoc() const { return capHoc; }
+        double getPhanTramGiam() const { return phanTramGiam; }
+        bool setMonHoc(const string&);
+        bool setCapHoc(const string&);
+        bool setPhanTramGiam(double);
+        string toCSV() const override;
+        bool fromCSV(const string&) override;
+};
+
+class SachVanHoc : public Sach {
+        string phongCach;
+        double phanTramGiam;
+public:
+        SachVanHoc();
+        SachVanHoc(const string&, const string&, const string&, const string&, const string&, int,
+                           double, double, int, const string&, const string&, const string&,
+                           const string& = "", double = 0.0);
+        string loaiSach() const override { return "Van hoc"; }
+        double tienGiamGia() const override { return phanTramGiam / 100.0; }
+        string nhaBan() const override { return "Nha sach"; }
+        string getPhongCach() const { return phongCach; }
+        double getPhanTramGiam() const { return phanTramGiam; }
+        bool setPhanTramGiam(double);
+        string toCSV() const override;
+        bool fromCSV(const string&) override;
+};
+
+class SachThieuNhi : public Sach {
+        int doTuoi;
+        double phanTramGiam;
+public:
+        SachThieuNhi();
+        SachThieuNhi(const string&, const string&, const string&, const string&, const string&, int,
+                                 double, double, int, const string&, const string&, const string&,
+                                 int = 0, double = 0.0);
+        string loaiSach() const override { return "Thieu nhi"; }
+        double tienGiamGia() const override { return phanTramGiam / 100.0; }
+        string nhaBan() const override { return "Nha sach"; }
+        int getDoTuoi() const { return doTuoi; }
+        double getPhanTramGiam() const { return phanTramGiam; }
+        bool setPhanTramGiam(double);
+        string toCSV() const override;
+        bool fromCSV(const string&) override;
+};
+
+Vector<shared_ptr<Sach> > docSach(const string& tenFile);
+
+
+
 
 
 

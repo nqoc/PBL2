@@ -3,13 +3,13 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
+#include "Vector.h"
 
 using namespace std ; 
 
 // XU LI CHUOI
 
-vector<string> TachChuoi (const string& s , char NganCach) ; 
+Vector<string> TachChuoi (const string& s , char NganCach) ;
 string ToLower ( string s ) ; // GK01 = gk01 = Gk01
 string ChuanHoa ( const string& s ) ; 
 string CatBot ( const string& s , string::size_type n ) ; 

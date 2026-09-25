@@ -2,7 +2,7 @@
 #define CHUNGTU_H
 
 #include <string>
-#include <vector>
+#include "Vector.h"
 
 using namespace std ;
 
@@ -56,7 +56,7 @@ class ChungTu {
         string ma ;
         string ngay ;                       // "dd/mm/yyyy"
         string nguoiLap ;                   // ma tai khoan nguoi lap
-        vector<DongChiTiet> chiTiet ;         
+        Vector<DongChiTiet> chiTiet ;
 
     public :
         ChungTu() ;
@@ -70,7 +70,7 @@ class ChungTu {
 
         size_t soDong()      const { return chiTiet.size() ; }      // bao nhieu dong
        
-        const vector<DongChiTiet>& cacDong() const { return chiTiet ; }
+        const Vector<DongChiTiet>& cacDong() const { return chiTiet ; }
         // kieu tra ve : chi doc ( tiet kiem bo nho )
 
         // ----- Setter -----
@@ -96,7 +96,7 @@ class ChungTu {
 
         // ----- Tuan tu hoa (Chuong 9) -----
         string chuoiChiTiet() const ;                       // "2|dong1|dong2"
-        void   docChiTiet( const vector<string>& p , size_t batDau ) ;
+        void   docChiTiet( const Vector<string>& p , size_t batDau ) ;
 
         virtual void inChungTu() const ;
 };

@@ -5,6 +5,12 @@
 #include<iomanip>
 #include<ctime>
 #include<cstdio>
+#include<fstream>
+#include<sstream>
+
+#define vector Vector
+
+#define vector Vector
 
 
 using namespace std ;
@@ -14,7 +20,7 @@ bool laNgayHopLe(const string& ngay) {
     int ngayTrongThang, thang, nam;
     char dau1, dau2;
 
-    if (sscanf(ngay.c_str(), "%d%c%d%c%d", &ngayTrongThang, &dau1,
+    if (ngay.size() != 10 || sscanf(ngay.c_str(), "%d%c%d%c%d", &ngayTrongThang, &dau1,
                &thang, &dau2, &nam) != 5 || dau1 != '/' || dau2 != '/') {
         return false;
     }
@@ -267,6 +273,147 @@ Sach& Sach::operator += ( int a ) {
 
 double Sach::giaSauGiam() const {
     return giaBan * (1.0 - tiLeGiamGia());
+}
+
+namespace {
+bool ganSachCoBan(Sach& sach, const vector<string>& p) {
+    if (p.size() != 12) return false;
+    int nam = 0, ton = 0;
+    double giaNhap = 0, giaBan = 0;
+    if (!ChuoiSangInt(p[5], nam) || !ChuoiSangDouble(p[6], giaNhap) ||
+        !ChuoiSangDouble(p[7], giaBan) || !ChuoiSangInt(p[8], ton)) return false;
+    return sach.setMaSach(p[0]) && sach.setTenSach(p[1]) &&
+           sach.setMaTacGia(p[2]) && sach.setMaTheLoai(p[3]) &&
+           sach.setMaNXB(p[4]) && sach.setNamXuatBan(nam) &&
+           sach.setGiaNhap(giaNhap) && sach.setGiaBan(giaBan) &&
+           sach.setSoLuongTon(ton) && sach.setViTriKe(p[9]) &&
+           sach.setMoTa(p[10]) && sach.setNgayTao(p[11]);
+}
+
+string csvCoBan(const Sach& sach) {
+    ostringstream os;
+    os << sach.getMaSach() << '|' << sach.getTenSach() << '|'
+       << sach.getMaTacGia() << '|' << sach.getMaTheLoai() << '|'
+       << sach.getMaNXB() << '|' << sach.getNamXuatBan() << '|'
+       << sach.getGiaNhap() << '|' << sach.getGiaBan() << '|'
+       << sach.getSoLuongTon() << '|' << sach.getViTriKe() << '|'
+       << sach.getMoTa() << '|' << sach.getNgayTao();
+    return os.str();
+}
+}
+
+string Sach::toCSV() const { return csvCoBan(*this); }
+
+bool Sach::fromCSV(const string& dong) {
+    return ganSachCoBan(*this, TachChuoi(dong, '|'));
+}
+
+SachGiaoKhoa::SachGiaoKhoa() : Sach(), monHoc(""), capHoc(""), phanTramGiam(0) {}
+
+SachGiaoKhoa::SachGiaoKhoa(const string& a, const string& b, const string& c,
+                           const string& d, const string& e, int f, double g,
+                           double h, int i, const string& j, const string& k,
+                           const string& l, const string& m, const string& n, double o)
+    : Sach(a,b,c,d,e,f,g,h,i,j,k,l), monHoc(m), capHoc(n), phanTramGiam(0) {
+    setPhanTramGiam(o);
+}
+
+bool SachGiaoKhoa::setMonHoc(const string& s) { monHoc = ChuanHoa(s); return !monHoc.empty() && !CoKyTuNganCach(monHoc); }
+bool SachGiaoKhoa::setCapHoc(const string& s) { capHoc = ChuanHoa(s); return !CoKyTuNganCach(capHoc); }
+bool SachGiaoKhoa::setPhanTramGiam(double v) { if (v < 0 || v > 100) return false; phanTramGiam = v; return true; }
+
+string SachGiaoKhoa::toCSV() const {
+    return csvCoBan(*this) + "|" + monHoc + "|" + capHoc + "|" + ChuyenSo(phanTramGiam);
+}
+
+bool SachGiaoKhoa::fromCSV(const string& dong) {
+    vector<string> p = TachChuoi(dong, '|');
+    if (p.size() != 15 || !ganSachCoBan(*this, vector<string>(p.begin(), p.begin() + 12))) return false;
+    double g = 0;
+    if (!ChuoiSangDouble(p[14], g) || !setMonHoc(p[12]) || !setCapHoc(p[13]) || !setPhanTramGiam(g)) return false;
+    return true;
+}
+
+SachVanHoc::SachVanHoc() : Sach(), phongCach(""), phanTramGiam(0) {}
+
+SachVanHoc::SachVanHoc(const string& a, const string& b, const string& c,
+                       const string& d, const string& e, int f, double g,
+                       double h, int i, const string& j, const string& k,
+                       const string& l, const string& m, double n)
+    : Sach(a,b,c,d,e,f,g,h,i,j,k,l), phongCach(m), phanTramGiam(0) { setPhanTramGiam(n); }
+
+bool SachVanHoc::setPhanTramGiam(double v) {
+    if (v < 0 || v > 100) return false;
+    phanTramGiam = v;
+    return true;
+}
+
+string SachVanHoc::toCSV() const { return csvCoBan(*this) + "|" + phongCach + "|" + ChuyenSo(phanTramGiam); }
+bool SachVanHoc::fromCSV(const string& dong) {
+    vector<string> p = TachChuoi(dong, '|');
+    if (p.size() != 14 || !ganSachCoBan(*this, vector<string>(p.begin(), p.begin() + 12))) return false;
+    double g = 0;
+    if (!ChuoiSangDouble(p[13], g) || CoKyTuNganCach(p[12]) || !setPhanTramGiam(g)) return false;
+    phongCach = ChuanHoa(p[12]);
+    return true;
+}
+
+SachThieuNhi::SachThieuNhi() : Sach(), doTuoi(0), phanTramGiam(0) {}
+
+SachThieuNhi::SachThieuNhi(const string& a, const string& b, const string& c,
+                           const string& d, const string& e, int f, double g,
+                           double h, int i, const string& j, const string& k,
+                           const string& l, int m, double n)
+    : Sach(a,b,c,d,e,f,g,h,i,j,k,l), doTuoi(0), phanTramGiam(0) { doTuoi = m; setPhanTramGiam(n); }
+
+bool SachThieuNhi::setPhanTramGiam(double v) {
+    if (v < 0 || v > 100) return false;
+    phanTramGiam = v;
+    return true;
+}
+
+string SachThieuNhi::toCSV() const { return csvCoBan(*this) + "|" + to_string(doTuoi) + "|" + ChuyenSo(phanTramGiam); }
+bool SachThieuNhi::fromCSV(const string& dong) {
+    vector<string> p = TachChuoi(dong, '|');
+    if (p.size() != 14 || !ganSachCoBan(*this, vector<string>(p.begin(), p.begin() + 12))) return false;
+    int tuoi = 0; double g = 0;
+    if (!ChuoiSangInt(p[12], tuoi) || tuoi < 0 || !ChuoiSangDouble(p[13], g) || !setPhanTramGiam(g)) return false;
+    doTuoi = tuoi;
+    return true;
+}
+
+vector<shared_ptr<Sach> > docSach(const string& tenFile) {
+    vector<shared_ptr<Sach> > ds;
+    ifstream file(tenFile);
+    string dong;
+    while (getline(file, dong)) {
+        if (ChuanHoa(dong).empty()) continue;
+        vector<string> p = TachChuoi(dong, '|');
+        shared_ptr<Sach> sach;
+        if (!p.empty() && p[0].find("GK") == 0) sach = make_shared<SachGiaoKhoa>();
+        else if (!p.empty() && p[0].find("VH") == 0) sach = make_shared<SachVanHoc>();
+        else if (!p.empty() && p[0].find("TN") == 0) sach = make_shared<SachThieuNhi>();
+        if (!sach && p.size() == 12) {
+            int nam = 0, ton = 0;
+            double giaNhap = 0, giaBan = 0;
+            if (!ChuoiSangInt(p[5], nam) || !ChuoiSangDouble(p[6], giaNhap) ||
+                !ChuoiSangDouble(p[7], giaBan) || !ChuoiSangInt(p[8], ton)) continue;
+            if (p[3] == "1" || p[3] == "23" || p[3] == "24")
+                sach = make_shared<SachThieuNhi>(p[0], p[1], p[2], p[3], p[4], nam,
+                                                 giaNhap, giaBan, ton, p[9], p[10], p[11]);
+            else if (p[3] == "10" || p[3] == "11" || p[3] == "12" ||
+                     p[3] == "13" || p[3] == "14")
+                sach = make_shared<SachGiaoKhoa>(p[0], p[1], p[2], p[3], p[4], nam,
+                                                 giaNhap, giaBan, ton, p[9], p[10], p[11]);
+            else
+                sach = make_shared<SachVanHoc>(p[0], p[1], p[2], p[3], p[4], nam,
+                                               giaNhap, giaBan, ton, p[9], p[10], p[11]);
+            ds.push_back(sach);
+        } else if (sach && sach->fromCSV(dong)) {
+            ds.push_back(sach);
+        }
+    }
+    return ds;
 }
 
 

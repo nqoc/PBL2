@@ -2,6 +2,10 @@
 #include<sstream>
 #include "TienIch.h"
 
+#define vector Vector
+
+#define vector Vector
+
 using namespace std ; 
 
 

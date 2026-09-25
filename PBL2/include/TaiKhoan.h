@@ -3,7 +3,7 @@
 
 #include "Nguoi.h"
 #include <string>
-#include <vector>
+#include "Vector.h"
 
 using namespace std;
 
@@ -19,6 +19,15 @@ public:
 
     TaiKhoan();
     TaiKhoan(
+             const string& ma,
+             const string& hoTen,
+             const string& soDienThoai,
+             const string& diaChi,
+             const string& email,
+             const string& tenDangNhap,
+             const string& matKhauHash,
+             const string& quyen);
+    TaiKhoan(
              const string& tenDangNhap_,
              const string& matKhauHash_,
              const string& quyen_);
@@ -33,11 +42,13 @@ public:
 
     bool laAdmin() const;
     bool laNhanVien() const;
+    bool laEmployee() const;
+    string valiRet() const override { return "TaiKhoan"; }
 
     bool fromChuoi(const string& dong);
     string toChuoi() const;
 };
 
-vector<TaiKhoan> docTaiKhoan(const string& tenFile);
+Vector<TaiKhoan> docTaiKhoan(const string& tenFile);
 
 #endif

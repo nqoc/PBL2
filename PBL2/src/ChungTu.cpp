@@ -4,6 +4,10 @@
 #include "ChungTu.h"
 #include "TienIch.h"
 
+#define vector Vector
+
+#define vector Vector
+
 using namespace std ;
 
 // ==================================================================
@@ -232,6 +236,7 @@ bool ChungTu::laNgayHopLe(const string& s) {
 
 // "05/09/2026" -> 20260905  ->  so sanh ngay chi con so sanh hai so nguyen
 long ChungTu::soHoaNgay(const string& s) {
+    if (!laNgayHopLe(s)) return 0;
     vector<string> p = TachChuoi(s, '/');
     if (p.size() != 3) return 0;
     long ngay, thang, nam;

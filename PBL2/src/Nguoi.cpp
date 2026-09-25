@@ -2,6 +2,11 @@
 #include<string>
 #include"Nguoi.h"
 #include"TienIch.h"
+#include<sstream>
+
+#define vector Vector
+
+#define vector Vector
 
 
 using namespace std ; 
@@ -91,5 +96,19 @@ bool Nguoi::setSoDienThoai ( const string& s ) {
         return true ; 
     }
     return false ; 
+}
+
+string Nguoi::toCSV() const {
+    return ma + "|" + hoTen + "|" + soDienThoai + "|" + diaChi + "|" + email;
+}
+
+bool Nguoi::fromCSV(const string& dong) {
+    vector<string> p = TachChuoi(dong, '|');
+    if (p.size() != 5) return false;
+    Nguoi tam;
+    if (!tam.setMa(p[0]) || !tam.setHoTen(p[1]) || !tam.setSoDienThoai(p[2]) ||
+        !tam.setDiaChi(p[3]) || !tam.setEmail(p[4])) return false;
+    *this = tam;
+    return true;
 }
 

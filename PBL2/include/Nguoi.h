@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include<string>
+#include "Vector.h"
 
 
 using namespace std ; 
@@ -42,6 +43,11 @@ class Nguoi {
     // check email 
     static bool checkEmail ( const string& s ) ;
     static bool checkSoDienThoai ( const string& s ) ; 
+
+    virtual string valiRet() const { return "Nguoi"; }
+
+    virtual string toCSV() const;
+    virtual bool fromCSV(const string& dong);
 
 };
 
